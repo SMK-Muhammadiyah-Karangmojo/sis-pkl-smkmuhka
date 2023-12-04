@@ -1,0 +1,69 @@
+[1mdiff --cc app/Models/MasterDataModel.php[m
+[1mindex 793bf0f,f60388c..0000000[m
+[1m--- a/app/Models/MasterDataModel.php[m
+[1m+++ b/app/Models/MasterDataModel.php[m
+[36m@@@ -74,6 -74,7 +74,10 @@@[m [mclass MasterDataModel extends Mode[m
+                  ->join('tutor', 'tutor.iduka_id = i.id', 'left')[m
+                  ->join('teacher', 'teacher.user_public_id = tutor.teacher_id', 'left')[m
+                  ->join('tbl_surat surat', 'surat.id_tp = md.tp_id', 'left')[m
+[32m++<<<<<<< HEAD[m
+[32m++=======[m
+[32m+                 ->where('tutor.deleted_at', null)[m
+[32m++>>>>>>> 23daa9033de941e68df975a12ca3b1edb2a0fb57[m
+                  ->where('md.tp_id', $tp)[m
+                  ->where('m.id', $major)[m
+                  ->orderBy('i.name', 'ASC')[m
+[1mdiff --cc app/Views/pages/general/cetak-id-card.php[m
+[1mindex 3d8791f,eedb100..0000000[m
+[1m--- a/app/Views/pages/general/cetak-id-card.php[m
+[1m+++ b/app/Views/pages/general/cetak-id-card.php[m
+[36m@@@ -134,7 -134,7 +134,11 @@@[m
+                          <?= $siswa->detail_tgl; ?>[m
+                      </div>[m
+                      <div class="link">[m
+[32m++<<<<<<< HEAD[m
+[32m +                        <a href="https://data.smkmuhkarangmojo.sch.id" target="_blank">https://data.smkmuhkarangmojo.sch.id</a>[m
+[32m++=======[m
+[32m+                         <a href="https://pkl.smkmuhkarangmojo.sch.id" target="_blank">https://pkl.smkmuhkarangmojo.sch.id</a>[m
+[32m++>>>>>>> 23daa9033de941e68df975a12ca3b1edb2a0fb57[m
+                      </div>[m
+                  </div>[m
+              </div>[m
+[1mdiff --cc composer.json[m
+[1mindex bbb26db,267911f..0000000[m
+[1m--- a/composer.json[m
+[1m+++ b/composer.json[m
+[36m@@@ -5,19 -5,6 +5,22 @@@[m
+      "homepage": "https://codeigniter.com",[m
+      "license": "MIT",[m
+      "require": {[m
+[32m++<<<<<<< HEAD[m
+[32m +<<<<<<< HEAD[m
+[32m +        "php": "^7.4 || ^8.0",[m
+[32m +        "ext-curl": "*",[m
+[32m +        "ext-intl": "*",[m
+[32m +        "ext-json": "*",[m
+[32m +        "ext-mbstring": "*",[m
+[32m +        "kint-php/kint": "^4.0",[m
+[32m +        "laminas/laminas-escaper": "^2.9",[m
+[32m +        "psr/log": "^1.1",[m
+[32m +        "mpdf/mpdf": "^8.1",[m
+[32m +        "phpoffice/phpspreadsheet": "^1.25",[m
+[32m +        "mpdf/qrcode": "^1.2"[m
+[32m +=======[m
+[32m++=======[m
+[32m++>>>>>>> 23daa9033de941e68df975a12ca3b1edb2a0fb57[m
+        "php": "^7.4 || ^8.0",[m
+        "ext-curl": "*",[m
+        "ext-intl": "*",[m
+[36m@@@ -29,7 -16,6 +32,10 @@@[m
+        "mpdf/mpdf": "^8.1",[m
+        "phpoffice/phpspreadsheet": "^1.25",[m
+        "mpdf/qrcode": "^1.2"[m
+[32m++<<<<<<< HEAD[m
+[32m +>>>>>>> 93a884fdeb50785095a30e8ab310951c8d224312[m
+[32m++=======[m
+[32m++>>>>>>> 23daa9033de941e68df975a12ca3b1edb2a0fb57[m
+      },[m
+      "require-dev": {[m
+          "codeigniter/coding-standard": "^1.1",[m

@@ -1,0 +1,79 @@
+@page {
+    margin: 0.5cm 0.0cm 0.0cm;
+    width: 1250px;
+    height: 814px;
+    size: auto;
+}
+
+@font-face {
+    font-family: AspireDemiBold;
+    src: url("/assets/font/RoosterPersonalUse-3z8d8.ttf");
+}
+
+.header {
+    text-align: center;
+}
+
+.title {
+    margin: 12px 12px 12px 30%;
+    text-align: center;
+    font-family: snell, serif;;
+}
+
+.title .title-column {
+    float: left;
+    width: 25%;
+}
+
+.title .title-column-2 {
+    float: left;
+}
+
+.title .title-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.title .title-info {
+    font-size: 20px;
+    text-align: left;
+}
+
+.title .title-data {
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 20px;
+}
+
+.content table {
+    border: 1px;
+    font-size: 18px;
+}
+
+
+.content-bottom {
+    margin: 10px 15% 10px 15%;
+    text-align: center;
+}
+
+.content-bottom-column {
+    float: right;
+    width: 50%;
+}
+
+.content-bottom-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content-margin-bottom {
+    height: 100px;
+}
