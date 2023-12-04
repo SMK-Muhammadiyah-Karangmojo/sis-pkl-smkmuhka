@@ -62,7 +62,7 @@ class ClassStaticsPlugin extends Plugin
                     continue;
                 }
 
-                $const = Value::blank($name, '\\' . $class . '::' . $name);
+                $const = Value::blank($name, '\\'.$class.'::'.$name);
                 $const->const = true;
                 $const->depth = $o->depth + 1;
                 $const->owner_class = $class;

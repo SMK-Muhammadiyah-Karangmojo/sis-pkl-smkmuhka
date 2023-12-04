@@ -60,7 +60,7 @@ class TimestampPlugin extends Plugin
             return;
         }
 
-        $len = \strlen((string)$var);
+        $len = \strlen((string) $var);
 
         // Guess for anything between March 1973 and November 2286
         if (9 === $len || 10 === $len) {

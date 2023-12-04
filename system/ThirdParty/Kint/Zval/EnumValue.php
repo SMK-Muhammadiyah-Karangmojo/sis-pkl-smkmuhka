@@ -43,17 +43,17 @@ class EnumValue extends InstanceValue
     {
         if ($this->enumval instanceof BackedEnum) {
             if (\is_string($this->enumval->value)) {
-                return '"' . $this->enumval->value . '"';
+                return '"'.$this->enumval->value.'"';
             }
             if (\is_int($this->enumval->value)) {
-                return (string)$this->enumval->value;
+                return (string) $this->enumval->value;
             }
         }
     }
 
     public function getType()
     {
-        return $this->classname . '::' . $this->enumval->name;
+        return $this->classname.'::'.$this->enumval->name;
     }
 
     public function getSize()

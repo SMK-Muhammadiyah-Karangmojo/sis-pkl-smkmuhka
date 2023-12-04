@@ -520,11 +520,11 @@ class Parser
                 $child->access_path = $object->access_path;
 
                 if (!KINT_PHP72 && \is_int($child->name)) {
-                    $child->access_path = 'array_values((array) ' . $child->access_path . ')[' . $i . ']'; // @codeCoverageIgnore
+                    $child->access_path = 'array_values((array) '.$child->access_path.')['.$i.']'; // @codeCoverageIgnore
                 } elseif (\preg_match('/^[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*$/', $child->name)) {
-                    $child->access_path .= '->' . $child->name;
+                    $child->access_path .= '->'.$child->name;
                 } else {
-                    $child->access_path .= '->{' . \var_export((string)$child->name, true) . '}';
+                    $child->access_path .= '->{'.\var_export((string) $child->name, true).'}';
                 }
             }
 
