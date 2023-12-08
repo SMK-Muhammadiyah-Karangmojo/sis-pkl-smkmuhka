@@ -38,7 +38,7 @@ class Iduka extends ResourceController
         $request = [
             'name' => $this->request->getVar('name'),
             'address' => $this->request->getVar('address'),
-            'major' => $this->request->getVar('major')
+            'major_id' => $this->request->getVar('major')
         ];
         try {
             $responseAddIduka = $this->iduka->insert($request);
