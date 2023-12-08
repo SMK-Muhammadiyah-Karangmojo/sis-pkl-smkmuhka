@@ -21,7 +21,7 @@
                 <img src="<?= base_url('assets/img/logo/logo-login.png'); ?>" alt="logo">
             </div>
             <div class="title">
-                <h2>Login Page || PKL</h2>
+                <h2>Login Page || SIS-PKL</h2>
                 <h3>SMK Muhammadiyah Karangmojo</h3>
             </div>
             <?= $this->include('./flash/flash'); ?>

@@ -62,7 +62,7 @@ class EnumPlugin extends Plugin
             $cases->contents = [];
 
             foreach ($var->cases() as $case) {
-                $base_obj = Value::blank($class . '::' . $case->name, '\\' . $class . '::' . $case->name);
+                $base_obj = Value::blank($class.'::'.$case->name, '\\'.$class.'::'.$case->name);
                 $base_obj->depth = $o->depth + 1;
 
                 if ($var instanceof BackedEnum) {

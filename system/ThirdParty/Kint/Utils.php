@@ -121,8 +121,8 @@ final class Utils
 
                 $folder = \dirname($folder);
 
-                if (\file_exists($folder . '/composer.json') && \is_readable($folder . '/composer.json')) {
-                    $composer = \json_decode(\file_get_contents($folder . '/composer.json'), true);
+                if (\file_exists($folder.'/composer.json') && \is_readable($folder.'/composer.json')) {
+                    $composer = \json_decode(\file_get_contents($folder.'/composer.json'), true);
 
                     if (isset($composer['extra'][$key]) && \is_array($composer['extra'][$key])) {
                         $extras = \array_replace($extras, $composer['extra'][$key]);
