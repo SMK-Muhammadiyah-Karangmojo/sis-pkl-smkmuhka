@@ -115,7 +115,7 @@ class UsersModel extends Model
             ->join('user_details ud', 'u.id = ud.user_public_id')
             ->join('class c', 'c.id = ud.class_id', 'left')
             ->join('major m', 'm.id = ud.major_id', 'left')
-            ->join('tp', 'tp.id = ud.tp', 'left')
+            ->join('tp', 'tp.id = ud.tp_id', 'left')
             ->where('u.role_pkl', 3)
             ->orderBy('ud.name', 'ASC')
             ->get()->getResult();

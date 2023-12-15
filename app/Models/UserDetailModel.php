@@ -40,7 +40,7 @@ class UserDetailModel extends Model
     {
         return $this->db->table('users u')
             ->select(
-                'ud.name, ud.user_id as nis, ud.nisn, ud.tp as tpId,
+                'ud.name, ud.user_id as nis, ud.nisn, ud.tp_id as tpId,
                 ud.jk,
                  m.id as majorId, m.name as major,
                 c.id as classId, c.name as kelas,
@@ -52,7 +52,7 @@ class UserDetailModel extends Model
             ->join('class c', 'c.id = ud.class_id', 'left')
             ->join('master_data md', 'md.nis = ud.user_id', 'left')
             ->join('iduka i', 'i.id = md.iduka_id', 'left')
-            ->join('tp', 'tp.id = ud.tp', 'left')
+            ->join('tp', 'tp.id = ud.tp_id', 'left')
             ->where('ud.id', $id)
             ->get()->getRow();
     }
