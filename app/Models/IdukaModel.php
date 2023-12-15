@@ -62,7 +62,7 @@ class IdukaModel extends Model
     {
         return $this->db->table('iduka')
             ->select('*')
-            ->where('major', $major)
+            ->where('major_id', $major)
             ->where('deleted_at', null)
             ->orderBy('name', 'ASC')
             ->get()->getResult();
