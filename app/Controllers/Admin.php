@@ -534,6 +534,7 @@ class  Admin extends BaseController
         $instansi = $this->request->getVar('instansi');
         $surat = $this->surat->findByTp($tp)->getRow();
         $masterData = $this->masterData->findByIdukaAndTp($iduka, $tp);
+        $school = $this->schoolModel->find(1);
         $kajur = $this->kajur->findByMajor($major)->getRow();
         if ($surat === null) {
             $this->session->setFlashdata(
@@ -547,7 +548,8 @@ class  Admin extends BaseController
             'instansi' => $instansi,
             'surat' => $surat ?: '',
             'master_data' => $masterData,
-            'kajur' => $kajur
+            'kajur' => $kajur,
+            'school' => $school
         ];
         view('pages/general/permohonan1', $data);
         view('pages/general/permohonan2', $data);

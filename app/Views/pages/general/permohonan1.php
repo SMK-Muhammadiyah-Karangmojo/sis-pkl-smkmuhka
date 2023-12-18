@@ -118,8 +118,8 @@
     </tr>
     <tr>
         <td valign="bottom" height="80px">
-            <img src="<?= $_SERVER['app.baseURL']; ?>/assets/img/ttd-ks.png" alt="ttd kepsek" width="150px"/>
-            <p><u><?= $surat ? $surat->kepala_sekolah : ''; ?></u></p>
+<!--            <img src="--><?php //= $_SERVER['app.baseURL']; ?><!--/assets/img/ttd-ks.png" alt="ttd kepsek" width="150px"/>-->
+            <p><u><?= $school['kepala_sekolah']; ?></u></p>
         </td>
         <td></td>
         <td valign="bottom">
@@ -128,7 +128,7 @@
     </tr>
     <tr>
         <td>
-            <p>NBM. <?= $surat ? $surat->nbm : ''; ?></p>
+            <p>NBM. <?= $school['nip']; ?></p>
         </td>
         <td></td>
         <td>
