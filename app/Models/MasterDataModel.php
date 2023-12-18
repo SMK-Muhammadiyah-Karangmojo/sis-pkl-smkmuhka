@@ -38,7 +38,7 @@ class MasterDataModel extends Model
                 from master_data md
                         inner join user_details as ud on md.nis = ud.user_id
                         inner join iduka i on md.iduka_id = i.id
-                        inner join major m on i.major = m.id
+                        inner join major m on i.major_id = m.id
                         inner join class c on ud.class_id = c.id
                         left join detail_iduka di on di.id_iduka = i.id
                 where md.deleted_at is null 
