@@ -132,7 +132,7 @@ class MasterDataModel extends Model
                 select distinct md.iduka_id,
                                 md.iduka_id as id,
                                 i.name,
-                                i.major,
+                                i.major_id,
                                 di.address
                 from master_data md
                         inner join iduka i on md.iduka_id = i.id
@@ -140,7 +140,7 @@ class MasterDataModel extends Model
                 where md.deleted_at is null
                   and md.user_public_id is not null
                   and md.tp_id = ' . $tp . '
-                order by i.major ASC
+                order by i.major_id ASC
         ')->getResult();
     }
 
