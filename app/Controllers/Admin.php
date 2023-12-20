@@ -692,7 +692,8 @@ class  Admin extends BaseController
             'iduka' => $this->masterData->findByTp($tp),
             'nomor' => $this->nomorModel->findByTpAndCategory($tp, 3),
             'tp' => $tp,
-            'dataTp' => $this->tp->find($tp)
+            'dataTp' => $this->tp->find($tp),
+            'school' => $this->schoolModel->find(1)
         ];
         view('pages/general/cetak-daftar-peserta', $data);
         $mpdf = new \Mpdf\Mpdf();

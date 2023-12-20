@@ -67,19 +67,17 @@
                 <td>Karangmojo, <?= tgl2($surat->tanggal); ?></td>
             </tr>
             <tr>
-                <td>
-                    <img src="
-            <?= base_url('assets/img/ttd-ks.png'); ?>" width="170px" height="100px" alt="ttd-kas">
+                <td height="80px">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <?= $school['kepala_sekolah'];?>
+                    <?= $school['kepala_sekolah']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. <?= $school['nip'];?>
+                    NBM. <?= $school['nip']; ?>
                 </td>
             </tr>
             </tbody>

@@ -60,7 +60,7 @@ foreach ($results as $result): ?>
             </thead>
             <tbody>
             <?php
-//            dd($result->idukaid);
+            //            dd($result->idukaid);
             $i = 1;
             $db = db_connect();
             $data = $db->query('
@@ -110,19 +110,17 @@ foreach ($results as $result): ?>
                 <td>Karangmojo, <?= tanggal($surat->tanggal); ?></td>
             </tr>
             <tr>
-                <td>
-                    <img src="
-            <?= base_url('assets/img/ttd-ks.png'); ?>" width="170px" height="100px" alt="ttd-kas">
+                <td height="80px">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <?= $school['kepala_sekolah'];?>
+                    <?= $school['kepala_sekolah']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. <?= $school['nip'];?>
+                    NBM. <?= $school['nip']; ?>
                 </td>
             </tr>
             </tbody>

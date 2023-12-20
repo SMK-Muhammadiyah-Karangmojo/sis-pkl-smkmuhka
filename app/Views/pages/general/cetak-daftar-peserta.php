@@ -107,18 +107,17 @@
                 <td>Kepala Sekolah,</td>
             </tr>
             <tr>
-                <td>
-                    <img src=" <?= base_url('assets/img/ttd-ks.png'); ?>" width="170px" height="100px">
+                <td height="80px">
                 </td>
             </tr>
             <tr>
                 <td>
-                    MUNAWAR, S.Pd.I
+                    <?= $school['kepala_sekolah']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. 1076230
+                    NBM. <?= $school['nip']; ?>
                 </td>
             </tr>
             </tbody>
