@@ -34,7 +34,7 @@ class MasterTemplateModel extends Model
 
     }
 
-    public function findByCode(string $code)
+    public function findByCode($code)
     {
         $builder = $this->db->table("master_template template");
         $builder->where("template.code", $code);
