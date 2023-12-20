@@ -610,8 +610,7 @@ class  Admin extends BaseController
             'result' => $result,
             'surat' => $surat,
             'school' => $this->schoolModel->find(1),
-//            'data' => $this->masterData->findByIdukaAndTp($iduka->id, $tp)
-            'master_template' => $this->masterTemplateModel->findByCodeAndCategorySuratIdAndTpId("SURAT", $surat->id, $tp),
+            'master_template' => $this->masterTemplateModel->findByCodeAndCategorySuratIdAndTpId("SURAT", $surat->kategori_surat_id, $tp),
             'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-surat-pengantar', $data);
