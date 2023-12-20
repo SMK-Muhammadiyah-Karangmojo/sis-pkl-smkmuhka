@@ -44,6 +44,11 @@ class Template extends BaseController
             'surat' => $this->nomorSuratModel->findByTp($tp)
         ];
 
+        $result = $this->ResponseBuilder->ReturnViewValidation(
+            $this->session,
+            'pages/setting/index',
+            $data);
+
         if (!$data['data_template']) {
             $this->masterTemplateModel->insert(
                 [
@@ -53,10 +58,7 @@ class Template extends BaseController
                 ]
             );
         }
-        return $this->ResponseBuilder->ReturnViewValidation(
-            $this->session,
-            'pages/setting/index',
-            $data);
+        return $result;
     }
 
     public function updateTemplate()
@@ -84,6 +86,11 @@ class Template extends BaseController
             'data_template' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
 
+        $result = $this->ResponseBuilder->ReturnViewValidation(
+            $this->session,
+            'pages/setting/kop-surat',
+            $data);
+
         if (!$data['data_template']) {
             $this->masterTemplateModel->insert(
                 [
@@ -91,10 +98,7 @@ class Template extends BaseController
                 ]
             );
         }
-        return $this->ResponseBuilder->ReturnViewValidation(
-            $this->session,
-            'pages/setting/kop-surat',
-            $data);
+        return $result;
     }
 
     public function saveTemplateKopSurat()
