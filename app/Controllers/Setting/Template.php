@@ -65,6 +65,8 @@ class Template extends BaseController
     {
         $id = $this->request->getVar('id');
         $content = $this->request->getVar('content');
+        $tp = $this->request->getVar('tp');
+        $kategori_surat = $this->request->getVar('kategori_surat');
         $response = $this->masterTemplateModel->update(
             $id,
             [
@@ -76,7 +78,7 @@ class Template extends BaseController
         if ($response) {
             $this->session->setFlashdata('success', 'update template surat berhasil');
         }
-        return redirect()->to('/setting/template');
+        return redirect()->to("/setting/template?tp=$tp&kategori_surat=$kategori_surat");
     }
 
     public function templateKopSurat()

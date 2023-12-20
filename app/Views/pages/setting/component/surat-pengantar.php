@@ -69,6 +69,8 @@
                     </div>
                 </div>
                 <input type="hidden" id="id" name="id" value="<?= $data_template->id; ?>">
+                <input type="hidden" id="tp" name="tp" value="<?= $tpId; ?>">
+                <input type="hidden" id="kategori_surat" name="kategori_surat" value="<?= $template; ?>">
                 <button type="submit" class="btn btn-primary">SIMPAN</button>
             </form>
             <?php
