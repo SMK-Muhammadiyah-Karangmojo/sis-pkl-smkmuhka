@@ -16,7 +16,9 @@ class MasterTemplateModel extends Model
     protected $table = 'master_template';
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['code', 'kategori_surat_id', 'content', 'hal', 'lampiran', 'nomor', 'tp_id'];
+    protected $allowedFields = ['code', 'kategori_surat_id',
+        'content', 'content_2', 'content_3', 'content_4', 'content_5',
+        'hal', 'lampiran', 'nomor', 'tp_id', 'detail_tanggal'];
 
     public function findByCodeAndCategorySuratIdAndTpId($code, $kategori_surat_id, $tpId)
     {

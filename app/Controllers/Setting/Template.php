@@ -41,7 +41,8 @@ class Template extends BaseController
             'sekolah' => $this->schoolModel->find(1),
             'tp' => $this->tp->findAll(),
             'data_template' => $this->masterTemplateModel->findByCodeAndCategorySuratIdAndTpId("SURAT", $kategori_surat_id, $tp),
-            'surat' => $this->nomorSuratModel->findByTp($tp)
+            'surat' => $this->nomorSuratModel->findByTp($tp),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
 
         $result = $this->ResponseBuilder->ReturnViewValidation(
@@ -65,7 +66,12 @@ class Template extends BaseController
     {
         $id = $this->request->getVar('id');
         $content = $this->request->getVar('content');
+        $content_2 = $this->request->getVar('content_2');
+        $content_3 = $this->request->getVar('content_3');
+        $content_4 = $this->request->getVar('content_4');
+        $content_5 = $this->request->getVar('content_5');
         $tp = $this->request->getVar('tp');
+        $detail_tanggal = $this->request->getVar('detail_tanggal');
         $kategori_surat = $this->request->getVar('kategori_surat');
         $response = $this->masterTemplateModel->update(
             $id,
@@ -73,6 +79,11 @@ class Template extends BaseController
                 "hal" => $this->request->getVar("hal"),
                 "lampiran" => $this->request->getVar("lampiran"),
                 "content" => $content,
+                "content_2" => $content_2,
+                "content_3" => $content_3,
+                "content_4" => $content_4,
+                "content_5" => $content_5,
+                "detail_tanggal" => $detail_tanggal,
             ]
         );
         if ($response) {

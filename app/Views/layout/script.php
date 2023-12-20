@@ -53,8 +53,12 @@
 
     $(function () {
         // Summernote
-        $('#content').summernote()
         $('#kop_surat').summernote()
+        $('#content').summernote()
+        $('#content_2').summernote()
+        $('#content_3').summernote()
+        $('#content_4').summernote()
+        $('#content_5').summernote()
         // $('#note').summernote()
         // $('#rules').summernote()
         // $('#regulation').summernote()
