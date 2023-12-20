@@ -584,7 +584,8 @@ class  Admin extends BaseController
         $data = [
             'results' => $result,
             'surat' => $this->nomorModel->findByTp($tp),
-            'tp' => $tp
+            'tp' => $tp,
+            'school' => $this->schoolModel->find(1)
         ];
         view('pages/general/cetak-surat-tugas', $data);
         $mpdf = new \Mpdf\Mpdf();
@@ -607,6 +608,7 @@ class  Admin extends BaseController
             'instansi' => $this->request->getVar('instansi'),
             'result' => $result,
             'surat' => $this->nomorModel->findByTp($tp),
+            'school' => $this->schoolModel->find(1)
 //            'data' => $this->masterData->findByIdukaAndTp($iduka->id, $tp)
         ];
         view('pages/general/cetak-surat-pengantar', $data);

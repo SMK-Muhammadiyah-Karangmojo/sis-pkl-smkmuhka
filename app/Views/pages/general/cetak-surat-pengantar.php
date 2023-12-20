@@ -38,12 +38,12 @@
         </table>
 
         <p>Kepada<br/>
-            Yth.<b> <?= $instansi; ?> <?= $res->idukaName; ?></b><br/>
+            Yth.<b> <?= $instansi; ?> <?= $res->idukaname; ?></b><br/>
             di <b><?= $res->address ?></b>
         </p>
         <p>Assalamu'alaikum Wr.Wb</p>
         <p>
-            Sesuai program Kurikulum SMK Muhammadiyah Karangmojo tahun pelajaran <?= $res->tpName; ?> dan surat
+            Sesuai program Kurikulum SMK Muhammadiyah Karangmojo tahun pelajaran <?= $res->tpname; ?> dan surat
             kesanggupan Bapak/Ibu untuk menerima siswa kami untuk melaksanakan kegiatan Praktik Kerja
             Lapangan (PKL) maka dengan ini kami kirimkan peserta PKL sebagaimana daftar terlampir
         </p>
@@ -74,12 +74,12 @@
             </tr>
             <tr>
                 <td>
-                    MUNAWAR, S.Pd.I
+                    <?= $school['kepala_sekolah'];?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. 1076230
+                    NBM. <?= $school['nip'];?>
                 </td>
             </tr>
             </tbody>

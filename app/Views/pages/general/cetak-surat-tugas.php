@@ -19,7 +19,9 @@
     </style>
 </head>
 <body>
-<?php foreach ($results as $result): ?>
+<?php
+echo $tp;
+foreach ($results as $result): ?>
     <div id="body">
         <img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
         <h3 class="center">
@@ -58,6 +60,7 @@
             </thead>
             <tbody>
             <?php
+//            dd($result->idukaid);
             $i = 1;
             $db = db_connect();
             $data = $db->query('
@@ -71,12 +74,12 @@
                 from master_data md
                         inner join user_details as ud on md.nis = ud.user_id
                         inner join iduka i on md.iduka_id = i.id
-                        inner join major m on i.major = m.id
+                        inner join major m on i.major_id = m.id
                         inner join class c on ud.class_id = c.id
                         left join detail_iduka di on di.id_iduka = i.id
                 where md.deleted_at is null 
                     and md.user_public_id is not null
-                    and md.iduka_id = ' . $result->idukaId . ' 
+                    and md.iduka_id = ' . $result->idukaid . ' 
                     and md.tp_id = ' . $tp
             )->getResult();
             ?>
@@ -114,12 +117,12 @@
             </tr>
             <tr>
                 <td>
-                    MUNAWAR, S.Pd.I
+                    <?= $school['kepala_sekolah'];?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. 1076230
+                    NBM. <?= $school['nip'];?>
                 </td>
             </tr>
             </tbody>

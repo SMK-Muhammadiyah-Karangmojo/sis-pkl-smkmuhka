@@ -152,7 +152,7 @@ class MasterDataModel extends Model
                          inner join iduka i on md.iduka_id = i.id
                          inner join detail_iduka di on md.iduka_id = di.id_iduka
                          inner join tp t on md.tp_id = t.id
-                where i.major = ' . $major . '
+                where i.major_id = ' . $major . '
                   and md.tp_id = ' . $tp . '
                 order by i.name
         ')->getResult();
