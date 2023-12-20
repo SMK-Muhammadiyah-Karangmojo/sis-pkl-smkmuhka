@@ -585,7 +585,8 @@ class  Admin extends BaseController
             'results' => $result,
             'surat' => $this->nomorModel->findByTp($tp),
             'tp' => $tp,
-            'school' => $this->schoolModel->find(1)
+            'school' => $this->schoolModel->find(1),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-surat-tugas', $data);
         $mpdf = new \Mpdf\Mpdf();

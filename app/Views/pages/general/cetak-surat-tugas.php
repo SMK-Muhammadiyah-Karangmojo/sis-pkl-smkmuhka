@@ -22,7 +22,7 @@
 <?php
 foreach ($results as $result): ?>
     <div id="body">
-        <img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
+        <?= $kop_surat->content; ?>
         <h3 class="center">
             <u>SURAT TUGAS</u>
             <br/>Nomor : <?= $surat->nomor; ?></h3>
