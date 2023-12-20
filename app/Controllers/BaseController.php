@@ -5,12 +5,15 @@ namespace App\Controllers;
 use App\Models\GuruModel;
 use App\Models\IdukaModel;
 use App\Models\JurusanModel;
+use App\Models\KategoriSuratModel;
 use App\Models\MajorModel;
 use App\Models\MasterCategoryNilaiModel;
 use App\Models\MasterDataModel;
 use App\Models\MasterNilaiModel;
 use App\Models\MentorDetailModel;
+use App\Models\NomorSuratModel;
 use App\Models\SchoolModel;
+use App\Models\Template\MasterTemplateModel;
 use App\Models\TpModel;
 use App\Models\UserDetailModel;
 use App\Models\UsersModel;
@@ -44,6 +47,9 @@ use Psr\Log\LoggerInterface;
  * @property MentorDetailModel $mentorDetailModel
  * @property MasterCategoryNilaiModel $masterCategoryNilai
  * @property MasterNilaiModel $masterNilai
+ * @property KategoriSuratModel $kategoriSurat
+ * @property NomorSuratModel $nomorSuratModel
+ * @property MasterTemplateModel $masterTemplateModel
  */
 class BaseController extends Controller
 {
@@ -86,5 +92,8 @@ class BaseController extends Controller
         $this->mentorDetailModel = new MentorDetailModel();
         $this->masterCategoryNilai = new MasterCategoryNilaiModel();
         $this->masterNilai = new MasterNilaiModel();
+        $this->kategoriSurat =  new KategoriSuratModel();
+        $this->nomorSuratModel =  new NomorSuratModel();
+        $this->masterTemplateModel = new MasterTemplateModel();
     }
 }

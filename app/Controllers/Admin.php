@@ -1,10 +1,10 @@
 <?php
 
-/**
- * Copyright (c) yantodev all right reserved
- * The Admin Controller
- * @author  Eko Cahyanto
- * mail to: ekocahyanto007@gmail.com
+/*
+ * Copyright (c) 2023. Yantodev - All Rights Reserved.
+ * @Author  :  yantodev
+ * mailto : ekocahyanto007@gmail.com
+ * link : https://yantodev.my.id/
  */
 
 namespace App\Controllers;
@@ -604,12 +604,15 @@ class  Admin extends BaseController
         $tp = $this->request->getVar('tp_pengantar');
         $major = $this->request->getVar('major_id_pengantar');
         $result = $this->masterData->findIdukaByTpAndMajor($tp, $major);
+        $surat = $this->nomorModel->findByTp($tp);
         $data = [
             'instansi' => $this->request->getVar('instansi'),
             'result' => $result,
-            'surat' => $this->nomorModel->findByTp($tp),
-            'school' => $this->schoolModel->find(1)
+            'surat' => $surat,
+            'school' => $this->schoolModel->find(1),
 //            'data' => $this->masterData->findByIdukaAndTp($iduka->id, $tp)
+            'master_template' => $this->masterTemplateModel->findByCodeAndCategorySuratIdAndTpId("SURAT", $surat->id, $tp),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-surat-pengantar', $data);
         $mpdf = new \Mpdf\Mpdf();

@@ -30,6 +30,7 @@
 <script src=<?= base_url('assets/yantodev/teacher.js') ?>></script>
 <script src=<?= base_url('assets/yantodev/nomor-surat.js') ?>></script>
 <script src=<?= base_url('assets/yantodev/auth/logout.js') ?>></script>
+<script src="<?= base_url() ?>/assets/template/plugins/summernote/summernote-bs4.js"></script>
 
 <script>
     $(function () {
@@ -49,4 +50,21 @@
             "responsive": true,
         });
     });
+
+    $(function () {
+        // Summernote
+        $('#content').summernote()
+        $('#kop_surat').summernote()
+        // $('#note').summernote()
+        // $('#rules').summernote()
+        // $('#regulation').summernote()
+        // $('#rundown').summernote()
+        // $('#doorprize').summernote()
+
+        // CodeMirror
+        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            mode: "htmlmixed",
+            theme: "monokai"
+        });
+    })
 </script>

@@ -20,7 +20,7 @@ class MentorDetailModel extends Model
                                 tp.name as tp')
                 ->join('iduka i', 'i.id = md.iduka_id')
                 ->join('tp', "tp.id = md.tp_id")
-                ->join('major m', 'm.id = i.major')
+                ->join('major m', 'm.id = i.major_id')
                 ->get()->getResult();
         }
         return $this->db->table('mentor_detail md')
@@ -28,8 +28,8 @@ class MentorDetailModel extends Model
                                 tp.name as tp')
             ->join('iduka i', 'i.id = md.iduka_id')
             ->join('tp', "tp.id = md.tp_id")
-            ->join('major m', 'm.id = i.major')
-            ->where('i.major', $majorId)
+            ->join('major m', 'm.id = i.major_id')
+            ->where('i.major_id', $majorId)
             ->get()->getResult();
     }
 

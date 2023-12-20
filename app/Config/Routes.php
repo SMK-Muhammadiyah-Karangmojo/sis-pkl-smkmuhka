@@ -49,6 +49,15 @@ $routes->group("sertifikat", static function ($routes) {
     $routes->post("import-excel", "Certificate\CertificateController::importExcel");
     $routes->match(['post', 'get'], "setting", "Certificate\CertificateController::setting");
 });
+
+$routes->group("setting", static function ($setting) {
+    $setting->group("template", static function ($template) {
+        $template->get('/', "Setting\Template::index");
+        $template->post('/', "Setting\Template::updateTemplate");
+        $template->get('kop-surat', "Setting\Template::templateKopSurat");
+        $template->post('kop-surat', "Setting\Template::saveTemplateKopSurat");
+    });
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

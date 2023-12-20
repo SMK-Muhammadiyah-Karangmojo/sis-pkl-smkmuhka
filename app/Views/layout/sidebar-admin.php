@@ -84,7 +84,7 @@
                         <li class="nav-item">
                             <a href="<?= base_url('Mentor/mentor'); ?>" class="nav-link">
                                 <em class="far fa-circle nav-icon"></em>
-                                <p>Mentor</p>
+                                <p>Pembimbing</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -149,6 +149,27 @@
                         <em class="nav-icon fa fa-certificate"></em>
                         <p>Cetak Sertifikat</p>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <em class="nav-icon fa fa-sliders"></em>
+                        <p>Pengaturan</p>
+                        <em class="right fas fa-angle-left"></em>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('setting/template'); ?>" class="nav-link">
+                                <em class="far fa-circle nav-icon"></em>
+                                <p>Template Surat</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('setting/template/kop-surat'); ?>" class="nav-link">
+                                <em class="far fa-circle nav-icon"></em>
+                                <p>Kop Surat</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

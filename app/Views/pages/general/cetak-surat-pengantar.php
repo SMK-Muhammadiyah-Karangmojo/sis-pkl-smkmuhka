@@ -21,7 +21,7 @@
 <body>
 <?php foreach ($result as $res): ?>
     <div id="body">
-        <img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
+         <?= $kop_surat->content; ?>
         <table>
             <tr>
                 <td>Nomor</td>
@@ -29,11 +29,11 @@
             </tr>
             <tr>
                 <td>Lampiran</td>
-                <td class="column-name">: 1 Bandel</td>
+                <td class="column-name">: <?= $master_template->lampiran; ?></td>
             </tr>
             <tr>
                 <td>Hal</td>
-                <td class="column-name">: Pengiriman Peserta PKL</td>
+                <td class="column-name">: <?= $master_template->hal; ?></td>
             </tr>
         </table>
 
@@ -41,25 +41,7 @@
             Yth.<b> <?= $instansi; ?> <?= $res->idukaname; ?></b><br/>
             di <b><?= $res->address ?></b>
         </p>
-        <p>Assalamu'alaikum Wr.Wb</p>
-        <p>
-            Sesuai program Kurikulum SMK Muhammadiyah Karangmojo tahun pelajaran <?= $res->tpname; ?> dan surat
-            kesanggupan Bapak/Ibu untuk menerima siswa kami untuk melaksanakan kegiatan Praktik Kerja
-            Lapangan (PKL) maka dengan ini kami kirimkan peserta PKL sebagaimana daftar terlampir
-        </p>
-        <p>
-            Selanjutnya para peserta PKL kami serahkan sepenuhnya kepada Bapak/Ibu untuk mendapatkan
-            bimbingan, pendidikan dan pelatihan, mulai tanggal 02 januari 2023 sampai dengan 31 maret 2023.
-            Pada akhir PKL nanti kami mohon kepada Bapak/Ibu berkenan memberikan nilai terhadap siswa
-            peserta PKL tersebut.
-            <strong>Mengenai format penilaian, petunjuk penilaian, buku absen siswa ada
-                pada buku laporan pembimbing. Setelah selesai masa PKL para siswa juga diwajibkan
-                mengumpulkan buku laporan kegiatan PKL yang telah ditandatangani oleh Pembimbing
-                IDUKA pada setiap jenis pekerjaan.</strong>
-        </p>
-        <p>
-            Demikian atas perhatian dan kerjasamanya kami sampaikan terimakasih.
-        </p>
+        <?= $master_template->content; ?>
         <table class="table">
             <tbody>
             <tr>

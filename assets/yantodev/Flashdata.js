@@ -40,4 +40,3 @@ if (flashSuccessLogin) {
         text: "Welcome " + flashSuccessLogin
     })
 }
-

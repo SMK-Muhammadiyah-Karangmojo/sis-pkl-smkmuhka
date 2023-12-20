@@ -12,6 +12,7 @@
     <link rel="stylesheet" href=<?= base_url('assets/template/plugins/fontawesome-free/css/all.min.css') ?>>
     <link rel="stylesheet" href=<?= base_url('assets/template/dist/css/adminlte.min.css') ?>>
     <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
+    <link href="<?= base_url(); ?>/assets/template/plugins/summernote/summernote-bs4.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/41781f79df.js" crossorigin="anonymous"></script>
 </head>
 
