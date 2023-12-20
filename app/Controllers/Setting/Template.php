@@ -68,8 +68,8 @@ class Template extends BaseController
         $response = $this->masterTemplateModel->update(
             $id,
             [
-                "hal" => $this->request->get("hal"),
-                "lampiran" => $this->request->get("lampiran"),
+                "hal" => $this->request->getVar("hal"),
+                "lampiran" => $this->request->getVar("lampiran"),
                 "content" => $content,
             ]
         );
