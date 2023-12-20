@@ -20,7 +20,6 @@
 </head>
 <body>
 <?php
-echo $tp;
 foreach ($results as $result): ?>
     <div id="body">
         <img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
