@@ -31,7 +31,6 @@
                                 <?php
                             }
                             ?>
-
                         </div>
                         <table id="dataTable" class="table table-sm table-bordered table-striped">
                             <thead>
@@ -66,6 +65,7 @@
     </div>
 
     <script>
+
         if ("geolocation" in navigator) {
             function addPresenceIn(userId) {
                 navigator.geolocation.getCurrentPosition(function (position) {
