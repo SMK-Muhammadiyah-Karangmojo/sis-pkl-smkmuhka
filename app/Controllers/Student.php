@@ -18,6 +18,7 @@ use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Session\Session;
 use Config\APIResponseBuilder;
+use Config\Bot\BotDiscord;
 use Config\Services;
 use Config\YantoDevConfig;
 
@@ -28,6 +29,7 @@ use Config\YantoDevConfig;
  * @property APIResponseBuilder $ResponseBuilder
  * @property MasterLaporanModal $masterLaporan
  * @property DataLaporanSiswaModal $laporanSiswa
+ * @property BotDiscord $botDiscord
  */
 class Student extends BaseController
 {
@@ -45,6 +47,7 @@ class Student extends BaseController
         $this->masterData = new MasterDataModel();
         $this->masterLaporan = new MasterLaporanModal();
         $this->laporanSiswa = new DataLaporanSiswaModal();
+        $this->botDiscord = new BotDiscord();
     }
 
     public function index()
@@ -365,7 +368,8 @@ class Student extends BaseController
             'users_id' => $this->session->get('id'),
             'role' => $this->session->get('role'),
             'data' => $this->users->findUserDetailByEmail(
-                $this->session->get('email'))->getRow()
+                $this->session->get('email'))->getRow(),
+            'data_presence' => $this->presenceModel->findByUserIdAndDeletedAtIsNull($this->session->get('id'))
         ];
 
         return $this->ResponseBuilder->ReturnViewValidationStudent(
@@ -373,6 +377,35 @@ class Student extends BaseController
             'pages/student/presence',
             $data
         );
+    }
 
+    public function addPresence()
+    {
+        $userId = $this->request->getVar("user_id");
+        $latitude = $this->request->getVar("latitude");
+        $longitude = $this->request->getVar("longitude");
+        $fileImage = $this->request->getFile('image');
+//        $timeIn = $this->request->getVar("date");
+
+        if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
+            $fileImage->getRandomName();
+            $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
+            $result = $this->botDiscord->sendImagePresence($filePath, "presence");
+            $image = $result->attachments[0]->url;
+        }
+
+        $response = $this->presenceModel->insert([
+            "users_id" => $userId,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "date" => today(),
+            "time_in" => today(),
+            "image" => $image
+        ]);
+
+        if ($response) {
+            return $this->respond($this->ResponseBuilder->ok($response));
+        }
+        return $this->respond($this->ResponseBuilder->internalServerError("failed to save data"));
     }
 }

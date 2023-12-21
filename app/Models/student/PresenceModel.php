@@ -16,8 +16,18 @@ class PresenceModel extends Model
     protected $table = 'presence';
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['user_id', 'name', 'image', 'location', 'date', 'time_in', 'time_out'];
+    protected $allowedFields = ['users_id', 'name', 'image', 'location', 'date', 'time_in', 'time_out',
+        'latitude', 'longitude'];
 
+    public function findByUserIdAndDeletedAtIsNull($userId): array
+    {
+        $builder = $this->db->table("presence");
+        $builder->where("users_id", $userId);
+        $builder->where("deleted_at", null);
+
+        $sql = $builder->get();
+        return $sql->getResult();
+    }
 
 
 }

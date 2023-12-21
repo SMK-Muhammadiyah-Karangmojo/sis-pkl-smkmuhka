@@ -441,4 +441,13 @@ if (!function_exists('bulan')) {
         }
         return $image;
     }
+
+    function today()
+    {
+        $TimeStr = "2017-01-01 12:00:00";
+        $TimeZoneNameFrom = "GMT+7";
+        $TimeZoneNameTo = "Asia/Jakarta";
+        return date_create(date("Y-m-d H:i:s"), new DateTimeZone($TimeZoneNameFrom))
+            ->setTimezone(new DateTimeZone($TimeZoneNameTo))->format("Y-m-d H:i:s");
+    }
 }

@@ -61,7 +61,8 @@ $routes->group("setting", static function ($setting) {
 
 //Student
 $routes->group('student', static function ($student) {
-    $student->get("/presence", "Student::presence");
+    $student->get("presence", "Student::presence");
+    $student->post("presence", "Student::addPresence");
 });
 /*
  * --------------------------------------------------------------------
