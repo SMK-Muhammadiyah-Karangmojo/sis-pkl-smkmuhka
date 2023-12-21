@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Libraries\ImageCompressor;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -19,6 +20,16 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
+    public static function imageCompressor($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('ImageCompressor');
+        }
+
+        return new ImageCompressor();
+    }
+
+
     /*
      * public static function example($getShared = true)
      * {
@@ -30,3 +41,5 @@ class Services extends BaseService
      * }
      */
 }
+
+

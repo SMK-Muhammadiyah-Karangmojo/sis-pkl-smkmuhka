@@ -5,7 +5,7 @@
   "homepage": "https://codeigniter.com",
   "license": "MIT",
   "require": {
-    "php": "^7.4 || ^8.0",
+    "php": "^8.1.0 || ^8.1",
     "ext-curl": "*",
     "ext-intl": "*",
     "ext-json": "*",
@@ -15,7 +15,8 @@
     "psr/log": "^1.1",
     "mpdf/mpdf": "^8.1",
     "phpoffice/phpspreadsheet": "^1.25",
-    "mpdf/qrcode": "^1.2"
+    "mpdf/qrcode": "^1.2",
+    "ext-gd": "*"
   },
   "require-dev": {
     "codeigniter/coding-standard": "^1.1",

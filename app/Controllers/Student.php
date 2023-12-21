@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\ImageCompressor;
 use App\Models\ClassModel;
 use App\Models\DataLaporanSiswaModal;
 use App\Models\MajorModel;
@@ -35,6 +36,11 @@ class Student extends BaseController
 {
     use ResponseTrait;
 
+    /**
+     * @var mixed
+     */
+    private $imageCompressor;
+
     public function __construct()
     {
         $this->session = session();
@@ -48,6 +54,7 @@ class Student extends BaseController
         $this->masterLaporan = new MasterLaporanModal();
         $this->laporanSiswa = new DataLaporanSiswaModal();
         $this->botDiscord = new BotDiscord();
+        $this->imageCompressor = new ImageCompressor();
     }
 
     public function index()
@@ -369,6 +376,7 @@ class Student extends BaseController
             'role' => $this->session->get('role'),
             'data' => $this->users->findUserDetailByEmail(
                 $this->session->get('email'))->getRow(),
+            'cek_presence' => $this->presenceModel->findByUserIdAndDate($this->session->get('id'), today()),
             'data_presence' => $this->presenceModel->findByUserIdAndDeletedAtIsNull($this->session->get('id'))
         ];
 
@@ -381,27 +389,40 @@ class Student extends BaseController
 
     public function addPresence()
     {
+        $id = $this->request->getVar("id");
         $userId = $this->request->getVar("user_id");
         $latitude = $this->request->getVar("latitude");
         $longitude = $this->request->getVar("longitude");
         $fileImage = $this->request->getFile('image');
-//        $timeIn = $this->request->getVar("date");
+        $image = null;
+        $user = $this->userDetail->findByUserPublicId($userId);
 
-        if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
-            $fileImage->getRandomName();
-            $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
-            $result = $this->botDiscord->sendImagePresence($filePath, "presence");
-            $image = $result->attachments[0]->url;
+        if ($id) {
+            $message = "$user->name baru saja melakukan presensi pulang";
+        } else {
+            $message = "$user->name baru saja melakukan presensi masuk";
         }
 
-        $response = $this->presenceModel->insert([
-            "users_id" => $userId,
-            "latitude" => $latitude,
-            "longitude" => $longitude,
-            "date" => today(),
-            "time_in" => today(),
-            "image" => $image
-        ]);
+        if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
+            $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
+            $result = $this->botDiscord->sendImagePresence($filePath, $message);
+            $image = $result->attachments[0]->url;
+        }
+        if ($id) {
+            $response = $this->presenceModel->update($id, [
+                "time_out" => today(),
+                "location_out" => "$latitude,$longitude",
+                "image_out" => $image ?? null
+            ]);
+        } else {
+            $response = $this->presenceModel->insert([
+                "users_id" => $userId,
+                "location_in" => "$latitude,$longitude",
+                "date" => today(),
+                "time_in" => today(),
+                "image_in" => $image ?? null
+            ]);
+        }
 
         if ($response) {
             return $this->respond($this->ResponseBuilder->ok($response));

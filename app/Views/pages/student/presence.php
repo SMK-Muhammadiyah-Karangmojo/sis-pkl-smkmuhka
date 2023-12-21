@@ -9,9 +9,29 @@
                     </div>
                     <div class="card-body">
                         <div class="card-footer">
-                            <button class="btn btn-primary" onclick="addPresence(<?= $users_id; ?>)">Presensi Masuk
-                            </button>
-                            <button class="btn btn-danger">Presensi Pulang</button>
+                            <?php
+                            if (!$cek_presence) {
+                                ?>
+                                <button class="btn btn-primary m-1" onclick="addPresenceIn(<?= $users_id; ?>)">Presensi
+                                    Masuk
+                                </button>
+                                <?php
+                            } elseif (!$cek_presence->time_out) {
+                                ?>
+                                <button class="btn btn-danger m-1"
+                                        onclick="addPresenceOut(<?= $users_id; ?>, <?= $cek_presence->id; ?>)">
+                                    Presensi Pulang
+                                </button>
+                                <?php
+                            } else {
+                                ?>
+                                <h5>Terima kasih <strong><?= $data->name; ?></strong> untuk hari ini sudah melakukan
+                                    presensi
+                                    masuk dan pulang</h5>
+                                <?php
+                            }
+                            ?>
+
                         </div>
                         <table id="dataTable" class="table table-sm table-bordered table-striped">
                             <thead>
@@ -20,25 +40,18 @@
                                 <th>Tanggal</th>
                                 <th>Waktu Masuk</th>
                                 <th>Waktu Pulang</th>
-                                <th>Lokasi</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $number = 1;
+                            <?php
+                            $number = 1;
                             foreach ($data_presence as $item) {
                                 ?>
                                 <tr>
                                     <td class="text-center"><?= $number++; ?></td>
-                                    <td><?= format_indo($item->date); ?></td>
+                                    <td><?= tanggal($item->date); ?></td>
                                     <td class="text-center"><?= $item->time_in; ?></td>
                                     <td class="text-center"><?= $item->time_out; ?></td>
-                                    <td>
-                                        <?= $item->latitude; ?>,<?= $item->longitude; ?>
-                                    </td>
-                                    <td>
-
-                                    </td>
                                 </tr>
                                 <?php
                             }
@@ -53,9 +66,8 @@
     </div>
 
     <script>
-
         if ("geolocation" in navigator) {
-            function addPresence(userId) {
+            function addPresenceIn(userId) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     let latitude = position.coords.latitude;
                     let longitude = position.coords.longitude;
@@ -65,6 +77,14 @@
                     //     window.open(mapsUrl, '_blank');
                     // });
                     presenceIn(userId, latitude, longitude)
+                });
+            }
+
+            function addPresenceOut(userId, id) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+                    presenceOut(userId, id, latitude, longitude)
                 });
             }
 
