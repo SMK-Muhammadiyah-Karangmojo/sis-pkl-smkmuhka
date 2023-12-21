@@ -77,7 +77,7 @@ function presenceOut(userId, id, latitude, longitude) {
             <form id="imageUploadForm" enctype="multipart/form-data">
                 <div class="form-group text-left">
                     <label for="imageInput" class="form-label">Silahkan upload foto selfie terlebih dahulu</label>
-                    <input class="form-control" type="file" name="imageInput" id="imageInput">
+                    <input class="form-control" type="file" name="imageInput" id="imageInput" accept="image/*">
                 </div>
             </form>
         `,
