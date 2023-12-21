@@ -51,7 +51,6 @@ class Student extends BaseController
     {
         $response = $this->users->findUserDetailByEmail(
             $this->session->get('email'))->getRow();
-//        dd($response);
         $res = $this->masterData->findByNis($response != null ? $response->nis : null)->getRow();
         if ($response && $res) {
             return $this->ResponseBuilder->ReturnViewValidationStudent(
@@ -356,5 +355,24 @@ class Student extends BaseController
                 $this->request->getVar('id')
             )
         ));
+    }
+
+    public function presence()
+    {
+        $data = [
+            'title' => "Presensi Siswa",
+            'users' => $this->session->get('email'),
+            'users_id' => $this->session->get('id'),
+            'role' => $this->session->get('role'),
+            'data' => $this->users->findUserDetailByEmail(
+                $this->session->get('email'))->getRow()
+        ];
+
+        return $this->ResponseBuilder->ReturnViewValidationStudent(
+            $this->session,
+            'pages/student/presence',
+            $data
+        );
+
     }
 }

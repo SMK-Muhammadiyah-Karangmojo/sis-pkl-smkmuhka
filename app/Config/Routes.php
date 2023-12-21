@@ -58,6 +58,11 @@ $routes->group("setting", static function ($setting) {
         $template->post('kop-surat', "Setting\Template::saveTemplateKopSurat");
     });
 });
+
+//Student
+$routes->group('student', static function ($student) {
+    $student->get("/presence", "Student::presence");
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

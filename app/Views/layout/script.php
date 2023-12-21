@@ -29,9 +29,10 @@
 <script src=<?= base_url('assets/yantodev/master.js') ?>></script>
 <script src=<?= base_url('assets/yantodev/teacher.js') ?>></script>
 <script src=<?= base_url('assets/yantodev/nomor-surat.js') ?>></script>
+<script src=<?= base_url('assets/yantodev/presence.js') ?>></script>
 <script src=<?= base_url('assets/yantodev/auth/logout.js') ?>></script>
 <script src="<?= base_url() ?>/assets/template/plugins/summernote/summernote-bs4.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIe0c2C6vRVTo9PulXODspLMS2fV7fGWQ&callback=initMap" async defer></script>
 <script>
     $(function () {
         $("#example1").DataTable({

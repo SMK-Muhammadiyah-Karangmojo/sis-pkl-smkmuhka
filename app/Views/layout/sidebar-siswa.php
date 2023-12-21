@@ -27,10 +27,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= base_url('student/presence'); ?>" class="nav-link">
+                            <i class="nav-icon fas  fa-person-chalkboard"></i>
+                            <p>
+                                Presensi
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= base_url('student/profile'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-user-alt"></i>
                             <p>
-                                Change Profile
+                                Update Profile
                             </p>
                         </a>
                     </li>

@@ -13,6 +13,7 @@ use App\Models\MasterNilaiModel;
 use App\Models\MentorDetailModel;
 use App\Models\NomorSuratModel;
 use App\Models\SchoolModel;
+use App\Models\student\PresenceModel;
 use App\Models\Template\MasterTemplateModel;
 use App\Models\TpModel;
 use App\Models\UserDetailModel;
@@ -50,6 +51,7 @@ use Psr\Log\LoggerInterface;
  * @property KategoriSuratModel $kategoriSurat
  * @property NomorSuratModel $nomorSuratModel
  * @property MasterTemplateModel $masterTemplateModel
+ * @property PresenceModel $presenceModel
  */
 class BaseController extends Controller
 {
@@ -95,5 +97,6 @@ class BaseController extends Controller
         $this->kategoriSurat =  new KategoriSuratModel();
         $this->nomorSuratModel =  new NomorSuratModel();
         $this->masterTemplateModel = new MasterTemplateModel();
+        $this->presenceModel = new PresenceModel();
     }
 }
