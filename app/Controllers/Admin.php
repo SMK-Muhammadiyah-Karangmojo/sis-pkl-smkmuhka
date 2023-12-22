@@ -248,9 +248,8 @@ class  Admin extends BaseController
             if (!$this->validate($this->config->formValidationVerifikasiDataPKL())) {
                 return redirect()->to('/admin/verifikasi?id=' . $id)->withInput();
             }
-            if ($fileImage->getError() == 4) {
-                $imageName = $oldImage;
-            } else {
+            $imageName = $oldImage;
+            if (!$fileImage->getError() == 4 && !$fileImage->hasMoved()) {
                 $message = "Verifikasi lokasi PKL";
                 $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
                 $result = $this->botDiscord->sendImagePresence($_ENV['BASE_URL_NOTIFICATION'], $filePath, $message);
