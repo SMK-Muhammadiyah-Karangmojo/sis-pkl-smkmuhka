@@ -20,6 +20,7 @@ use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
 use Config\APIResponseBuilder;
 use Config\IApplicationConstantConfig;
+use Config\Services;
 use Config\YantoDevConfig;
 use Mpdf\MpdfException;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -223,7 +224,7 @@ class  Admin extends BaseController
             'subtitle' => "Rekap Data Lokasi PKL",
             'users' => $this->session->get('email'),
             'role' => $this->session->get('role'),
-            'validation' => \Config\Services::validation(),
+            'validation' => Services::validation(),
             'master' => $this->masterData->findById($id),
             'statusData' => '',
         ];
@@ -250,11 +251,10 @@ class  Admin extends BaseController
             if ($fileImage->getError() == 4) {
                 $imageName = $oldImage;
             } else {
-                $imageName = $fileImage->getRandomName();
-                $fileImage->move('assets/img/verifikasi', $imageName);
-                if ($oldImage != 'no_image.jpg') {
-                    unlink('assets/img/verifikasi/' . $oldImage);
-                }
+                $message = "Verifikasi lokasi PKL";
+                $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
+                $result = $this->botDiscord->sendImagePresence($_ENV['BASE_URL_NOTIFICATION'], $filePath, $message);
+                $imageName = $result->attachments[0]->url;
             }
             $this->masterData->update($id, [
                 'image' => $imageName,
