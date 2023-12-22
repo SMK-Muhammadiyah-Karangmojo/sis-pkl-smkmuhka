@@ -71,11 +71,6 @@
                 navigator.geolocation.getCurrentPosition(function (position) {
                     let latitude = position.coords.latitude;
                     let longitude = position.coords.longitude;
-
-                    // document.getElementById('lihat-di-maps').addEventListener('click', function () {
-                    //     let mapsUrl = 'https://www.google.com/maps?q=' + latitude + ',' + longitude;
-                    //     window.open(mapsUrl, '_blank');
-                    // });
                     presenceIn(userId, latitude, longitude)
                 });
             }

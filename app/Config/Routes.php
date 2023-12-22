@@ -58,7 +58,11 @@ $routes->group("setting", static function ($setting) {
         $template->post('kop-surat', "Setting\Template::saveTemplateKopSurat");
     });
 });
-
+//presence
+$routes->group("presence", static function ($admin) {
+    $admin->get("/", "Presence\PresenceController::index");
+    $admin->get("detail/(:num)", "Presence\PresenceController::presenceDetail/$1");
+});
 //Student
 $routes->group('student', static function ($student) {
     $student->get("presence", "Student::presence");

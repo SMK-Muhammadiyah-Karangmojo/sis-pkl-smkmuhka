@@ -45,13 +45,6 @@
                                 <p>Nilai Siswa</p>
                             </a>
                         </li>
-                        <!--                        <li class="nav-item">-->
-                        <!--                            <a href="-->
-                        <?php //= base_url('admin/laporan'); ?><!--" class="nav-link">-->
-                        <!--                                <em class="far fa-circle nav-icon"></em>-->
-                        <!--                                <p>Laporan Siswa</p>-->
-                        <!--                            </a>-->
-                        <!--                        </li>-->
                         <li class="nav-item">
                             <a href="<?= base_url('admin/pendamping'); ?>" class="nav-link">
                                 <em class="far fa-circle nav-icon"></em>
@@ -62,6 +55,21 @@
                             <a href="<?= base_url('admin/rekap'); ?>" class="nav-link">
                                 <em class="far fa-circle nav-icon"></em>
                                 <p>Rekap Data</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <em class="nav-icon fas  fa-person-chalkboard"></em>
+                        <p>Presensi</p>
+                        <em class="right fas fa-angle-left"></em>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('/presence'); ?>" class="nav-link">
+                                <em class="far fa-circle nav-icon"></em>
+                                <p>Semua Siswa</p>
                             </a>
                         </li>
                     </ul>

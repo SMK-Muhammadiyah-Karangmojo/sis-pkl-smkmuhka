@@ -23,6 +23,7 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Bot\BotDiscord;
 use Config\YantoDevConfig;
 use Psr\Log\LoggerInterface;
 
@@ -52,6 +53,7 @@ use Psr\Log\LoggerInterface;
  * @property NomorSuratModel $nomorSuratModel
  * @property MasterTemplateModel $masterTemplateModel
  * @property PresenceModel $presenceModel
+ * @property BotDiscord $botDiscord
  */
 class BaseController extends Controller
 {
@@ -82,6 +84,7 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->botDiscord = new BotDiscord();
         $this->config = new YantoDevConfig();
         $this->users = new UsersModel();
         $this->idukaModel = new IdukaModel();

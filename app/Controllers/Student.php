@@ -405,7 +405,7 @@ class Student extends BaseController
 
         if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
             $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
-            $result = $this->botDiscord->sendImagePresence($filePath, $message);
+            $result = $this->botDiscord->sendImagePresence($_ENV['BASE_URL_PRESENCE'], $filePath, $message);
             $image = $result->attachments[0]->url;
         }
         if ($id) {

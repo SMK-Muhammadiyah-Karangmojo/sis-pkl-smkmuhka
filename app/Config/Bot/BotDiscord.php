@@ -13,7 +13,7 @@ use CURLFile;
 
 class BotDiscord extends Config
 {
-    public function sendImagePresence($image, $description)
+    public function sendImagePresence($webhook_url, $image, $description)
     {
         $request = [
             "username" => "Muhka Bot",
@@ -28,7 +28,7 @@ class BotDiscord extends Config
 
         curl_setopt_array($curl,
             [
-                CURLOPT_URL => $_ENV['BASE_URL_NOTIFICATION'],
+                CURLOPT_URL => $webhook_url,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
