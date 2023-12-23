@@ -109,7 +109,8 @@ foreach ($results as $result): ?>
                 <td>Karangmojo, <?= tanggal($surat->tanggal); ?></td>
             </tr>
             <tr>
-                <td height="80px">
+                <td>
+                    <?= $school['ttd']; ?>
                 </td>
             </tr>
             <tr>
