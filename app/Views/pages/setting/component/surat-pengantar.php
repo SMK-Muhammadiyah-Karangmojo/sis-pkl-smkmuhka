@@ -61,9 +61,12 @@
                 </div>
                 <div>
                     <div class="row">
-                        <div class="col-sm-8"></div>
+                        <div class="col-sm-8">
+
+                        </div>
                         <div class="col-sm-4">
-                            <p class="mb-5">Karangmojo, <?= $surat ? tanggal($surat->tanggal) : ''; ?></p>
+                            <p>Karangmojo, <?= $surat ? tanggal($surat->tanggal) : ''; ?></p>
+                            <?= $sekolah['ttd'] ?? "<p>Tidak ada tanda tangan digital</p>"; ?>
                             <p><?= $sekolah['kepala_sekolah']; ?><br>
                                 NBM. <?= $sekolah['nip']; ?></p>
                         </div>

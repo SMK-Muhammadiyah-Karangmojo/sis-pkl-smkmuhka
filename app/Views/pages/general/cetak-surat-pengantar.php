@@ -21,7 +21,7 @@
 <body>
 <?php foreach ($result as $res): ?>
     <div id="body">
-         <?= $kop_surat->content; ?>
+        <?= $kop_surat->content; ?>
         <table>
             <tr>
                 <td>Nomor</td>
@@ -49,7 +49,8 @@
                 <td>Karangmojo, <?= tgl2($surat->tanggal); ?></td>
             </tr>
             <tr>
-                <td height="80px">
+                <td>
+                    <?= $school['ttd']; ?>
                 </td>
             </tr>
             <tr>
