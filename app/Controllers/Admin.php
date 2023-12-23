@@ -702,7 +702,7 @@ class  Admin extends BaseController
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-surat-jalan', [
-            ini_set("pcre.backtrack_limit", "50000000")
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
         ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
@@ -718,13 +718,14 @@ class  Admin extends BaseController
             'nomor' => $this->nomorModel->findByTpAndCategory($tp, 3),
             'tp' => $tp,
             'dataTp' => $this->tp->find($tp),
-            'school' => $this->schoolModel->find(1)
+            'school' => $this->schoolModel->find(1),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-daftar-peserta', $data);
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-daftar-peserta', [
-            ini_set("pcre.backtrack_limit", "5000000")
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
         ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
@@ -747,7 +748,7 @@ class  Admin extends BaseController
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-lembar-monitoring', [
-            ini_set("pcre.backtrack_limit", "5000000")
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
         ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
@@ -775,7 +776,7 @@ class  Admin extends BaseController
         ]);
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-daftar-hadir', [
-            ini_set("pcre.backtrack_limit", "5000000")
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
         ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
