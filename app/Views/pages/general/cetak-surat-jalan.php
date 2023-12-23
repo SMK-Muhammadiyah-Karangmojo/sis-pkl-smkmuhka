@@ -18,20 +18,18 @@
                tp.name as tpName')
         ->join('tp', 'tp.id = md.tp_id')
         ->join('iduka i', 'i.id = md.iduka_id')
-        ->join('major m', 'm.id = i.major')
+        ->join('major m', 'm.id = i.major_id')
         ->join('user_details ud', 'ud.user_public_id = md.user_public_id')
         ->join('class', 'class.id = ud.class_id', 'left')
         ->where('md.tp_id', $tp)
         ->where('md.iduka_id', $idk->id)
-//        ->where('m.id', $idk->major)
         ->where('md.deleted_at', null)
         ->orderBy('ud.user_id', 'ASC')
         ->orderBy('i.name', 'ASC')
         ->get()->getResult();
-//    echo dd($data);
     ?>
     <div id="body">
-        <img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
+        <?= $kop_surat->content; ?>
         <h3 align="center">
             <u>SURAT JALAN</u>
             <br/>Nomor : <?= $nomor->nomor; ?></h3>
@@ -99,17 +97,17 @@
             </tr>
             <tr>
                 <td>
-                    <img src=" <?= base_url('assets/img/ttd-ks.png'); ?>" width="170px" height="100px">
+                    <?= $school['ttd']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    MUNAWAR, S.Pd.I
+                    <?= $school['kepala_sekolah']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    NBM. 1076230
+                    NBM. <?= $school['nip']; ?>
                 </td>
             </tr>
             </tbody>

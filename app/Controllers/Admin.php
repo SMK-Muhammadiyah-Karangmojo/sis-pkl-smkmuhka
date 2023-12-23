@@ -692,13 +692,15 @@ class  Admin extends BaseController
             'surat' => $this->nomorModel->findByTp($tp),
             'iduka' => $this->masterData->findByTp($tp),
             'nomor' => $this->nomorModel->findByTpAndCategory($tp, 3),
-            'tp' => $tp
+            'tp' => $tp,
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
+            'school' => $this->schoolModel->find(1),
         ];
         view('pages/general/cetak-surat-jalan', $data);
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-surat-jalan', [
-            ini_set("pcre.backtrack_limit", "5000000")
+            ini_set("pcre.backtrack_limit", "50000000")
         ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
