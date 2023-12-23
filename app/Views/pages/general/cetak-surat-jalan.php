@@ -33,7 +33,8 @@
         <h3 align="center">
             <u>SURAT JALAN</u>
             <br/>Nomor : <?= $nomor->nomor; ?></h3>
-        <p>Kepala SMK Muhammadiyah Karangmojo menerangkan dengan sesungguhnya bahwa siswa tersebut di bawah ini :
+        <p>
+            <?= $master_template->content; ?>
         </p>
         <table border="1" width="100%" cellspacing="0">
             <thead>
@@ -61,7 +62,9 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-        <p>Adalah peserta praktik Kerja Lapangan dalam rangka Pendidikan Sistem Ganda (PSG), pada :</p>
+        <p>
+            <?= $master_template->content_2; ?>
+        </p>
         <table class="table">
             <tbody>
             <tr>
@@ -81,7 +84,7 @@
             <tr>
                 <td width="50px"></td>
                 <td>Waktu</td>
-                <td>: <strong><?= $nomor->detail_tanggal; ?></strong></td>
+                <td>: <strong> <?= $master_template->detail_tanggal; ?></strong></td>
             </tr>
             </tbody>
         </table>

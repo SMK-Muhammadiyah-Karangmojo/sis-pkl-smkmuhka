@@ -687,6 +687,7 @@ class  Admin extends BaseController
     public function printLetterDisposition()
     {
         $tp = $this->request->getVar('tp_surat_jalan');
+        $surat = $this->nomorModel->findByTpAndCategory($tp, 3);
         $data = [
             'instansi' => $this->request->getVar('instansi'),
             'surat' => $this->nomorModel->findByTp($tp),
@@ -695,6 +696,7 @@ class  Admin extends BaseController
             'tp' => $tp,
             'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
             'school' => $this->schoolModel->find(1),
+            'master_template' => $this->masterTemplateModel->findByCodeAndCategorySuratIdAndTpId("SURAT", $surat->kategori_surat_id, $tp),
         ];
         view('pages/general/cetak-surat-jalan', $data);
         $mpdf = new Mpdf();
