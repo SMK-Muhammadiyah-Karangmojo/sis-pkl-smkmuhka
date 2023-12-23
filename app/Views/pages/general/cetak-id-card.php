@@ -159,7 +159,7 @@
                     </div>
                     <div class="scan">
                         <strong>SCAN ME</strong><br/>
-                        <barcode code="<?= base_url('home/detailsiswa/') . $siswa->id; ?>" size="1.2" type="QR"
+                        <barcode code="<?= base_url() . 'home/detailsiswa/' . $siswa->id; ?>" size="1.2" type="QR"
                                  error="M" class="barcode"></barcode>
                     </div>
                 </div>
