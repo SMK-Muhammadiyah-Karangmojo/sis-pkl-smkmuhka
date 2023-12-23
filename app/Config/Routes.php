@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
+$routes->get('detail-siswa/(:num)', 'Home::index/$1');
 $routes->get("nilai", "NilaiController::index");
 $routes->get("export-nilai", "NilaiController::exportNilai");
 $routes->post("add-nilai", "NilaiController::addNilai");

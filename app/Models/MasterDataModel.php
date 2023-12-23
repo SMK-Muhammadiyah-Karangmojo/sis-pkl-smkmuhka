@@ -237,4 +237,21 @@ class MasterDataModel extends Model
             ->where("md.id", $id)
             ->get()->getRow();
     }
+
+    public function findByUserNis($id)
+    {
+        return $this->db->table('master_data md')
+            ->select('md.id, md.image, md.status,
+                            ud.name, ud.user_id as nis,
+                            i.name as iduka,
+                            di.address,
+                            teacher.name as teacher, teacher.hp')
+            ->join('user_details ud', 'ud.user_public_id = md.user_public_id')
+            ->join('iduka i', 'i.id = md.iduka_id')
+            ->join('detail_iduka di', 'di.id_iduka = md.iduka_id')
+            ->join('tutor', 'tutor.iduka_id = i.id', 'left')
+            ->join('teacher', 'teacher.user_public_id = tutor.teacher_id', 'left')
+            ->where('md.nis', $id)
+            ->get()->getRow();
+    }
 }
