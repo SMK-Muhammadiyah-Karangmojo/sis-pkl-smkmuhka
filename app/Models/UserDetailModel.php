@@ -66,6 +66,7 @@ class UserDetailModel extends Model
         $teacher = $this->db->table('teacher')
             ->set('nbm', $data['nbm'])
             ->set('name', $data['name'])
+            ->set('position', $data['position'])
             ->where('user_public_id', $id)
             ->update();
 

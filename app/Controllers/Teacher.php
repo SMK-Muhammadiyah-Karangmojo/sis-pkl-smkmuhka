@@ -155,7 +155,7 @@ class Teacher extends BaseController
         return redirect()->to('/student/profile');
     }
 
-    public function updateTeacher(): \CodeIgniter\HTTP\Response
+    public function updateTeacher()
     {
         $id = $this->request->getVar('id');
         $data = [

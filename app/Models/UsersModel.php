@@ -93,7 +93,7 @@ class UsersModel extends Model
                        u.email,
                        u.image,
                        ud.id as userDetailId,
-                       ud.name,
+                       t.name,
                        t.nbm, t.hp, t.position')
             ->join('user_details ud', 'u.id = ud.user_public_id')
             ->join('teacher t', 'u.id = t.user_public_id')
@@ -125,7 +125,7 @@ class UsersModel extends Model
     {
         return $this->db->table('users u')
             ->select('u.id, u.email, u.image,
-                       ud.id as ids, ud.name,
+                       ud.id as ids, t.name,
                        t.nbm, t.hp, t.position')
             ->join('user_details ud', 'u.id = ud.user_public_id')
             ->join('teacher t', 'u.id = t.user_public_id')
