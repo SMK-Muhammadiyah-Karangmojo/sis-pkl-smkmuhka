@@ -107,7 +107,8 @@
                 <td>Kepala Sekolah,</td>
             </tr>
             <tr>
-                <td height="80px">
+                <td>
+                    <?= $school['ttd']; ?>
                 </td>
             </tr>
             <tr>
