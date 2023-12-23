@@ -42,7 +42,7 @@ echo $this->extend('layout/template'); ?>
                 echo $this->include("pages/setting/component/surat-tugas");
                 break;
             case 3:
-                echo "Surat Jalan";
+                echo $this->include("pages/setting/component/surat-jalan");
                 break;
             case 4:
                 echo $this->include("pages/setting/component/surat-pengantar");
