@@ -23,7 +23,7 @@
         margin-right: 0.5cm;
     }
 </style>
-<img src="<?= base_url('assets/img/kop.png'); ?>" alt="">
+<?= $kop_surat->content; ?>
 <table>
     <tbody>
     <tr>

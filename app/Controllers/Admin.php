@@ -22,6 +22,7 @@ use Config\APIResponseBuilder;
 use Config\IApplicationConstantConfig;
 use Config\Services;
 use Config\YantoDevConfig;
+use Mpdf\Mpdf;
 use Mpdf\MpdfException;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -208,7 +209,7 @@ class  Admin extends BaseController
         ];
 
         view('pages/general/cetak-rekap-siswa', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-rekap-siswa', []);
         $mpdf->WriteHTML($html);
@@ -570,7 +571,7 @@ class  Admin extends BaseController
         view('pages/general/permohonan1', $data);
         view('pages/general/permohonan2', $data);
 
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/permohonan1', []);
         $mpdf->WriteHTML($html);
@@ -605,7 +606,7 @@ class  Admin extends BaseController
             'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-surat-tugas', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-surat-tugas', []);
         $mpdf->WriteHTML($html);
@@ -631,7 +632,7 @@ class  Admin extends BaseController
             'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-surat-pengantar', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-surat-pengantar', []);
         $mpdf->WriteHTML($html);
@@ -651,7 +652,7 @@ class  Admin extends BaseController
             'data' => $this->masterData->findByTpAndMajor($tp, $major)
         ];
         view('pages/general/cetak-id-card', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-id-card', []);
         $mpdf->WriteHTML($html);
@@ -666,10 +667,11 @@ class  Admin extends BaseController
             'instansi' => $this->request->getVar('instansi'),
             'surat' => $this->nomorModel->findByTp($tp),
             'data' => $this->idukaModel->findById($this->request->getVar('kop-surat-iduka')),
-            'hal' => $this->request->getVar('hal')
+            'hal' => $this->request->getVar('hal'),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
         ];
         view('pages/general/cetak-kop-surat', $data);
-        $mpdf = new \Mpdf\Mpdf([
+        $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'format' => [110, 220],
             'orientation' => 'L',
@@ -693,7 +695,7 @@ class  Admin extends BaseController
             'tp' => $tp
         ];
         view('pages/general/cetak-surat-jalan', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-surat-jalan', [
             ini_set("pcre.backtrack_limit", "5000000")
@@ -715,7 +717,7 @@ class  Admin extends BaseController
             'school' => $this->schoolModel->find(1)
         ];
         view('pages/general/cetak-daftar-peserta', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-daftar-peserta', [
             ini_set("pcre.backtrack_limit", "5000000")
@@ -738,7 +740,7 @@ class  Admin extends BaseController
             'dataTp' => $this->tp->find($tp)
         ];
         view('pages/general/cetak-lembar-monitoring', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-lembar-monitoring', [
             ini_set("pcre.backtrack_limit", "5000000")
@@ -761,7 +763,7 @@ class  Admin extends BaseController
             'dataTp' => $this->tp->find($tp)
         ];
         view('pages/general/cetak-daftar-hadir', $data);
-        $mpdf = new \Mpdf\Mpdf([
+        $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'format' => 'A4',
             'orientation' => 'L',
@@ -814,7 +816,7 @@ class  Admin extends BaseController
         ];
         $file = 'pages/general/front-certificate-' . $majorId;
         view($file, $data);
-        $mpdf = new \Mpdf\Mpdf([
+        $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'format' => [215, 330],
             'orientation' => 'L',
@@ -842,7 +844,7 @@ class  Admin extends BaseController
         ];
         $file = 'pages/general/back-certificate';
         view($file, $data);
-        $mpdf = new \Mpdf\Mpdf([
+        $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'format' => [215, 330],
             'orientation' => 'L',
