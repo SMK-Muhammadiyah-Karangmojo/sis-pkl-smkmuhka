@@ -5,6 +5,17 @@
  * mailto : ekocahyanto007@gmail.com
  * link : https://yantodev.my.id/
  */
+if (!empty($data)) {
+    $image_in = $data->image_in;
+    $image_out = $data->image_out;
+
+    if (!$image_out) {
+        $image_out = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png";
+    }
+    if (!$image_in) {
+        $image_in = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png";
+    }
+}
 echo $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
@@ -37,7 +48,7 @@ echo $this->extend('layout/template'); ?>
                             <div class="col-sm-6">
                                 <label for="name">Foto Masuk</label>
                                 <div>
-                                    <img src="<?= $data->image_in; ?>" alt="image-in" width="280px" height="300px">
+                                    <img src="<?= $image_in; ?>" alt="image-in" width="280px" height="300px">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -69,7 +80,8 @@ echo $this->extend('layout/template'); ?>
                             <div class="col-sm-6">
                                 <label for="name">Foto Pulang</label>
                                 <div>
-                                    <img src="<?= $data->image_out; ?>" alt="image-in" width="280px" height="300px">
+                                    <img src="<?= $image_out; ?>"
+                                         alt="image-in" width="280px" height="300px">
                                 </div>
                             </div>
                             <div class="col-sm-6">
