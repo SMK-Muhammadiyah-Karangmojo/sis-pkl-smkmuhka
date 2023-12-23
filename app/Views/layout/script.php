@@ -59,6 +59,7 @@
         $('#content_3').summernote()
         $('#content_4').summernote()
         $('#content_5').summernote()
+        $('#ttd').summernote()
         // $('#note').summernote()
         // $('#rules').summernote()
         // $('#regulation').summernote()

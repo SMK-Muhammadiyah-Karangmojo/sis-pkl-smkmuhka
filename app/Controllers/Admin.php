@@ -279,13 +279,30 @@ class  Admin extends BaseController
             'role' => $session->get('role'),
             'sekolah' => $this->schoolModel->find(1)
         ];
-        if (!$this->session->get('logged_in')) {
-            return redirect()->to($this->IApplicationConstant->auth);
+        $id = $this->request->getVar("id");
+        if ($id) {
+            $result = $this->schoolModel->update($id, [
+                "name" => $this->request->getPost('name'),
+                "npsn" => $this->request->getPost('npsn'),
+                "address" => $this->request->getPost('address'),
+                "phone" => $this->request->getPost('phone'),
+                "akreditasi" => $this->request->getPost('akreditasi'),
+                "ks" => $this->request->getPost('kepala_sekolah'),
+                "nip" => $this->request->getPost('nip'),
+                "ttd" => $this->request->getPost('ttd'),
+            ]);
+            if ($result) {
+                $this->session->setFlashdata('success', 'Data is updated!!!');
+                return redirect()->to('/admin/master_sekolah');
+            }
         }
-        if ($session->get('role') != 1) {
-            return redirect()->to($this->IApplicationConstant->authError);
-        }
-        return view('pages/admin/master-sekolah', $data);
+
+        return $this->ResponseBuilder->ReturnViewValidation(
+            $this->session,
+            'pages/admin/master-sekolah',
+            $data
+        );
+
     }
 
     /**
