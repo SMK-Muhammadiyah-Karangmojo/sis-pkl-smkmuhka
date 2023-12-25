@@ -31,6 +31,9 @@
                         <button class="btn btn-danger btn-xs" onclick="resetPasswordUser(<?= $d->id; ?>)">
                             Reset Password
                         </button>
+                        <button class="btn btn-danger btn-xs" onclick="resetDataUser(<?= $d->id; ?>)">
+                            Reset Data
+                        </button>
                     </td>
                 </tr>
             <?php endforeach; ?>

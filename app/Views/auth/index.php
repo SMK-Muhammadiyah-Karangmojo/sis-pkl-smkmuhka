@@ -39,14 +39,14 @@
                         LOGIN
                     </button>
                 </div>
-                <div class="register">
-                    <div>
-                        Don't have account?
-                        <div class="btn-register" onclick="register()">
-                            REGISTER NOW
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="register">-->
+<!--                    <div>-->
+<!--                        Don't have account?-->
+<!--                        <div class="btn-register" onclick="register()">-->
+<!--                            REGISTER NOW-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </form>
         </div>
     </div>

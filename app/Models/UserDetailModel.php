@@ -96,4 +96,24 @@ class UserDetailModel extends Model
             ->where('ud.user_public_id', $id)
             ->get()->getRow();
     }
+
+    public function resetData($id, $nis)
+    {
+        $user_detail = $this->db->table("user_details")
+            ->set("user_public_id", null)
+            ->set("user_id", "reset|$id|$nis")
+            ->where("user_id", $nis)
+            ->update();
+
+        $master_data = $this->db->table("master_data")
+            ->set("user_public_id", null)
+            ->set("nis", "reset|$id|$nis")
+            ->where("nis", $nis)
+            ->update();
+
+        if ($user_detail && $master_data) {
+            return true;
+        }
+        return false;
+    }
 }

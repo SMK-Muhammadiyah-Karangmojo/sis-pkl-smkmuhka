@@ -178,3 +178,48 @@ function resetPasswordUser(id) {
         }
     )
 }
+
+function resetDataUser(id) {
+    Swal.fire({
+            title: "Reset Data Users",
+            html: `
+            <div id="label-swal">
+                 <div class="mb-3">
+                <div class="mb-3">
+                 <label class="ml-3">Masukan NIS</label>
+                    <input class="form-control" type="text" id="nis"/>
+                </div>
+                <small class="text-danger">Data yang sudah di reset tidak bisa dikembalikan lagi, silahkan pastikan data yag di reset sudah benar!!!</small>
+            </div>
+                `,
+            icon: "warning",
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: "Update",
+            showLoaderOnConfirm: true,
+            preConfirm: async () => {
+                let nis = Swal.getPopup().querySelector("#nis").value;
+                if (nis) {
+                    fetchingData('/users/reset-data', {
+                        id,
+                        nis
+                    }).then(response => {
+                        if (response.code === 200) {
+                            Swal.fire({
+                                icon: response.message,
+                                title: "reset data successfully!!!",
+                            });
+                            setTimeout(function () {
+                                window.location.reload(1);
+                            }, 2000);
+                        }
+                    }).catch(error => {
+                        Swal.fire(error.name, error.message, 'error');
+                    })
+                } else {
+                    Swal.showValidationMessage('NIS wajib diisi!!');
+                }
+            },
+        }
+    )
+}

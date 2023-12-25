@@ -69,6 +69,11 @@ $routes->group('student', static function ($student) {
     $student->get("presence", "Student::presence");
     $student->post("presence", "Student::addPresence");
 });
+
+//Users
+$routes->group('users', static function ($user) {
+    $user->post("reset-data", "User::resetDataUser");
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use App\Models\UserDetailModel;
 use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
@@ -18,6 +19,7 @@ use Config\YantoDevConfig;
  * @property YantoDevConfig $config
  * @property UsersModel $user
  * @property APIResponseBuilder $ResponseBuilder
+ * @property UserDetailModel $userDetail
  */
 class User extends ResourceController
 {
@@ -28,6 +30,7 @@ class User extends ResourceController
         $this->ResponseBuilder = new APIResponseBuilder();
         $this->config = new YantoDevConfig();
         $this->user = new UsersModel();
+        $this->userDetail = new UserDetailModel();
     }
 
     /**
@@ -122,6 +125,17 @@ class User extends ResourceController
                     ['password' => password_hash($password)]
                 )
             )
+        );
+    }
+
+    public function resetDataUser()
+    {
+        $id = $this->request->getVar('id');
+        $nis = $this->request->getVar('nis');
+
+        $response = $this->userDetail->resetData($id, $nis);
+        return $this->respond(
+            $this->config->ApiResponseBuilder($response)
         );
     }
 }
