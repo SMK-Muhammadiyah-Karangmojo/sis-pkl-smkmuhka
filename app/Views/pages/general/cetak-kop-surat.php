@@ -9,21 +9,15 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
     <style>
         @page {
-            margin-top: 20px;
-            height: 100%;
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
         }
     </style>
 </head>
 <body>
-<style>
-    @page {
-        margin-top: 0.5cm;
-        margin-bottom: 0.5cm;
-        margin-left: 0.5cm;
-        margin-right: 0.5cm;
-    }
-</style>
-<?= $kop_surat->content; ?>
+<img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
 <table>
     <tbody>
     <tr>

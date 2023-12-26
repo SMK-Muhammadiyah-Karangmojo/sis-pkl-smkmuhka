@@ -29,7 +29,7 @@
         ->get()->getResult();
     ?>
     <div id="body">
-        <?= $kop_surat->content; ?>
+        <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
         <h3 align="center">
             <u>SURAT JALAN</u>
             <br/>Nomor : <?= $nomor->nomor; ?></h3>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
                 <td>
-                    <?= $school['ttd']; ?>
+                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="250px">
                 </td>
             </tr>
             <tr>

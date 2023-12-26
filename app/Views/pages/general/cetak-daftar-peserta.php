@@ -108,7 +108,7 @@
             </tr>
             <tr>
                 <td>
-                    <?= $school['ttd']; ?>
+                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="250px">
                 </td>
             </tr>
             <tr>

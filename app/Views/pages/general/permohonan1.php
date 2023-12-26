@@ -25,7 +25,7 @@
     }
 </style>
 <div class="image">
-    <img src="<?= $_SERVER['app.baseURL']; ?>/assets/img/kop.png" alt="kop surat">
+    <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
 </div>
 <table>
     <thead>

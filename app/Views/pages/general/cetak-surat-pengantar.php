@@ -21,7 +21,7 @@
 <body>
 <?php foreach ($result as $res): ?>
     <div id="body">
-        <img src="<?= $kop_surat->content; ?>" alt="kop-surat">
+        <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
         <table>
             <tr>
                 <td>Nomor</td>
@@ -50,7 +50,7 @@
             </tr>
             <tr>
                 <td>
-                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="200px">
+                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="250px">
                 </td>
             </tr>
             <tr>
