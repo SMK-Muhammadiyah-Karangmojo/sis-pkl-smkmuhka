@@ -18,7 +18,7 @@
             <hr>
             <p class="text-center">--- Page 1 --</p>
             <hr>
-            <?= $kop_surat->content; ?>
+            <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
             <form action="" method="post">
                 <div class="row form-group">
                     <div class="col-sm-1">

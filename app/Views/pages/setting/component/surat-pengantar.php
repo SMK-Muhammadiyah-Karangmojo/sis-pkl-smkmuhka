@@ -15,7 +15,7 @@
         <?php
         if (isset($data_template)) {
             ?>
-            <?= $kop_surat->content; ?>
+            <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
             <form action="" method="post">
                 <div class="row form-group">
                     <div class="col-sm-1">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-sm-4">
                             <p>Karangmojo, <?= $surat ? tanggal($surat->tanggal) : ''; ?></p>
-                            <?= $sekolah['ttd'] ?? "<p>Tidak ada tanda tangan digital</p>"; ?>
+                            <img src="<?= $sekolah['ttd']; ?>" alt="ttd-ks" width="250px">
                             <p><?= $sekolah['kepala_sekolah']; ?><br>
                                 NBM. <?= $sekolah['nip']; ?></p>
                         </div>

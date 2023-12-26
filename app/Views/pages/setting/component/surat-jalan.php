@@ -16,7 +16,7 @@
         if (isset($data_template)) {
             ?>
             <div class="text-center">
-                <?= $kop_surat->content; ?>
+                <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
             </div>
             <form action="" method="post">
                 <div class="text-center">
@@ -72,7 +72,7 @@
                         <div class="col-sm-8"></div>
                         <div class="col-sm-4">
                             <p>Karangmojo, <?= $surat ? tanggal($surat->tanggal) : ''; ?></p>
-                            <?= $sekolah['ttd']; ?>
+                            <img src="<?= $sekolah['ttd']; ?>" alt="ttd-ks" width="250px">
                             <p><?= $sekolah['kepala_sekolah']; ?><br>
                                 NBM. <?= $sekolah['nip']; ?></p>
                         </div>
