@@ -634,7 +634,9 @@ class  Admin extends BaseController
         view('pages/general/cetak-surat-pengantar', $data);
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
-        $html = view('pages/general/cetak-surat-pengantar', []);
+        $html = view('pages/general/cetak-surat-pengantar', [
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
+        ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
         $mpdf->Output('Surat Pengantar.pdf', 'I');
@@ -654,7 +656,9 @@ class  Admin extends BaseController
         view('pages/general/cetak-id-card', $data);
         $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
-        $html = view('pages/general/cetak-id-card', []);
+        $html = view('pages/general/cetak-id-card', [
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
+        ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
         $mpdf->Output('ID Card.pdf', 'I');
@@ -678,7 +682,9 @@ class  Admin extends BaseController
             'setAutoTopMargin' => false,
         ]);
         $mpdf->showImageErrors = true;
-        $html = view('pages/general/cetak-kop-surat', []);
+        $html = view('pages/general/cetak-kop-surat', [
+            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
+        ]);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
         $mpdf->Output('kop-surat.pdf', 'I');
