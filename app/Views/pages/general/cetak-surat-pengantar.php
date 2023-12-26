@@ -21,7 +21,7 @@
 <body>
 <?php foreach ($result as $res): ?>
     <div id="body">
-        <?= $kop_surat->content; ?>
+        <img src="<?= $kop_surat->content; ?>" alt="kop-surat">
         <table>
             <tr>
                 <td>Nomor</td>
@@ -41,7 +41,7 @@
             Yth.<b> <?= $instansi; ?> <?= $res->idukaname; ?></b><br/>
             di <b><?= $res->address ?></b>
         </p>
-        <?= $master_template->content; ?>
+        <?= $master_template->content;?>
         <table class="table">
             <tbody>
             <tr>
@@ -50,7 +50,7 @@
             </tr>
             <tr>
                 <td>
-                    <?= $school['ttd']; ?>
+                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="200px">
                 </td>
             </tr>
             <tr>

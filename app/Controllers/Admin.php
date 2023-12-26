@@ -9,6 +9,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\PdfGenerator;
 use App\Models\KajurModel;
 use App\Models\KategoriSuratModel;
 use App\Models\MajorModel;
@@ -40,6 +41,7 @@ use ReflectionException;
  * @property KategoriSuratModel $kategoriSurat
  * @property TeacherModel $teacher
  * @property NomorSuratModel $nomorModel
+ * @property PdfGenerator $pdfGenerator
  */
 class  Admin extends BaseController
 {
@@ -59,6 +61,7 @@ class  Admin extends BaseController
         $this->teacher = new TeacherModel();
         $this->kategoriSurat = new KategoriSuratModel();
         $this->nomorModel = new NomorSuratModel();
+        $this->pdfGenerator = new PdfGenerator();
     }
 
     public function index()
@@ -633,10 +636,7 @@ class  Admin extends BaseController
         ];
         view('pages/general/cetak-surat-pengantar', $data);
         $mpdf = new Mpdf();
-        $mpdf->showImageErrors = true;
-        $html = view('pages/general/cetak-surat-pengantar', [
-            ini_set("pcre.backtrack_limit", $this->IApplicationConstant->limitPdf)
-        ]);
+        $html = view('pages/general/cetak-surat-pengantar', []);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
         $mpdf->Output('Surat Pengantar.pdf', 'I');
