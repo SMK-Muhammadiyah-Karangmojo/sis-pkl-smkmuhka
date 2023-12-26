@@ -131,7 +131,7 @@ class RestApi extends ResourceController
         ];
         return $this->respond(
             $this->config->ApiResponseBuilder(
-                $this->tutor->save($data)
+                $this->tutor->insert($data)
             )
         );
     }
