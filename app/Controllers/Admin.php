@@ -603,7 +603,7 @@ class  Admin extends BaseController
         $result = $this->teacher->findAllByUserPublicId($teacherId);
         $data = [
             'results' => $result,
-            'surat' => $this->nomorModel->findByTp($tp),
+            'surat' => $this->nomorModel->findByTpAndCategory($tp, 2),
             'tp' => $tp,
             'school' => $this->schoolModel->find(1),
             'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
