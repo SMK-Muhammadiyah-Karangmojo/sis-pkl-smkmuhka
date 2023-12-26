@@ -9,13 +9,11 @@
 namespace App\Libraries;
 
 use Config\IApplicationConstantConfig;
-use Dompdf\Dompdf;
 use Mpdf\Mpdf;
 
 /**
  * @property Mpdf $mpdf
  * @property IApplicationConstantConfig $IApplicationConstant
- * @property Dompdf $dompdf
  */
 class PdfGenerator
 {
@@ -24,7 +22,7 @@ class PdfGenerator
     {
         $this->mpdf = new Mpdf();
         $this->IApplicationConstant = new IApplicationConstantConfig();
-        $this->dompdf = new Dompdf();
+//        $this->dompdf = new Dompdf();
     }
 
     public function generatePdf($html, $filename = 'output.pdf')
@@ -35,19 +33,19 @@ class PdfGenerator
         $this->mpdf->Output($filename, 'I');
     }
 
-    public function generatePDFDomp($html, $filename = 'document')
-    {
-        $this->dompdf->loadHtml($html);
-
-        // (Opsional) Konfigurasi tambahan, seperti ukuran kertas, margin, dll.
-        $this->dompdf->setPaper('A4', 'portrait');
-
-        // Render PDF
-        $this->dompdf->render();
-
-        // Output PDF ke file atau browser
-        $this->dompdf->stream($filename . '.pdf', [
-            'Attachment' => 0 // Ubah menjadi 1 jika ingin mengunduh secara otomatis
-        ]);
-    }
+//    public function generatePDFDomp($html, $filename = 'document')
+//    {
+//        $this->dompdf->loadHtml($html);
+//
+//        // (Opsional) Konfigurasi tambahan, seperti ukuran kertas, margin, dll.
+//        $this->dompdf->setPaper('A4', 'portrait');
+//
+//        // Render PDF
+//        $this->dompdf->render();
+//
+//        // Output PDF ke file atau browser
+//        $this->dompdf->stream($filename . '.pdf', [
+//            'Attachment' => 0 // Ubah menjadi 1 jika ingin mengunduh secara otomatis
+//        ]);
+//    }
 }
