@@ -42,7 +42,7 @@
 //    echo dd($data);
     ?>
     <div id="body">
-        <?= $kop_surat->content; ?>
+        <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
         <h3 class="center">
             <u>DAFTAR PESERTA PRAKTIK KERJA LAPANGAN</u>
             <br/>Tahun Pelajaran <?= $dataTp['name']; ?></h3>
