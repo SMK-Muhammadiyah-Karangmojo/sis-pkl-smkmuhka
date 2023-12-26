@@ -54,7 +54,7 @@ class TutorModel extends Model
             ->select('t.id,
                             tp.id as tpId, tp.name as tp, 
                             ud.user_public_id as userId, ud.user_id as nbm, ud.name,
-                            i.id as idIduka, i.name as iduka, i.major,
+                            i.id as idIduka, i.name as iduka, i.major_id,
                             major.id as majorId, major.name as jurusan')
             ->join('tp', 't.tp_id = tp.id')
             ->join('user_details as ud', 't.teacher_id = ud.user_public_id')
@@ -62,7 +62,8 @@ class TutorModel extends Model
             ->join('major', 'major.id = t.major_id')
             ->where('t.id', $id)
             ->where('t.deleted_at', null)
-            ->get()->getRow();
+            ->get()
+            ->getRow();
     }
 
     public function findByTeacherId($id): array
