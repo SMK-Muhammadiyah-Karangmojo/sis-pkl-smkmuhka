@@ -29,7 +29,7 @@
                tp.name as tpName')
         ->join('tp', 'tp.id = md.tp_id')
         ->join('iduka i', 'i.id = md.iduka_id')
-        ->join('major m', 'm.id = i.major')
+        ->join('major m', 'm.id = i.major_id')
         ->join('user_details ud', 'ud.user_public_id = md.user_public_id')
         ->join('class', 'class.id = ud.class_id', 'left')
         ->where('md.tp_id', $idk->tp_id)
