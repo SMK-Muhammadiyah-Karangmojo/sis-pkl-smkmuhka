@@ -74,7 +74,7 @@ class TutorModel extends Model
                        ud.user_public_id as userId,
                        ud.user_id        as nbm,
                        ud.name,
-                       i.id              as idIduka,
+                       i.id              as id_iduka,
                        i.name            as iduka,
                        di.address
                 from tutor t
