@@ -75,7 +75,7 @@
         font-size: 12px;
     }
 
-    .konten-left .link {
+    .konten-right .link {
         border-top: 5px;
         text-align: center;
         font-size: 12px;
@@ -137,9 +137,6 @@
                     <div class="tanggal">
                         <?= $siswa->detail_tgl; ?>
                     </div>
-                    <div class="link">
-                        <a href="https://pkl.smkmuhkarangmojo.sch.id" target="_blank">https://pkl.smkmuhkarangmojo.sch.id</a>
-                    </div>
                 </div>
             </div>
             <div class="konten">
@@ -165,6 +162,9 @@
                         <strong>SCAN ME</strong><br/>
                         <barcode code="<?= base_url('detail-siswa/' . $siswa->nis); ?>" size="1.2" type="QR"
                                  error="M" class="barcode"></barcode>
+                    </div>
+                    <div class="link">
+                        <a href="https://pkl.smkmuhkarangmojo.sch.id" target="_blank">https://pkl.smkmuhkarangmojo.sch.id</a>
                     </div>
                 </div>
             </div>
