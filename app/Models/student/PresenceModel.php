@@ -17,7 +17,7 @@ class PresenceModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
     protected $allowedFields = ['users_id', 'name', 'image_in', 'location_in', 'date', 'time_in', 'time_out',
-        'location_out', 'image_out'];
+        'location_out', 'image_out', 'tp_id'];
 
 
     public function findByUserIdAndDate($userId, $today)

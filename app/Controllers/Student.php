@@ -420,7 +420,8 @@ class Student extends BaseController
                 "location_in" => "$latitude,$longitude",
                 "date" => today(),
                 "time_in" => today(),
-                "image_in" => $image ?? null
+                "image_in" => $image ?? null,
+                "tp_id" => $user->tpId
             ]);
         }
 
