@@ -28,8 +28,8 @@
 
     .id-card .konten {
         border: 2px solid #000;
-        width: 242px;
-        height: 340px;
+        width: 57mm;
+        height: 90mm;
         float: left;
     }
 
@@ -42,6 +42,9 @@
     .konten-left .foto {
         text-align: center;
         margin-bottom: 5px;
+    }
+    .konten-left .foto img {
+      height: 50px;
     }
 
     .konten-left .jurusan {
@@ -69,12 +72,13 @@
         text-align: center;
         font-weight: bolder;
         border: 2px solid #000;
+        font-size: 12px;
     }
 
     .konten-left .link {
         border-top: 5px;
         text-align: center;
-        font-size: small;
+        font-size: 12px;
     }
 
     .konten-right .header {
