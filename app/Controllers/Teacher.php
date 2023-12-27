@@ -13,7 +13,9 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Session\Session;
 use Config\APIResponseBuilder;
 use Config\IApplicationConstantConfig;
+use Config\Services;
 use Config\YantoDevConfig;
+use Mpdf\Mpdf;
 
 /**
  * @property Session|mixed|null $session
@@ -52,7 +54,7 @@ class Teacher extends BaseController
 
         $data = [
             'title' => "Dashboard",
-            'validation' => \Config\Services::validation(),
+            'validation' => Services::validation(),
             'users' => $this->session->get('email'),
             'users_id' => $this->session->get('id'),
             'role' => $this->session->get('role'),
@@ -80,7 +82,7 @@ class Teacher extends BaseController
         $res = $this->masterData->findByNis($response ? $response->nis : null)->getRow();
         $data = [
             'title' => "Profile",
-            'validation' => \Config\Services::validation(),
+            'validation' => Services::validation(),
             'users' => $this->session->get('email'),
             'users_id' => $this->session->get('id'),
             'role' => $this->session->get('role'),
@@ -189,14 +191,16 @@ class Teacher extends BaseController
     {
         $response = $this->session ? $this->users->findTeacherDetailByEmail(
             $this->session->get('email'))->getRow() : null;
+        $tpId = $this->request->getVar("tp");
         $data = [
             'title' => "Laporan Siswa",
-            'validation' => \Config\Services::validation(),
+            'validation' => Services::validation(),
             'users' => $this->session->get('email'),
             'users_id' => $this->session->get('id'),
             'role' => $this->session->get('role'),
             'data' => $response,
-            'laporan' => $response ? $this->laporan->findStudentReport($response->id) : null
+            'tp' => $this->tp->findAll(),
+            'laporan' => $response ? $this->laporan->findStudentReport($response->id, $tpId) : null
         ];
 
         return $this->ResponseBuilder->ReturnViewValidationTeacher(
@@ -214,7 +218,7 @@ class Teacher extends BaseController
             'laporan' => $this->laporan->findByUserPublicId($id)
         ];
         view('pages/general/cetak-laporan-siswa', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/general/cetak-laporan-siswa');
         $mpdf->WriteHTML($html);
@@ -231,7 +235,7 @@ class Teacher extends BaseController
             'dataTp' => $this->tp->find(5)
         ];
         view('pages/teacher/cetak-lembar-monitoring', $data);
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new Mpdf();
         $mpdf->showImageErrors = true;
         $html = view('pages/teacher/cetak-lembar-monitoring', [
             ini_set("pcre.backtrack_limit", "5000000")
@@ -239,5 +243,29 @@ class Teacher extends BaseController
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->IApplicationConstant->contentType('pdf'));
         $mpdf->Output('ID Card.pdf', 'I');
+    }
+
+    public function presence()
+    {
+        $tpId = $this->request->getVar("tp");
+
+        $response = $this->session ? $this->users->findTeacherDetailByEmail(
+            $this->session->get('email'))->getRow() : null;
+        $data = [
+            'title' => "Presensi Siswa",
+            'validation' => Services::validation(),
+            'users' => $this->session->get('email'),
+            'users_id' => $this->session->get('id'),
+            'role' => $this->session->get('role'),
+            'data' => $response,
+            'tp' => $this->tp->findAll(),
+            'laporan' => $response ? $this->laporan->findStudentReport($response->id, $tpId) : null,
+        ];
+
+        return $this->ResponseBuilder->ReturnViewValidationTeacher(
+            $this->session,
+            'pages/teacher/presence',
+            $data
+        );
     }
 }

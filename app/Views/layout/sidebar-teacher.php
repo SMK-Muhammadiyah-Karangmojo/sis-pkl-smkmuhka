@@ -46,6 +46,12 @@
                                     <p>Laporan Siswa</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('teacher/presence'); ?>" class="nav-link">
+                                    <em class="far fa-circle nav-icon"></em>
+                                    <p>Presensi Siswa</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
