@@ -5,9 +5,9 @@
  * mailto : ekocahyanto007@gmail.com
  * link : https://yantodev.my.id/
  */
-if (!empty($data)) {
-    $image_in = $data->image_in;
-    $image_out = $data->image_out;
+if (!empty($data_presence)) {
+    $image_in = $data_presence->image_in;
+    $image_out = $data_presence->image_out;
 
     if (!$image_out) {
         $image_out = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png";
@@ -26,18 +26,18 @@ echo $this->extend('layout/template'); ?>
                 <div class="row">
                     <div class="col-sm-4">
                         <label for="name">Nama Siswa</label>
-                        <input class="form-control" type="text" id="name" name="name" value="<?= $data->name; ?>"
+                        <input class="form-control" type="text" id="name" name="name" value="<?= $data_presence->name; ?>"
                                readonly>
                     </div>
                     <div class="col-sm-4">
                         <label for="name">Kelas</label>
-                        <input class="form-control" type="text" id="name" name="name" value="<?= $data->class; ?>"
+                        <input class="form-control" type="text" id="name" name="name" value="<?= $data_presence->class; ?>"
                                readonly>
                     </div>
                     <div class="col-sm-4">
                         <label for="name">Tanggal</label>
                         <input class="form-control" type="text" id="name" name="name"
-                               value="<?= tanggal($data->date); ?>" readonly>
+                               value="<?= tanggal($data_presence->date); ?>" readonly>
                     </div>
                 </div>
             </div>
@@ -55,17 +55,17 @@ echo $this->extend('layout/template'); ?>
                                 <div class="col-sm-12">
                                     <label for="name">Masuk</label>
                                     <input class="form-control" type="text" id="name" name="name"
-                                           value="<?= $data->time_in; ?>"
+                                           value="<?= $data_presence->time_in; ?>"
                                            readonly>
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="name">Lokasi Masuk</label>
                                     <input class="form-control" type="text" id="name" name="name"
-                                           value="<?= $data->location_in; ?>"
+                                           value="<?= $data_presence->location_in; ?>"
                                            readonly>
                                 </div>
                                 <div class="col-sm-12 m-3">
-                                    <a href="https://www.google.com/maps?q=<?= $data->location_in; ?>" target="_blank">
+                                    <a href="https://www.google.com/maps?q=<?= $data_presence->location_in; ?>" target="_blank">
                                         <button class="btn btn-sm btn-primary">
                                             <i class="fa-solid fa-map-location-dot m-1"></i>
                                             Buka G-Maps
@@ -88,17 +88,17 @@ echo $this->extend('layout/template'); ?>
                                 <div class="col-sm-12">
                                     <label for="name">Pulang</label>
                                     <input class="form-control" type="text" id="name" name="name"
-                                           value="<?= $data->time_out; ?>"
+                                           value="<?= $data_presence->time_out; ?>"
                                            readonly>
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="name">Lokasi Pulang</label>
                                     <input class="form-control" type="text" id="name" name="name"
-                                           value="<?= $data->location_out; ?>"
+                                           value="<?= $data_presence->location_out; ?>"
                                            readonly>
                                 </div>
                                 <div class="col-sm-12 m-3">
-                                    <a href="https://www.google.com/maps?q=<?= $data->location_out; ?>" target="_blank">
+                                    <a href="https://www.google.com/maps?q=<?= $data_presence->location_out; ?>" target="_blank">
                                         <button class="btn btn-sm btn-primary">
                                             <i class="fa-solid fa-map-location-dot m-1"></i>
                                             Buka G-Maps

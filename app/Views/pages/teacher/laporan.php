@@ -6,6 +6,21 @@
             <h3><b>Data Laporan Siswa</b></h3>
         </div>
         <div class="card-body">
+            <form action="" method="get">
+                <div class="row">
+                    <select class="form-control col-sm-3" name="tp" id="tp">
+                        <option value="">Pilih Tahun Pelajaran</option>
+                        <?php
+                        foreach ($tp as $item){
+                            ?>
+                            <option value="<?= $item['id']; ?>"><?= $item['name'];?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary ml-2">Lihat</button>
+                </div>
+            </form>
             <table id="dataTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>

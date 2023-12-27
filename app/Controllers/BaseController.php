@@ -24,6 +24,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Bot\BotDiscord;
+use Config\IApplicationConstantConfig;
 use Config\YantoDevConfig;
 use Psr\Log\LoggerInterface;
 
@@ -54,6 +55,7 @@ use Psr\Log\LoggerInterface;
  * @property MasterTemplateModel $masterTemplateModel
  * @property PresenceModel $presenceModel
  * @property BotDiscord $botDiscord
+ * @property IApplicationConstantConfig $IApplicationConstant
  */
 class BaseController extends Controller
 {
@@ -101,5 +103,6 @@ class BaseController extends Controller
         $this->nomorSuratModel =  new NomorSuratModel();
         $this->masterTemplateModel = new MasterTemplateModel();
         $this->presenceModel = new PresenceModel();
+        $this->IApplicationConstant = new IApplicationConstantConfig();
     }
 }

@@ -75,5 +75,38 @@ class PresenceModel extends Model
         return $sql->getRow();
     }
 
+    public function findByTpIdAndTeacherId($tpId, $ids)
+    {
+        $builder = $this->db->table("tutor t");
+        $builder->select("*");
+        $builder->join("iduka i", "t.iduka_id = i.id");
+        $builder->join("master_data md", "i.id = md.iduka_id");
+        $builder->join("user_details ud", "md.user_public_id = ud.user_public_id");
+        $builder->join("presence p", "ud.user_public_id = p.users_id");
+        $builder->where("t.id", $ids);
+        $builder->where("p.tp_id", $tpId);
+        $builder->where("p.deleted_at", null);
+
+        $sql = $builder->get();
+
+        return $sql->getResult();
+    }
+
+    public function findAllByUserIdAndDeletedAtIsNull($userId)
+    {
+        $builder = $this->db->table("presence p");
+        $builder->select("p.id, p.date, p.time_in, p.time_out, p.location_in, p.location_out,
+        p.image_in, p.image_out, ud.name, c.name as class");
+        $builder->join("user_details ud", "ud.user_public_id = p.users_id");
+        $builder->join("class c", "c.id = ud.class_id");
+        $builder->where("p.users_id", $userId);
+        $builder->where("p.deleted_at", null);
+        $builder->orderBy("p.date", "DESC");
+        $builder->orderBy("p.time_in", "DESC");
+
+        $sql = $builder->get();
+        return $sql->getResult();
+    }
+
 
 }

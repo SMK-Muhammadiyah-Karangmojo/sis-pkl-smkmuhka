@@ -79,19 +79,39 @@ class DataLaporanSiswaModal extends Model
             ->getResult();
     }
 
-    public function findStudentReport($id): array
+    public function findStudentReport($id, $tpId): array
     {
-        return $this->db()->query("
-        select ud.user_public_id as id,
+        $builder = $this->db->table("tutor");
+        $builder->select("
+        ud.user_public_id as id,
                ud.user_id        as nis,
                ud.name,
-               i.name            as iduka
-        from tutor
-                 inner join iduka i on tutor.iduka_id = i.id
-                 inner join master_data md on i.id = md.iduka_id
-                 inner join user_details ud on md.user_public_id = ud.user_public_id
-        where tutor.teacher_id = $id
-        order by i.id
-        ")->getResult();
+               i.name            as iduka,
+               tp.name as tp_name
+               ");
+        $builder->join("iduka i", "tutor.iduka_id = i.id");
+        $builder->join("master_data md", "i.id = md.iduka_id");
+        $builder->join("tp", "md.tp_id = tp.id");
+        $builder->join("user_details ud", "md.user_public_id = ud.user_public_id");
+        $builder->where("tutor.teacher_id", $id);
+        if ($tpId) {
+            $builder->where("md.tp_id", $tpId);
+        }
+        $builder->orderBy("i.id", "ASC");
+
+        $sql = $builder->get();
+        return $sql->getResult();
+//        return $this->db()->query("
+//        select ud.user_public_id as id,
+//               ud.user_id        as nis,
+//               ud.name,
+//               i.name            as iduka
+//        from tutor
+//                 inner join iduka i on tutor.iduka_id = i.id
+//                 inner join master_data md on i.id = md.iduka_id
+//                 inner join user_details ud on md.user_public_id = ud.user_public_id
+//        where tutor.teacher_id = $id
+//        order by i.id
+//        ")->getResult();
     }
 }

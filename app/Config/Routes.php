@@ -62,7 +62,9 @@ $routes->group("setting", static function ($setting) {
 //presence
 $routes->group("presence", static function ($admin) {
     $admin->get("/", "Presence\PresenceController::index");
+    $admin->get("siswa/(:num)", "Presence\PresenceController::presenceDetailSiswa/$1");
     $admin->get("detail/(:num)", "Presence\PresenceController::presenceDetail/$1");
+    $admin->get("cetak/(:num)", "Presence\PresenceController::printPresenceStudent/$1");
 });
 //Student
 $routes->group('student', static function ($student) {

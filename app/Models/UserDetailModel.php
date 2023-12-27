@@ -85,6 +85,7 @@ class UserDetailModel extends Model
                  m.id as majorId, m.name as major,
                 c.id as classId, c.name as kelas,
                 i.id as idukaId, i.name as iduka,
+                di.address,
                 tp.id as tpId, tp.name as tp
                 ')
             ->join('user_details ud', 'u.id = ud.user_public_id')
@@ -92,6 +93,7 @@ class UserDetailModel extends Model
             ->join('class c', 'c.id = ud.class_id', 'LEFT')
             ->join('master_data md', 'md.nis = ud.user_id', 'LEFT')
             ->join('iduka i', 'i.id = md.iduka_id', 'LEFT')
+            ->join('detail_iduka di', 'i.id = di.id_iduka', 'LEFT')
             ->join('tp', 'tp.id = ud.tp_id', 'LEFT')
             ->where('ud.user_public_id', $id)
             ->get()->getRow();
