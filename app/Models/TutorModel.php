@@ -70,8 +70,8 @@ class TutorModel extends Model
     {
         return $this->db->query("
                 select t.id,
-                       tp.id             as tpId,
-                       ud.user_public_id as userId,
+                       tp.id             as tp_id,
+                       ud.user_public_id as user_id,
                        ud.user_id        as nbm,
                        ud.name,
                        i.id              as id_iduka,

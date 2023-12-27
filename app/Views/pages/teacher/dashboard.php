@@ -38,7 +38,7 @@
                                             where md.deleted_at is null
                                                 and ud.user_public_id is not null
                                                 and md.iduka_id =  $t->id_iduka 
-                                                and md.tp_id = $t->tpId
+                                                and md.tp_id = $t->tp_id
                                             ")->getResult(); ?>
                                             <ul>
                                                 <li><strong><?= $t->iduka; ?></strong></li>
