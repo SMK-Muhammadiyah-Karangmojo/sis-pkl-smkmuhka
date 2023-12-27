@@ -29,7 +29,7 @@
     .id-card .konten {
         border: 2px solid #000;
         width: 57mm;
-        height: 90mm;
+        height: 88mm;
         float: left;
     }
 
