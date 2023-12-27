@@ -122,7 +122,7 @@
                         SMK MUH KARANGMOJO
                     </div>
                     <div class="foto">
-                        <img src="<?= base_url('assets/img/users/default.png'); ?>" width="90px" height="100px"
+                        <img src="<?= base_url('assets/img/logo/logo-login.png'); ?>" width="90px" height="100px"
                              alt="image profile">
                     </div>
                     <div class="jurusan">
