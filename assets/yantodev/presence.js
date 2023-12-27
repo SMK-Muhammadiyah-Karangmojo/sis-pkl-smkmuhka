@@ -135,3 +135,61 @@ function presenceOut(userId, id, latitude, longitude) {
         }
     )
 }
+
+
+function reportPresence(id, userId) {
+    Swal.fire({
+        title: "Form Laporan Kehadiran",
+        html: `
+                <div class="form-group text-left">
+                    <label for="imageInput" class="form-label">Keterangan</label>
+                   <textarea class="form-control" id="note"></textarea>
+                </div>
+        `,
+        focusConfirm: false,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Yakin!",
+        preConfirm: () => {
+            let form = new FormData();
+            form.append("note", Swal.getPopup().querySelector('#note').value);
+            form.append("id", id);
+            form.append("user_id", userId);
+            Swal.showLoading();
+            return $.ajax({
+                method: "POST",
+                url: baseUrl + "/student/presence",
+                data: form,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+            }).done(function (response) {
+                return response;
+            });
+
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+    }).then(result => {
+            let jsonObject = JSON.parse(result.value);
+            console.log(jsonObject)
+            if (result.isConfirmed && jsonObject.result) {
+                Swal.hideLoading();
+                Swal.fire({
+                    icon: "success",
+                    title: "Anda berhasil membuat laporan presensi!!!",
+                });
+                setTimeout(function () {
+                    window.location.reload(1);
+                }, 3000);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: jsonObject.value.responseData.responseMsg
+                });
+            }
+        }
+    )
+}

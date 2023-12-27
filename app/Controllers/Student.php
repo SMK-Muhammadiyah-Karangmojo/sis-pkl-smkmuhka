@@ -390,6 +390,7 @@ class Student extends BaseController
     public function addPresence()
     {
         $id = $this->request->getVar("id");
+        $note = $this->request->getVar("note");
         $userId = $this->request->getVar("user_id");
         $latitude = $this->request->getVar("latitude");
         $longitude = $this->request->getVar("longitude");
@@ -397,18 +398,27 @@ class Student extends BaseController
         $image = null;
         $user = $this->userDetail->findByUserPublicId($userId);
 
-        if ($id) {
+        if ($id && $note) {
+            $message = "$user->name baru saja membuat laporan presensi";
+        } else if ($id) {
             $message = "$user->name baru saja melakukan presensi pulang";
         } else {
             $message = "$user->name baru saja melakukan presensi masuk";
         }
-
-        if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
-            $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
-            $result = $this->botDiscord->sendImagePresence($_ENV['BASE_URL_PRESENCE'], $filePath, $message);
-            $image = $result->attachments[0]->url;
+        if ($fileImage) {
+            if (!$fileImage->hasMoved() && $fileImage->getError() != 4) {
+                $filePath = WRITEPATH . 'uploads/' . $fileImage->store();
+                $result = $this->botDiscord->sendImagePresence($_ENV['BASE_URL_PRESENCE'], $filePath, $message);
+                $image = $result->attachments[0]->url;
+            }
+        } else {
+            $this->botDiscord->sendPresence($_ENV['BASE_URL_PRESENCE'], $message);
         }
-        if ($id) {
+        if ($id && $note) {
+            $response = $this->presenceModel->update($id, [
+                "note" => $note,
+            ]);
+        } else if ($id) {
             $response = $this->presenceModel->update($id, [
                 "time_out" => today(),
                 "location_out" => "$latitude,$longitude",

@@ -39,6 +39,7 @@
                                 <th>Tanggal</th>
                                 <th>Waktu Masuk</th>
                                 <th>Waktu Pulang</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,6 +52,13 @@
                                     <td><?= tanggal($item->date); ?></td>
                                     <td class="text-center"><?= $item->time_in; ?></td>
                                     <td class="text-center"><?= $item->time_out; ?></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                        onclick="reportPresence(<?= $item->id;?>, <?= $users_id; ?>)">
+                                            <i class="fa fa-edit"></i>
+                                            Buat Laporan
+                                        </button>
+                                    </td>
                                 </tr>
                                 <?php
                             }
