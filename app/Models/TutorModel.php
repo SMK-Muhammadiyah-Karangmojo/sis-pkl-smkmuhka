@@ -68,6 +68,7 @@ class TutorModel extends Model
 
     public function findByTeacherId($id): array
     {
+        $tp = $this->db->table("tp")->get()->getLastRow();
         return $this->db->query("
                 select t.id,
                        tp.id             as tp_id,
@@ -83,6 +84,7 @@ class TutorModel extends Model
                          inner join iduka i on t.iduka_id = i.id
                         inner join detail_iduka di on i.id = di.id_iduka
                 where t.teacher_id = $id
+                  and t.tp_id = " . $tp->id . "
                   and t.deleted_at is null
               ")->getResult();
     }

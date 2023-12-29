@@ -1,4 +1,6 @@
-<?= $this->extend('layout/template'); ?>
+<?php
+
+echo $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
     <div class="container-fluid">
         <div class="row">

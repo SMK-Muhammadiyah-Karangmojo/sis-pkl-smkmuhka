@@ -81,6 +81,8 @@ class DataLaporanSiswaModal extends Model
 
     public function findStudentReport($id, $tpId): array
     {
+        $tp = $this->db->table("tp")->get()->getLastRow();
+
         $builder = $this->db->table("tutor");
         $builder->select("
         ud.user_public_id as id,
@@ -96,6 +98,8 @@ class DataLaporanSiswaModal extends Model
         $builder->where("tutor.teacher_id", $id);
         if ($tpId) {
             $builder->where("md.tp_id", $tpId);
+        } else {
+            $builder->where("md.tp_id", $tp->id);
         }
         $builder->orderBy("i.id", "ASC");
 
