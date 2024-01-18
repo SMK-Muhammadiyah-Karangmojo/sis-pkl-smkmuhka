@@ -75,6 +75,8 @@
                                         <ol>
                                             <li>$l->other</li>
                                         </ol>";
+                            } else {
+                                $uraian = "";
                             } ?>
                             <tr>
                                 <td><?= $no++; ?></td>
