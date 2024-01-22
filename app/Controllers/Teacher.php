@@ -228,11 +228,12 @@ class Teacher extends BaseController
 
     public function monitoring($id)
     {
+        $tp = $this->tp->get()->getLastRow();
         $teacher = $this->tutor->findByTeacherId($id);
         $data = [
             'iduka' => $teacher,
-            'tp' => 5,
-            'dataTp' => $this->tp->find(5)
+            'tp' => $tp->id,
+            'dataTp' => $this->tp->find($tp->id),
         ];
         view('pages/teacher/cetak-lembar-monitoring', $data);
         $mpdf = new Mpdf();
