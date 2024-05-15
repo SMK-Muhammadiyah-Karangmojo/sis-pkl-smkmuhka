@@ -9,7 +9,7 @@
     <style rel="stylesheet">
         @page {
             margin: 0.5cm 0.0cm 0.0cm;
-            background: url("https://media.discordapp.net/attachments/1178712419833491567/1178712707982163978/pkl-03.png?ex=657724c1&is=6564afc1&hm=1bf3ea150cf2555b330012056436f05de8ff52e1e9cc4f08c8827cf8091a6640&=&format=webp") no-repeat;
+            background: url("https://pkl.yantodev.my.id/assets/img/sertifikat/pkl-03.png") no-repeat;
             width: 1250px;
             height: 814px;
             size: auto;
