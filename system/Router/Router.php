@@ -140,7 +140,7 @@ class Router implements RouterInterface
         // If we cannot find a URI to match against, then
         // everything runs off of it's default settings.
         if ($uri === null || $uri === '') {
-            return strpos($this->controller, '\\') === false
+            return str_contains($this->controller, '\\') === false
                 ? $this->collection->getDefaultNamespace() . $this->controller
                 : $this->controller;
         }
@@ -371,7 +371,7 @@ class Router implements RouterInterface
             $matchedKey = $key;
 
             // Are we dealing with a locale?
-            if (strpos($key, '{locale}') !== false) {
+            if (str_contains($key, '{locale}') !== false) {
                 $localeSegment = array_search('{locale}', preg_split('/[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+/m', $key), true);
 
                 // Replace it with a regex so it
@@ -418,23 +418,29 @@ class Router implements RouterInterface
 
                 // Support resource route when function with subdirectory
                 // ex: $routes->resource('Admin/Admins');
-                if (strpos($val, '$') !== false && strpos($key, '(') !== false && strpos($key, '/') !== false) {
-                    $replacekey = str_replace('/(.*)', '', $key);
-                    $val        = preg_replace('#^' . $key . '$#u', $val, $uri);
-                    $val        = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
-                } elseif (strpos($val, '$') !== false && strpos($key, '(') !== false) {
-                    $val = preg_replace('#^' . $key . '$#u', $val, $uri);
-                } elseif (strpos($val, '/') !== false) {
-                    [
-                        $controller,
-                        $method,
-                    ] = explode('::', $val);
+                if (is_string($val) && is_string($key)) {
+                    if (str_contains($val, '$') && str_contains($key, '(') !== false && str_contains($key, '/') !== false) {
+                        $replacekey = str_replace('/(.*)', '', $key);
+                        $val        = preg_replace('#^' . $key . '$#u', $val, $uri);
+                        $val        = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
+                    } elseif (str_contains($val, '$') !== false && str_contains($key, '(') !== false) {
+                        $val = preg_replace('#^' . $key . '$#u', $val, $uri);
+                    } elseif (str_contains($val, '/') !== false) {
+                        [
+                            $controller,
+                            $method,
+                        ] = explode('::', $val);
 
-                    // Only replace slashes in the controller, not in the method.
-                    $controller = str_replace('/', '\\', $controller);
+                        // Only replace slashes in the controller, not in the method.
+                        $controller = str_replace('/', '\\', $controller);
 
-                    $val = $controller . '::' . $method;
+                        $val = $controller . '::' . $method;
+                    }
+                } else {
+                    // Log untuk debugging jika $val atau $key bukan string
+                    var_dump($val, $key);
                 }
+
 
                 $this->setRequest(explode('/', $val));
 
@@ -501,7 +507,7 @@ class Router implements RouterInterface
             foreach ($this->collection->getRoutes('cli') as $route) {
                 if (is_string($route)) {
                     $route = strtolower($route);
-                    if (strpos($route, $controller . '::' . $methodName) === 0) {
+                    if (str_contains($route, $controller . '::' . $methodName) === 0) {
                         throw new PageNotFoundException();
                     }
 
@@ -520,7 +526,7 @@ class Router implements RouterInterface
 
         // Ensure the controller stores the fully-qualified class name
         // We have to check for a length over 1, since by default it will be '\'
-        if (strpos($this->controller, '\\') === false && strlen($defaultNamespace) > 1) {
+        if (str_contains($this->controller, '\\') === false && strlen($defaultNamespace) > 1) {
             $this->controller = '\\' . ltrim(str_replace('/', '\\', $defaultNamespace . $this->directory . $controllerName), '\\');
         }
     }

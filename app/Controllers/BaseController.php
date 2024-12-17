@@ -37,25 +37,6 @@ use Psr\Log\LoggerInterface;
  *     class Home extends BaseController
  *
  * For security be sure to declare any new methods as protected or private.
- * @property MajorModel $major
- * @property TpModel $tp
- * @property UsersModel $usersModel
- * @property IdukaModel $idukaModel
- * @property GuruModel $guruModel
- * @property SchoolModel $schoolModel
- * @property YantoDevConfig $config
- * @property UsersModel $users
- * @property UserDetailModel $userDetail
- * @property MasterDataModel $masterData
- * @property MentorDetailModel $mentorDetailModel
- * @property MasterCategoryNilaiModel $masterCategoryNilai
- * @property MasterNilaiModel $masterNilai
- * @property KategoriSuratModel $kategoriSurat
- * @property NomorSuratModel $nomorSuratModel
- * @property MasterTemplateModel $masterTemplateModel
- * @property PresenceModel $presenceModel
- * @property BotDiscord $botDiscord
- * @property IApplicationConstantConfig $IApplicationConstant
  */
 class BaseController extends Controller
 {
@@ -74,6 +55,24 @@ class BaseController extends Controller
      * @var array
      */
     protected $helpers = ['pkl_helper'];
+    public BotDiscord $botDiscord;
+    public YantoDevConfig $config;
+    public UsersModel $users;
+    public IdukaModel $idukaModel;
+    public GuruModel $guruModel;
+    public SchoolModel $schoolModel;
+    public MajorModel $major;
+    public TpModel $tp;
+    public UserDetailModel $userDetail;
+    public MasterDataModel $masterData;
+    public MentorDetailModel $mentorDetailModel;
+    public MasterCategoryNilaiModel $masterCategoryNilai;
+    public MasterNilaiModel $masterNilai;
+    public KategoriSuratModel $kategoriSurat;
+    public NomorSuratModel $nomorSuratModel;
+    public MasterTemplateModel $masterTemplateModel;
+    public PresenceModel $presenceModel;
+    public IApplicationConstantConfig $IApplicationConstant;
 
     /**
      * Constructor.

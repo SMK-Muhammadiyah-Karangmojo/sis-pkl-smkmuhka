@@ -8,6 +8,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\ResultInterface;
 use CodeIgniter\Model;
 
 class MasterDataModel extends Model
@@ -17,7 +18,7 @@ class MasterDataModel extends Model
     protected $useSoftDeletes = true;
     protected $allowedFields = ['user_public_id', 'nis', 'iduka_id', 'tp_id', 'status', 'image'];
 
-    public function findByNis($nis)
+    public function findByNis($nis): false|string|ResultInterface
     {
         return $this->db->table('master_data')
             ->select('*')

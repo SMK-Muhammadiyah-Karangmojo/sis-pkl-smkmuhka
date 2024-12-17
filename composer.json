@@ -39,7 +39,7 @@
       "**/Database/Migrations/**"
     ],
     "classmap": [
-      "../vendor/"
+      "./vendor/"
     ]
   },
   "scripts": {

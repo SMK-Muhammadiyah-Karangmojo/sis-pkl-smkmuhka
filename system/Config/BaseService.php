@@ -141,7 +141,7 @@ class BaseService
      *
      * @var array
      */
-    protected static $mocks = [];
+    protected static array $mocks = [];
 
     /**
      * Have we already discovered other Services?

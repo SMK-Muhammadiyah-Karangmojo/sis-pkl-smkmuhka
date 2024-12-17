@@ -23,25 +23,21 @@ use Config\BaseResponse;
 use Config\YantoDevConfig;
 use ReflectionException;
 
-/**
- * @property YantoDevConfig $config
- * @property MajorModel $major
- * @property IdukaModel $iduka
- * @property string $ok
- * @property string $error
- * @property UsersModel $user
- * @property TutorModel $tutor
- * @property UserDetailModel $userDetail
- * @property ClassModel $class
- * @property MasterDataModel $masterData
- * @property APIResponseBuilder $ResponseBuilder
- * @property BaseResponse $BaseResponse
- */
 class RestApi extends ResourceController
 {
     use ResponseTrait;
 
     private KategoriSuratModel $categoryModel;
+    private APIResponseBuilder $ResponseBuilder;
+    private BaseResponse $BaseResponse;
+    private YantoDevConfig $config;
+    private UsersModel $user;
+    private UserDetailModel $userDetail;
+    private MajorModel $major;
+    private IdukaModel $iduka;
+    private TutorModel $tutor;
+    private ClassModel $class;
+    private MasterDataModel $masterData;
 
     public function __construct()
     {

@@ -15,15 +15,14 @@ use CodeIgniter\RESTful\ResourceController;
 use Config\APIResponseBuilder;
 use Config\YantoDevConfig;
 
-/**
- * @property YantoDevConfig $config
- * @property IdukaModel $iduka
- * @property DetailIdukaModel $detailIduka
- * @property APIResponseBuilder $ResponseBuilder
- */
 class Iduka extends ResourceController
 {
     use ResponseTrait;
+
+    private APIResponseBuilder $ResponseBuilder;
+    private YantoDevConfig $config;
+    private IdukaModel $iduka;
+    private DetailIdukaModel $detailIduka;
 
     public function __construct()
     {

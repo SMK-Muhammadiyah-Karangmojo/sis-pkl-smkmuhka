@@ -8,13 +8,17 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\Session\Session;
 
-/**
- * @property IApplicationConstantConfig $IApplicationConstant
- * @property \CodeIgniter\Session\Session|mixed|null $session
- */
 class APIResponseBuilder extends BaseConfig
 {
+
+    private IApplicationConstantConfig $IApplicationConstant;
+    /**
+     * @var Session|mixed|null
+     */
+    private mixed $session;
 
     public function __construct()
     {
@@ -84,7 +88,7 @@ class APIResponseBuilder extends BaseConfig
         ];
     }
 
-    public function ReturnViewValidation($session, $url, $data): string|\CodeIgniter\HTTP\RedirectResponse
+    public function ReturnViewValidation($session, $url, $data): string|RedirectResponse
     {
         if (!$session->get('logged_in')) {
             return redirect()->to($this->IApplicationConstant->auth);
@@ -97,7 +101,7 @@ class APIResponseBuilder extends BaseConfig
         }
     }
 
-    public function ReturnViewValidationTeacher($session, $url, $data): string|\CodeIgniter\HTTP\RedirectResponse
+    public function ReturnViewValidationTeacher($session, $url, $data): string|RedirectResponse
     {
         if (!$this->session->get('logged_in')) {
             return redirect()->to($this->IApplicationConstant->auth);
@@ -108,7 +112,7 @@ class APIResponseBuilder extends BaseConfig
         return view($url, $data);
     }
 
-    public function ReturnViewValidationStudent($session, $url, $data): string|\CodeIgniter\HTTP\RedirectResponse
+    public function ReturnViewValidationStudent($session, $url, $data): string|RedirectResponse
     {
         if (!$session->get('logged_in')) {
             return redirect()->to($this->IApplicationConstant->auth);

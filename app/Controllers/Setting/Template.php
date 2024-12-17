@@ -10,16 +10,19 @@ namespace App\Controllers\Setting;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\APIResponseBuilder;
 
-/**
- * @property \CodeIgniter\Session\Session|mixed|null $session
- * @property APIResponseBuilder $ResponseBuilder
- */
 class Template extends BaseController
 {
 
     use ResponseTrait;
+
+    /**
+     * @var \CodeIgniter\Session\Session|mixed|null
+     */
+    private mixed $session;
+    private APIResponseBuilder $ResponseBuilder;
 
     public function __construct()
     {
@@ -27,7 +30,7 @@ class Template extends BaseController
         $this->ResponseBuilder = new APIResponseBuilder();
     }
 
-    public function index()
+    public function index(): string|RedirectResponse
     {
         $kategori_surat_id = $this->request->getVar("kategori_surat");
         $tp = $this->request->getVar("tp");

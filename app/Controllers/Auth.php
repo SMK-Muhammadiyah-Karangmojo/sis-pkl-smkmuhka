@@ -18,12 +18,13 @@ use App\Models\UsersModel;
 use CodeIgniter\Session\Session;
 use ReflectionException;
 
-/**
- * @property UsersModel $users
- * @property Session|mixed|null $session
- */
 class Auth extends BaseController
 {
+
+    /**
+     * @var Session|mixed|null
+     */
+    private mixed $session;
 
     public function __construct()
     {

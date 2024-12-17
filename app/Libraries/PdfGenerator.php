@@ -11,12 +11,11 @@ namespace App\Libraries;
 use Config\IApplicationConstantConfig;
 use Mpdf\Mpdf;
 
-/**
- * @property Mpdf $mpdf
- * @property IApplicationConstantConfig $IApplicationConstant
- */
 class PdfGenerator
 {
+
+    private Mpdf $mpdf;
+    private IApplicationConstantConfig $IApplicationConstant;
 
     public function __construct()
     {

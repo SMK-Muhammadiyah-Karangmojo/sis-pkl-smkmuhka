@@ -14,6 +14,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\ResultInterface;
 use CodeIgniter\Model;
 
 class UsersModel extends Model
@@ -23,7 +24,7 @@ class UsersModel extends Model
     protected $useSoftDeletes = true;
     protected $allowedFields = ['email', 'image', 'password', 'role_pkl', 'is_active'];
 
-    public function findUserDetailByEmail($email)
+    public function findUserDetailByEmail($email): false|string|ResultInterface
     {
         return $this->db->table('users as u')
             ->select('u.id as id, u.email, u.password, u.role_pkl, u.is_active, u.image,

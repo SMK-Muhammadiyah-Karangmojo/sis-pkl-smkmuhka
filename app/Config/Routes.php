@@ -3,6 +3,10 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
+use App\Controllers\Home;
+use App\Controllers\NilaiController;
+use App\Controllers\Student;
+
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
@@ -33,8 +37,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
-$routes->get('detail-siswa/(:num)', 'Home::index/$1');
-$routes->get("nilai", "NilaiController::index");
+$routes->get('detail-siswa/(:num)', [Home::class, 'index']);
+$routes->get("nilai", [NilaiController::class, "index"]);
 $routes->get("export-nilai", "NilaiController::exportNilai");
 $routes->post("add-nilai", "NilaiController::addNilai");
 $routes->get("certificate", "Admin::certificate");
@@ -59,6 +63,7 @@ $routes->group("setting", static function ($setting) {
         $template->post('kop-surat', "Setting\Template::saveTemplateKopSurat");
     });
 });
+
 //presence
 $routes->group("presence", static function ($admin) {
     $admin->get("/", "Presence\PresenceController::index");
@@ -66,8 +71,10 @@ $routes->group("presence", static function ($admin) {
     $admin->get("detail/(:num)", "Presence\PresenceController::presenceDetail/$1");
     $admin->get("cetak/(:num)", "Presence\PresenceController::printPresenceStudent/$1");
 });
+
 //Student
 $routes->group('student', static function ($student) {
+    $student->get('', 'Student::index');
     $student->get("presence", "Student::presence");
     $student->post("presence", "Student::addPresence");
 });

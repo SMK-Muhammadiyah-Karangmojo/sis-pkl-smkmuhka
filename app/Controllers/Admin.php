@@ -19,6 +19,8 @@ use App\Models\TeacherModel;
 use App\Models\TutorModel;
 use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\Session\Session;
 use Config\APIResponseBuilder;
 use Config\IApplicationConstantConfig;
 use Config\Services;
@@ -30,22 +32,23 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use ReflectionException;
 
-
-/**
- * @property \CodeIgniter\Session\Session|mixed|null $session
- * @property APIResponseBuilder $ResponseBuilder
- * @property IApplicationConstantConfig $IApplicationConstant
- * @property SuratModel $surat
- * @property KajurModel $kajur
- * @property TutorModel $tutor
- * @property KategoriSuratModel $kategoriSurat
- * @property TeacherModel $teacher
- * @property NomorSuratModel $nomorModel
- * @property PdfGenerator $pdfGenerator
- */
 class  Admin extends BaseController
 {
     use ResponseTrait;
+
+
+    /**
+     * @var Session|mixed|null
+     */
+    private mixed $session;
+    private APIResponseBuilder $ResponseBuilder;
+    private SuratModel $surat;
+    private KajurModel $kajur;
+    private TutorModel $tutor;
+    private TeacherModel $teacher;
+    private NomorSuratModel $nomorModel;
+    private PdfGenerator $pdfGenerator;
+    private UsersModel $usersModel;
 
     public function __construct()
     {
@@ -98,7 +101,7 @@ class  Admin extends BaseController
         );
     }
 
-    public function pendamping()
+    public function pendamping(): string|RedirectResponse
     {
         $tp = $this->request->getVar('tp') ?: false;
         $major = $this->request->getVar('major') ?: false;
@@ -121,7 +124,7 @@ class  Admin extends BaseController
         return view('pages/admin/data-pendamping', $data);
     }
 
-    public function rekap()
+    public function rekap(): string|RedirectResponse
     {
         $tp = $this->request->getVar('tp') ?: false;
         $major = $this->request->getVar('major') ?: false;
@@ -197,7 +200,7 @@ class  Admin extends BaseController
     /**
      * @throws MpdfException
      */
-    public function rekapPDF()
+    public function rekapPDF(): void
     {
         $tp = $this->request->getVar('tp');
         $major = $this->request->getVar('major');

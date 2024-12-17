@@ -17,21 +17,13 @@ use App\Models\MasterLaporanModal;
 use App\Models\UserDetailModel;
 use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\Session\Session;
 use Config\APIResponseBuilder;
 use Config\Bot\BotDiscord;
 use Config\Services;
 use Config\YantoDevConfig;
 
-/**
- * @property Session|mixed|null $session
- * @property ClassModel $class
- * @property UserDetailModel $userDetail
- * @property APIResponseBuilder $ResponseBuilder
- * @property MasterLaporanModal $masterLaporan
- * @property DataLaporanSiswaModal $laporanSiswa
- * @property BotDiscord $botDiscord
- */
 class Student extends BaseController
 {
     use ResponseTrait;
@@ -40,6 +32,15 @@ class Student extends BaseController
      * @var mixed
      */
     private $imageCompressor;
+    /**
+     * @var Session|mixed|null
+     */
+    private mixed $session;
+    private APIResponseBuilder $ResponseBuilder;
+    private UsersModel $usersModel;
+    private ClassModel $class;
+    private MasterLaporanModal $masterLaporan;
+    private DataLaporanSiswaModal $laporanSiswa;
 
     public function __construct()
     {
@@ -57,7 +58,7 @@ class Student extends BaseController
         $this->imageCompressor = new ImageCompressor();
     }
 
-    public function index()
+    public function index(): string|RedirectResponse
     {
         $response = $this->users->findUserDetailByEmail(
             $this->session->get('email'))->getRow();
@@ -102,7 +103,7 @@ class Student extends BaseController
         );
     }
 
-    function addDetail(): \CodeIgniter\HTTP\RedirectResponse
+    function addDetail(): RedirectResponse
     {
         if (!$this->validate([
             'nis' => [
@@ -141,7 +142,7 @@ class Student extends BaseController
         return redirect()->to('/student');
     }
 
-    function addMasterData(): \CodeIgniter\HTTP\RedirectResponse
+    function addMasterData(): RedirectResponse
     {
         if (!$this->validate([
             'nis' => [
@@ -205,7 +206,7 @@ class Student extends BaseController
     /**
      * @throws \ReflectionException
      */
-    public function updateProfile(): \CodeIgniter\HTTP\RedirectResponse
+    public function updateProfile(): RedirectResponse
     {
         helper(['form']);
         if (!$this->validate($this->config->formValidationUserDetail())) {
