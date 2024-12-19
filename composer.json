@@ -1,0 +1,55 @@
+{
+  "name": "codeigniter4/appstarter",
+  "description": "Aplikasi Sistem Informasi PKL SMK Muhammadiyag Karangmojo",
+  "license": "MIT",
+  "type": "project",
+  "homepage": "https://codeigniter.com",
+  "support": {
+    "forum": "https://forum.codeigniter.com/",
+    "source": "https://github.com/codeigniter4/CodeIgniter4",
+    "slack": "https://codeigniterchat.slack.com"
+  },
+  "require": {
+    "aws/aws-sdk-php": "^3.322",
+    "php": "^8.2.4",
+    "codeigniter4/framework": "^4.0",
+    "ext-curl": "*",
+    "ext-intl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "mpdf/mpdf": "^8.2",
+    "phpoffice/phpspreadsheet": "^1.25",
+    "mpdf/qrcode": "^1.2",
+    "ext-gd": "*",
+    "dompdf/dompdf": "^2.0",
+    "psr/log": "^3.0.2",
+    "ext-fileinfo": "*"
+  },
+  "require-dev": {
+    "fakerphp/faker": "^1.9",
+    "mikey179/vfsstream": "^1.6",
+    "phpunit/phpunit": "^10.5.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Config\\": "app/Config/"
+    },
+    "exclude-from-classmap": [
+      "**/Database/Migrations/**"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Support\\": "tests/_support"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}

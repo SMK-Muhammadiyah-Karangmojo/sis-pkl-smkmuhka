@@ -1,0 +1,8 @@
+apps:
+  - name: sis-pkl-smkmuhka
+    type: php
+    root: .
+    entrypoint: index.php
+    env:
+      CI_ENVIRONMENT: development
+    workers: 4

@@ -1,0 +1,225 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #FFFFFF;
+}
+
+.preloader .loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font: 14px arial;
+}
+
+#validation {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#label-swal {
+    text-align: left;
+}
+
+table tr th, table tr td {
+}
+
+#table-pdf {
+}
+
+#nomor-table {
+    width: 5px;
+    text-align: center;
+}
+
+#kelas {
+    width: 100px;
+    text-align: left;
+}
+
+.center {
+    vertical-align: top;
+    text-align: center;
+}
+
+.top {
+    text-align: left;
+    vertical-align: top;
+}
+
+.top-center {
+    text-align: center;
+    vertical-align: top;
+}
+
+.container {
+    margin-left: 50px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.column {
+    vertical-align: top;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.column-name {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.column2 {
+    vertical-align: top;
+    width: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+/* hapus floats setelah columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.title {
+    text-align: left;
+}
+
+.keterangan {
+    margin-bottom: 10px;
+}
+
+.print {
+    margin: 3px;
+    padding: 3px;
+}
+
+.print-name {
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 18px;
+    margin-left: 2px;
+}
+
+#monitoring-number {
+    width: 10px;
+    text-align: center;
+}
+
+#monitoring-name {
+    width: 30%;
+}
+
+#monitoring-paraf {
+    width: 15%;
+    text-align: center;
+}
+
+#data-monitoring-number {
+    vertical-align: top;
+    text-align: center;
+}
+
+#data-monitoring-name {
+    vertical-align: top;
+    height: 60px;
+}
+
+#monitoring-note {
+    border: 2px solid #0a0e14;
+    width: 100%;
+    height: 100px;
+}
+
+#monitoring-ttd {
+    margin-top: 30px;
+    width: 100%;
+}
+
+#monitoring-ttd-table {
+    width: 100%;
+}
+
+#monitoring-ttd-iduka {
+    width: 50%;
+    height: 100px;
+    vertical-align: top;
+    text-align: center;
+}
+
+#monitoring-ttd-data {
+    text-align: center;
+}
+
+#dh {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#dh-iduka-left {
+    margin-right: 500px;
+    float: left;
+    font-size: 16px
+}
+
+#dh-iduka-right {
+    float: right;
+    text-align: right;
+    font-size: 16px
+}
+
+#dh-number {
+    vertical-align: top;
+    text-align: center;
+    width: 10px;
+}
+
+#tgl {
+    width: 25px;
+}
+
+#dh-jumlah {
+    column-span: 5;
+}
+
+#dh-ttd-iduka-left {
+    margin-right: 550px;
+    float: left;
+    font-size: 16px;
+    color: rgb(242, 246, 242);
+}
+
+#dh-ttd-iduka-right {
+    float: right;
+    text-align: center;
+    font-size: 16px
+}
+
+#dh-pembimbing {
+    height: 80px;
+}
+
+button {
+    border: none;
+}
+
+.form-select {
+    width: 30%;
+}
+
+#label-swal-left {
+    text-align: left;
+}
