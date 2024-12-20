@@ -6,7 +6,7 @@
         <h3 class="card-title"><?= $subtitle; ?></h3>
     </div>
     <div class="card-body">
-        <button class="btn btn-outline-primary" onclick="addUser()">
+        <button class="btn btn-outline-primary" onclick="addTeacher()">
             <i class="fa fa-plus"></i> Tambah Guru
         </button>
         <table id="dataTable" class="table table-bordered table-striped">

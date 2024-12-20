@@ -460,7 +460,6 @@ class RestApiController extends BaseController
         }
         return $this->respond($response);
     }
-
     public function findTeacherById(): ResponseInterface
     {
         $id = $this->request->getVar('id');

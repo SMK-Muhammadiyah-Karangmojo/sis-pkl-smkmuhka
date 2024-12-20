@@ -1,8 +1,8 @@
 let baseUrl = window.location.origin;
 
-async function fetchingData(url = '', data = {}) {
+async function fetchingData(url = '', data = {}, method = 'POST') {
     return fetch(baseUrl + url, {
-        method: 'POST',
+        method: method,
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -11,8 +11,9 @@ async function fetchingData(url = '', data = {}) {
         },
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
-        body: data ? JSON.stringify(data) : ''
+        body: method !== 'GET' ? JSON.stringify(data) : null
     }).then(response => {
+        console.log(response)
         return response.json()
     }).catch(error => {
         return error
@@ -94,5 +95,5 @@ function base64ToBlob(base64String, contentType = 'image/jpeg') {
     }
 
     const byteArray = new Uint8Array(byteNumbers);
-    return new Blob([byteArray], { type: contentType });
+    return new Blob([byteArray], {type: contentType});
 }

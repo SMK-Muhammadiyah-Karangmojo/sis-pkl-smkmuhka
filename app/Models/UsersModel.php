@@ -213,4 +213,12 @@ class UsersModel extends Model
 
     }
 
+    public function findUserByEmail(float|array|bool|int|string|\stdClass|null $email)
+    {
+        return $this->db->table('users')
+            ->select('id, email, password, role_pkl, is_active, image')
+            ->where('email', $email)
+            ->get()->getRow();
+    }
+
 }

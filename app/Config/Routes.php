@@ -2,6 +2,7 @@
 
 use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
+use App\Controllers\Api\TeacherEndpoint;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Home;
 use App\Controllers\Mentor\MentorController;
@@ -116,10 +117,11 @@ $routes->group('api/v1/', function ($v1) {
     /**
      * Teacher controller
      */
-    $v1->group('teacher', function ($teacher) {
-        $teacher->post('find-by-id', [RestApiController::class, 'findTeacherById']);
-        $teacher->post('update', [RestApiController::class, 'updateTeacher']);
-    });
+    $v1->resource('teacher', ['controller' => 'Api\TeacherEndpoint']);
+//    $v1->group('teacher', function ($teacher) {
+//        $teacher->post('find-by-id', [RestApiController::class, 'findTeacherById']);
+//        $teacher->post('update', [RestApiController::class, 'updateTeacher']);
+//    });
 });
 
 /**

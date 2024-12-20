@@ -9,7 +9,7 @@ class TeacherModel extends Model
     protected $table = 'teacher';
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['name', 'nbm', 'hp', 'position', 'user_public_id'];
+    protected $allowedFields = ['name', 'email', 'nbm', 'hp', 'position', 'user_public_id'];
 
     public function findByUserPublicId($teacherId)
     {

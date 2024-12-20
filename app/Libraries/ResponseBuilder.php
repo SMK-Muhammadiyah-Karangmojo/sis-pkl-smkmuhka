@@ -85,7 +85,7 @@ class ResponseBuilder extends BaseConfig
         ];
     }
 
-    public function internalServerError(string $message): array
+    public function internalServerError($message): array
     {
         return [
             'result' => '',

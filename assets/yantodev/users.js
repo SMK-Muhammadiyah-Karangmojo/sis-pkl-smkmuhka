@@ -1,5 +1,15 @@
 function addUser() {
-    alert("masih dalam pengembangan")
+    Swal.fire({
+        title: "Add Data",
+        html: ``,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: "Update",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
+            console.log(Swal.getPopup().querySelector("#nisn").value)
+        },
+    })
 }
 
 async function updateUser(id) {
