@@ -101,7 +101,7 @@ class TeacherController extends BaseController
         );
     }
 
-    public function monitoring($id)
+    public function monitoring($id): void
     {
         $tp = $this->tp->get()->getLastRow();
         $teacher = $this->tutorModel->findByTeacherId($id);

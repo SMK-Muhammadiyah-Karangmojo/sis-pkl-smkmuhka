@@ -89,22 +89,22 @@ class DataLaporanSiswaModal extends Model
                ud.user_id        as nis,
                ud.name,
                i.name            as iduka,
-               tp.name as tp_name
+               tp.name as tp_name,
+               i.id              as iduka_id
                ");
         $builder->join("iduka i", "tutor.iduka_id = i.id");
         $builder->join("master_data md", "i.id = md.iduka_id");
         $builder->join("tp", "md.tp_id = tp.id");
         $builder->join("user_details ud", "md.user_public_id = ud.user_public_id");
         $builder->where("tutor.teacher_id", $teacherId);
-
         if ($tpId) {
             $builder->where("md.tp_id", $tpId);
         } else {
             $builder->where("md.tp_id", $tp->id);
         }
+        $builder->distinct();
 
         $builder->orderBy("i.id", "ASC");
-
         $sql = $builder->get();
         return $sql->getResult();
 //        return $this->db()->query("

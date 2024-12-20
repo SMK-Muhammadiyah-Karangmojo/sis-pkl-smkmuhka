@@ -17,7 +17,7 @@ function logout() {
                 title: 'Logout berhasil',
             })
             setTimeout(function () {
-                window.location.reload(1);
+                window.location.href = '/';
             }, 3000);
         }
     })
