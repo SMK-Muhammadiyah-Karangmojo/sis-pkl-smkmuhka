@@ -3,6 +3,7 @@
 use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
 use App\Controllers\Auth\AuthController;
+use App\Controllers\Home;
 use App\Controllers\Mentor\MentorController;
 use App\Controllers\Nilai\NilaiController;
 use App\Controllers\Presence\PresenceController;
@@ -44,6 +45,7 @@ $routes->group('auth', function ($auth) {
     $auth->get('register', [AuthController::class, 'register']);
     $auth->post('logout', [AuthController::class, 'logout']);
 });
+$routes->get('detail-siswa/(:num)', [Home::class, 'index']);
 
 /**
  * Rest Api service controller
@@ -110,6 +112,14 @@ $routes->group('api/v1/', function ($v1) {
         $mentor->post('edit/(:num)', [RestApiController::class, 'editMentor']);
         $mentor->post('addMentor', [RestApiController::class, 'addMentor']);
     });
+
+    /**
+     * Teacher controller
+     */
+    $v1->group('teacher', function ($teacher) {
+        $teacher->post('find-by-id', [RestApiController::class, 'findTeacherById']);
+        $teacher->post('update', [RestApiController::class, 'updateTeacher']);
+    });
 });
 
 /**
@@ -125,6 +135,9 @@ $routes->group('admin', function ($admin) {
     $admin->get('export-rekap-excel', [AdminController::class, 'exportDataRekapExcel']);
     $admin->get('export-rekap-pdf', [AdminController::class, 'exportDataRekapPdf']);
     $admin->get('iduka', [AdminController::class, 'iduka']);
+    $admin->get('teacher', [AdminController::class, 'teacher']);
+    $admin->get('print', [AdminController::class, 'print']);
+    $admin->post('print-id-card', [AdminController::class, 'printIdCard']);
 });
 
 /**

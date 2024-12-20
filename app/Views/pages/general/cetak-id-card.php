@@ -164,7 +164,7 @@
                                  error="M" class="barcode"></barcode>
                     </div>
                     <div class="link">
-                        <a href="https://pkl.smkmuhkarangmojo.sch.id" target="_blank">https://pkl.smkmuhkarangmojo.sch.id</a>
+                        <a href="https://pkl.smkmuhkarangmojo.my.id" target="_blank">https://pkl.smkmuhkarangmojo.my.id</a>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ class RestApiController extends BaseController
         try {
             $result = $this->users->findAllStudent();
             $response = $this->responseBuilder->ok($result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $response = $this->responseBuilder->internalServerError($e->getMessage());
         }
         return $this->respond($response);
@@ -29,7 +29,7 @@ class RestApiController extends BaseController
         try {
             $result = $this->masterData->findByNis($nis)->getRow();
             $response = $this->responseBuilder->ok($result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $response = $this->responseBuilder->internalServerError($e->getMessage());
         }
         return $this->respond($response);
@@ -45,7 +45,7 @@ class RestApiController extends BaseController
         try {
             $result = $this->masterData->updateByDataNis($nis, $data);
             $response = $this->responseBuilder->ok($result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $response = $this->responseBuilder->internalServerError($e->getMessage());
         }
         return $this->respond($response);
@@ -457,6 +457,36 @@ class RestApiController extends BaseController
             } else {
                 $response = $this->responseBuilder->internalServerError("Gagal simpan data");
             }
+        }
+        return $this->respond($response);
+    }
+
+    public function findTeacherById(): ResponseInterface
+    {
+        $id = $this->request->getVar('id');
+        try {
+            $result = $this->users->findTeacherById($id);
+            $response = $this->responseBuilder->ok($result);
+        } catch (Exception $e) {
+            $response = $this->responseBuilder->internalServerError($e->getMessage());
+        }
+        return $this->respond($response);
+    }
+
+    public function updateTeacher(): ResponseInterface
+    {
+        $id = $this->request->getVar('id');
+        $data = [
+            'nbm' => $this->request->getVar('nbm'),
+            'name' => $this->request->getVar('name'),
+            'position' => $this->request->getVar('position'),
+            'hp' => $this->request->getVar('hp')
+        ];
+        try {
+            $result = $this->userDetail->updateTeacher($id, $data);
+            $response = $this->responseBuilder->ok($result);
+        } catch (Exception $e) {
+            $response = $this->responseBuilder->internalServerError("update teacher with id " . $id . " failed");
         }
         return $this->respond($response);
     }

@@ -13,29 +13,31 @@
             <thead>
             <tr>
                 <th width="10px">No</th>
+                <th>Action</th>
                 <th>NIP/NBM</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
                 <th>HP</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <?php $no = 1; ?>
-            <?php foreach ($data as $d) : ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $d->nbm; ?></td>
-                    <td><?= $d->name; ?></td>
-                    <td><?= $d->position; ?></td>
-                    <td><?= $d->hp; ?></td>
-                    <td>
-                        <button class="btn btn-primary btn-xs" onclick="updateTeacher(<?= $d->id; ?>)">
-                            Edit
-                        </button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+            <?php if (isset($data)) {
+                foreach ($data as $d) : ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" onclick="updateTeacher(<?= $d->id; ?>)">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </td>
+                        <td><?= $d->nbm; ?></td>
+                        <td><?= $d->name; ?></td>
+                        <td><?= $d->position; ?></td>
+                        <td><?= $d->hp; ?></td>
+                    </tr>
+                <?php endforeach;
+            } ?>
             </tbody>
         </table>
     </div>

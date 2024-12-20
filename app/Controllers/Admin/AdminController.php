@@ -242,4 +242,60 @@ class AdminController extends BaseController
             $data
         );
     }
+
+    public function teacher(): string|RedirectResponse
+    {
+        $data = [
+            'title' => "Guru",
+            'subtitle' => "Data Guru",
+            'users' => $this->session->get('email'),
+            'role' => $this->session->get('role'),
+            'data' => $this->users->findAllTeacher()
+        ];
+
+        return $this->responseBuilder->ReturnViewValidation(
+            $this->session,
+            'pages/admin/data-teacher',
+            $data
+        );
+    }
+
+    public function print(): string|RedirectResponse
+    {
+        $data = [
+            'title' => "Cetak",
+            'subtitle' => "Cetak Data",
+            'users' => $this->session->get('email'),
+            'role' => $this->session->get('role'),
+            'major' => $this->major->findAll(),
+            'tp' => $this->tp->findAll()
+        ];
+        return $this->responseBuilder->ReturnViewValidation(
+            $this->session,
+            'pages/admin/print',
+            $data,
+        );
+    }
+
+    public function printIdCard(): void
+    {
+        $tp = $this->request->getVar('tpIdCard');
+        $major = $this->request->getVar('majorIdCard');
+        $result = $this->masterData->findByTpAndMajor($tp, $major);
+        $data = [
+            'instansi' => $this->request->getVar('instansi'),
+            'result' => $result,
+            'surat' => $this->nomorSuratModel->findByTp($tp),
+            'data' => $this->masterData->findByTpAndMajor($tp, $major)
+        ];
+        view('pages/general/cetak-id-card', $data);
+        $mpdf = new Mpdf();
+        $mpdf->showImageErrors = true;
+        $html = view('pages/general/cetak-id-card', [
+            ini_set("pcre.backtrack_limit", $this->applicationConstant->limitPdf)
+        ]);
+        $mpdf->WriteHTML($html);
+        $this->response->setHeader('Content-Type', $this->applicationConstant->contentType('pdf'));
+        $mpdf->Output('ID Card.pdf', 'I');
+    }
 }

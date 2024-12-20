@@ -1,6 +1,6 @@
 function updateTeacher(id) {
     console.log(id)
-    fetchingData('/RestApi/findTeacherById', {id})
+    fetchingData('/api/v1/teacher/find-by-id', {id})
         .then(response => {
             let result = response.result;
             Swal.fire({
@@ -37,7 +37,7 @@ function updateTeacher(id) {
                         position: Swal.getPopup().querySelector("#position").value,
                         hp: Swal.getPopup().querySelector("#hp").value
                     };
-                    fetchingData("/Teacher/updateTeacher", data)
+                    fetchingData("/api/v1/teacher/update", data)
                         .then(response => {
                             if (response.responseData.responseCode === 200) {
                                 Swal.fire({
