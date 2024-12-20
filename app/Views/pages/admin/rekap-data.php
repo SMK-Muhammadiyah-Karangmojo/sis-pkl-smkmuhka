@@ -39,24 +39,26 @@
             </thead>
             <tbody>
             <?php $no = 1; ?>
-            <?php foreach ($data as $d) : ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td id="name"><?= $d->tpName; ?></td>
-                    <td id="name"><?= $d->nis; ?></td>
-                    <td id="name"><?= $d->name; ?></td>
-                    <td id="kelas"><?= $d->kelas; ?></td>
-                    <td id="name"><?= $d->idukaName; ?></td>
-                    <td id="name"><?= $d->address; ?></td>
-                    <td id="name"><?= $d->teacherName; ?></td>
-                    <td id="name"><?= statusPKL($d->status); ?></td>
-                    <td>
-                        <a href="<?= base_url('admin/verification?id=' . $d->id); ?>">
-                            <button class="btn bg-green">Verifikasi</button>
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+            <?php if (isset($data)) {
+                foreach ($data as $d) : ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td id="name"><?= $d->tpName; ?></td>
+                        <td id="name"><?= $d->nis; ?></td>
+                        <td id="name"><?= $d->name; ?></td>
+                        <td id="kelas"><?= $d->kelas; ?></td>
+                        <td id="name"><?= $d->idukaName; ?></td>
+                        <td id="name"><?= $d->address; ?></td>
+                        <td id="name"><?= $d->teacherName; ?></td>
+                        <td id="name"><?= statusPKL($d->status); ?></td>
+                        <td>
+                            <a href="<?= base_url('admin/verification?id=' . $d->id); ?>">
+                                <button class="btn bg-green">Verifikasi</button>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach;
+            } ?>
             </tbody>
         </table>
         <div>

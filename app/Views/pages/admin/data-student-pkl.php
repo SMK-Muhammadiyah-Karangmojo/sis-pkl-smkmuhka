@@ -8,13 +8,23 @@
         </h3>
     </div>
     <div class="card-body">
-        <div class="form-group">
-            <select class="form-control col-lg-3" id="major" name="major" onchange="getStudentByMajor()">
-                <option value="">-- Pilih Jurusan --</option>
-                <?php foreach ($major as $j): ?>
-                    <option value="<?= $j['id']; ?>"><?= $j['name']; ?></option>
-                <?php endforeach; ?>
-            </select>
+        <div class="row">
+            <div class="form-group m-1">
+                <select class="form-control" id="tp1" name="tp1">
+                    <option value="">-- Pilih Tahun Pelajaran --</option>
+                    <?php foreach ($tp as $j): ?>
+                        <option value="<?= $j['id']; ?>"><?= $j['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group m-1">
+                <select class="form-control" id="major" name="major" onchange="getStudentByMajor()">
+                    <option value="">-- Pilih Jurusan --</option>
+                    <?php foreach ($major as $j): ?>
+                        <option value="<?= $j['id']; ?>"><?= $j['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
         <table id="dataTable" class="table table-bordered table-striped">
             <thead>
@@ -32,13 +42,14 @@
             <tbody>
             <?php $no = 1; ?>
             <?php
+//            dd($siswa);
             if (!empty($siswa)) {
                 foreach ($siswa as $s) : ?>
                     <tr>
                         <td><?= $no++; ?></td>
                         <td class="text-center">
                             <button class="btn btn-primary btn-xs" onclick="
-                                    editStudent(<?= $s->id; ?>,<?= $s->masterdataid != null ? $s->masterdataid : "false"; ?>)
+                                    editStudent(<?= $s->id; ?>,<?= $s->masterDataId != null ? $s->masterDataId : "false"; ?>)
                                     " name="Edit"><i class="fa-solid fa-pen-to-square"></i>
                             </button>
                         </td>

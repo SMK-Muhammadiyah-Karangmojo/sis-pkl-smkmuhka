@@ -267,13 +267,13 @@ function syncData() {
             allowOutsideClick: Swal.showLoading()
         });
         Swal.showLoading()
-        fetchingData("/RestApi/syncData")
+        fetchingData("/api/v1/sync-data")
             .then(async response => {
                 let result = response.result
                 let code = response.responseData.responseCode
                 if (code === 200) {
                     for (const element of result) {
-                        await fetchingData("/RestApi/cekMasterData", {
+                        await fetchingData("/api/v1/sync-master-data", {
                             nis: element.nis
                         }).then(response => {
                             let result = response.result
@@ -308,7 +308,7 @@ function syncData() {
 }
 
 function updateMasterDataByNis(data) {
-    fetchingData("/RestApi/updateMasterDataByNis",
+    fetchingData("/api/v1/update-master-data",
         {
             nis: data.nis,
             tpId: data.tpId,

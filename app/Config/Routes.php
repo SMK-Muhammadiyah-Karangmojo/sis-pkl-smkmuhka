@@ -49,6 +49,10 @@ $routes->group('auth', function ($auth) {
  * Rest Api service controller
  */
 $routes->group('api/v1/', function ($v1) {
+
+    $v1->post('sync-data', [RestApiController::class, 'syncData']);
+    $v1->post('sync-master-data', [RestApiController::class, 'syncMasterData']);
+    $v1->post('update-master-data', [RestApiController::class, 'updateMasterDataByNis']);
     /**
      * Student
      */

@@ -61,13 +61,13 @@ class UsersModel extends Model
         ')->getResult();
     }
 
-    public function findAllSiswaByMajor($major): array
+    public function findAllSiswaByMajor($major, $tpId): array
     {
-        if (!$major) {
-            return [];
-        }
-        return $this->db->query('
-                    select ud.id,
+//        if (!$major) {
+//            return [];
+//        }
+        $builder = $this->db->table('users u');
+        $builder->select('ud.id,
                            ud.name,
                            ud.jk,
                            ud.user_id as nis,
@@ -75,16 +75,39 @@ class UsersModel extends Model
                            m.name   as jurusan,
                            i.name   as iduka,
                            t.name as tp,
-                           md.id as masterDataId
-                    from users u
-                             inner join user_details ud on u.id = ud.user_public_id
-                             inner join class c on ud.class_id = c.id
-                             inner join major m on ud.major_id = m.id
-                             left join master_data md on md.nis = ud.user_id
-                             left join iduka i on i.id = md.iduka_id
-                             inner join tp t on t.id = ud.tp_id
-                    where u.role_pkl = 3 and ud.major_id =' . $major
-        )->getResult();
+                           md.id as masterDataId');
+        $builder->join('user_details ud', 'u.id = ud.user_public_id');
+        $builder->join('class c', 'ud.class_id = c.id');
+        $builder->join('major m', 'ud.major_id = m.id');
+        $builder->join('master_data md', 'md.nis = ud.user_id', 'LEFT');
+        $builder->join('iduka i', 'i.id = md.iduka_id', 'LEFT');
+        $builder->join('tp t', 't.id = ud.tp_id');
+        $builder->where('u.role_pkl', 3);
+        $builder->where('ud.major_id', $major);
+        if ($tpId) {
+            $builder->where('ud.tp_id', $tpId);
+        }
+        $builder->orderBy('i.name', 'desc');
+        return $builder->get()->getResult();
+//        return $this->db->query('
+//                    select ud.id,
+//                           ud.name,
+//                           ud.jk,
+//                           ud.user_id as nis,
+//                           c.name   as kelas,
+//                           m.name   as jurusan,
+//                           i.name   as iduka,
+//                           t.name as tp,
+//                           md.id as masterDataId
+//                    from users u
+//                             inner join user_details ud on u.id = ud.user_public_id
+//                             inner join class c on ud.class_id = c.id
+//                             inner join major m on ud.major_id = m.id
+//                             left join master_data md on md.nis = ud.user_id
+//                             left join iduka i on i.id = md.iduka_id
+//                             inner join tp t on t.id = ud.tp_id
+//                    where u.role_pkl = 3 and ud.major_id =' . $major
+//        )->getResult();
     }
 
     public function findAllTeacher(): array

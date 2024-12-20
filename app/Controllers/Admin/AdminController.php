@@ -36,12 +36,13 @@ class AdminController extends BaseController
     public function dataSiswa(): string|RedirectResponse
     {
         $major = $this->request->getVar('major') ?: false;
+        $tpId = $this->request->getVar('tp') ?: false;
         $data = [
             'title' => "Data",
             'subtitle' => "Data Siswa",
             'users' => $this->session->get('email'),
             'role' => $this->session->get('role'),
-            'siswa' => $major != null ? $this->users->findAllSiswaByMajor($major) : $this->users->findAllSiswa(),
+            'siswa' => $major != null ? $this->users->findAllSiswaByMajor($major, $tpId) : $this->users->findAllSiswa(),
             'major' => $this->major->findAll(),
             'tp' => $this->tp->findAll()
         ];

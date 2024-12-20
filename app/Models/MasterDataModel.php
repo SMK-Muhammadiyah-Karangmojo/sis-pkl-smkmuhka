@@ -76,29 +76,42 @@ class MasterDataModel extends Model
     {
         $builder = $this->db->table('master_data md');
         $builder->select('
-                            md.id, md.status, ud.name, i.id as idukaId, i.name as idukaName,
-                            ud.user_id as nis, ud.jk, class.name as kelas, m.name as majorName,
-                            di.address, tp.name as tpName, teacher.name as teacherName, teacher.hp, surat.detail_tgl');
+        md.id, md.status, 
+        ud.name, i.id AS idukaId, i.name AS idukaName,
+        ud.user_id AS nis, ud.jk, class.name AS kelas,
+        m.name AS majorName,
+        di.address, tp.name AS tpName, 
+        teacher.name AS teacherName, teacher.hp, 
+        surat.detail_tgl
+    ');
         $builder->join('tp', 'tp.id = md.tp_id');
         $builder->join('iduka i', 'i.id = md.iduka_id');
-        $builder->join('detail_iduka di', 'di.id_iduka = i.id', 'left');
+        $builder->join('detail_iduka di', 'di.id_iduka = i.id');
         $builder->join('major m', 'm.id = i.major_id');
         $builder->join('user_details ud', 'ud.user_public_id = md.user_public_id');
         $builder->join('class', 'class.id = ud.class_id', 'left');
-        $builder->join('tutor', 'tutor.iduka_id = i.id', 'left');
-        $builder->join('teacher', 'teacher.user_public_id = tutor.teacher_id', 'left');
+        $builder->join('tutor', 'tutor.iduka_id = md.iduka_id', 'left'); // Pastikan relasi tutor hanya sesuai
+        $builder->join('teacher', 'teacher.user_public_id = tutor.teacher_id', 'left'); // Pastikan hanya teacher yang relevan
         $builder->join('tbl_surat surat', 'surat.id_tp = md.tp_id', 'left');
+
+        // Filter tutor yang tidak dihapus
         $builder->where('tutor.deleted_at', null);
+
+        // Tambahkan filter berdasarkan $tp dan $major jika ada
         if ($tp && $major) {
             $builder->where('md.tp_id', $tp);
+            $builder->where('tutor.tp_id', $tp);
             $builder->where('m.id', $major);
         }
+
+        // Tambahkan sorting untuk output yang konsisten
         $builder->orderBy('i.name', 'ASC');
         $builder->orderBy('ud.user_id', 'ASC');
 
         $sql = $builder->get();
         return $sql->getResult();
     }
+
 
     public function findById($id)
     {

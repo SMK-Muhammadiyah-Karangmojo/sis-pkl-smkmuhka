@@ -1,6 +1,7 @@
 function getStudentByMajor() {
     let majorId = document.getElementById("major").value;
-    window.location.href = baseUrl + '/admin/data-siswa?major=' + majorId;
+    let tp1 = document.getElementById("tp1").value;
+    window.location.href = baseUrl + '/admin/data-siswa?major=' + majorId + '&tp=' + tp1;
 }
 
 async function editStudent(id, masterDataId) {

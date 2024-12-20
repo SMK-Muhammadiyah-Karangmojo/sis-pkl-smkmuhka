@@ -4,7 +4,6 @@ namespace App\Controllers\Api;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 use ReflectionException;
@@ -12,6 +11,45 @@ use ReflectionException;
 class RestApiController extends BaseController
 {
     use ResponseTrait;
+
+    public function syncData(): ResponseInterface
+    {
+        try {
+            $result = $this->users->findAllStudent();
+            $response = $this->responseBuilder->ok($result);
+        } catch (\Exception $e) {
+            $response = $this->responseBuilder->internalServerError($e->getMessage());
+        }
+        return $this->respond($response);
+    }
+
+    public function syncMasterData(): ResponseInterface
+    {
+        $nis = $this->request->getVar('nis');
+        try {
+            $result = $this->masterData->findByNis($nis)->getRow();
+            $response = $this->responseBuilder->ok($result);
+        } catch (\Exception $e) {
+            $response = $this->responseBuilder->internalServerError($e->getMessage());
+        }
+        return $this->respond($response);
+    }
+
+    public function updateMasterDataByNis(): ResponseInterface
+    {
+        $nis = $this->request->getVar('nis');
+        $data = [
+            'tpId' => $this->request->getVar('tpId'),
+            'id' => $this->request->getVar('id')
+        ];
+        try {
+            $result = $this->masterData->updateByDataNis($nis, $data);
+            $response = $this->responseBuilder->ok($result);
+        } catch (\Exception $e) {
+            $response = $this->responseBuilder->internalServerError($e->getMessage());
+        }
+        return $this->respond($response);
+    }
 
     /**
      * @return ResponseInterface
@@ -396,6 +434,7 @@ class RestApiController extends BaseController
         }
         return $this->respond($response);
     }
+
     public function addMentor(): ResponseInterface
     {
         helper(['form']);
