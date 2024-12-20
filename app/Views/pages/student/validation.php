@@ -102,7 +102,7 @@
             <div class="card-header">
                 <h3 class="card-title">STEP 2 | Silahkan Pilih Lokasi PKL</h3>
             </div>
-            <form action="<?= base_url('/student/addMasterData'); ?>" method="post">
+            <form action="<?= base_url('/student/add-master-data'); ?>" method="post">
                 <div class="card-body">
                     <div class="form-group">
                         <label>Nama</label>

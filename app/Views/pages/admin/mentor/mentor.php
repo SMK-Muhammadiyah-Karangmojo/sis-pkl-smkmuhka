@@ -21,13 +21,13 @@
             <thead>
             <tr>
                 <th width="10px">No</th>
+                <th>Action</th>
                 <th>Tahun Pelajaran</th>
                 <th>Iduka</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
                 <th>No. Telp</th>
                 <th>Email</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -35,20 +35,20 @@
             <?php foreach ($iduka as $d) : ?>
                 <tr>
                     <td><?= $no++; ?></td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" onclick="editMentor(<?= $d->id; ?>)">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn btn-danger btn-xs" onclick="deleteIduka(<?= $d->id; ?>)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
                     <td><?= $d->tp; ?></td>
                     <td id="name"><?= $d->iduka; ?></td>
                     <td id="name"><?= $d->name; ?></td>
                     <td id="name"><?= $d->position; ?></td>
                     <td id="name"><?= $d->hp; ?></td>
                     <td id="name"><?= $d->email; ?></td>
-                    <td>
-                        <button class="btn btn-primary btn-xs" onclick="editMentor(<?= $d->id; ?>)">
-                            Edit
-                        </button>
-                        <button class="btn btn-danger btn-xs" onclick="deleteIduka(<?= $d->id; ?>)">
-                            Delete
-                        </button>
-                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

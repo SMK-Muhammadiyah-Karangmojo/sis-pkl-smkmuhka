@@ -3,6 +3,7 @@
 use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
 use App\Controllers\Auth\AuthController;
+use App\Controllers\Mentor\MentorController;
 use App\Controllers\Nilai\NilaiController;
 use App\Controllers\Presence\PresenceController;
 use App\Controllers\Student\StudentController;
@@ -97,6 +98,14 @@ $routes->group('api/v1/', function ($v1) {
         $major->post('find-all', [RestApiController::class, 'findAllMajor']);
         $major->post('detail', [RestApiController::class, 'detailMajor']);
     });
+
+    /**
+     * Mentor
+     */
+    $v1->group('mentor', function ($mentor) {
+        $mentor->post('edit/(:num)', [RestApiController::class, 'editMentor']);
+        $mentor->post('addMentor', [RestApiController::class, 'addMentor']);
+    });
 });
 
 /**
@@ -133,6 +142,9 @@ $routes->group('student', function ($student) {
     $student->get('iduka', [StudentController::class, 'iduka']);
     $student->get('report', [StudentController::class, 'report']);
     $student->post('report', [StudentController::class, 'report']);
+    $student->post('report', [StudentController::class, 'report']);
+    $student->post('add-detail', [StudentController::class, 'addDetail']);
+    $student->post('add-master-data', [StudentController::class, 'addMasterData']);
 });
 
 /**
@@ -141,4 +153,11 @@ $routes->group('student', function ($student) {
 $routes->group('presence', function ($presence) {
     $presence->get('', [PresenceController::class, 'index']);
     $presence->get('detail/(:num)', [PresenceController::class, 'detail']);
+});
+
+/**
+ * Mentor controller
+ */
+$routes->group('mentor', function ($mentor) {
+    $mentor->get('', [MentorController::class, 'index']);
 });

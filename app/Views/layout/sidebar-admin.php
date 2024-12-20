@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('Mentor/mentor'); ?>" class="nav-link">
+                            <a href="<?= base_url('mentor'); ?>" class="nav-link">
                                 <em class="far fa-circle nav-icon"></em>
                                 <p>Pembimbing</p>
                             </a>

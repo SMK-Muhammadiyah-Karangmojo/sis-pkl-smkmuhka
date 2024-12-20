@@ -3,7 +3,7 @@ let iduka = [];
 
 function getMentorDetail() {
     let idJurusan = document.getElementById("jurusan").value;
-    window.location.href = baseUrl + '/mentor/mentor?jurusan=' + idJurusan;
+    window.location.href = baseUrl + '/mentor?jurusan=' + idJurusan;
 }
 
 function addMentor(idukaId, tpId) {
@@ -42,8 +42,7 @@ function addMentor(idukaId, tpId) {
                 hp: Swal.getPopup().querySelector("#hp").value ? Swal.getPopup().querySelector("#hp").value : 0,
                 email: Swal.getPopup().querySelector("#email").value ? Swal.getPopup().querySelector("#email").value : "-"
             };
-            console.log(data)
-            fetchingData('/mentor/mentor/addMentor', data)
+            fetchingData('/mentor/add', data)
                 .then(response => {
                     if (response.responseData.responseCode === 200) {
                         Swal.fire({
@@ -67,12 +66,11 @@ function addMentor(idukaId, tpId) {
 }
 
 function editMentor(id) {
-    fetchingData("/mentor/mentor/editMentor/" + id)
+    fetchingData("/api/v1/mentor/edit/" + id)
         .then(response => {
             let responseData = response.responseData;
             if (responseData.responseCode == 200) {
                 let result = response.result;
-                console.log(result)
                 editMentorDetail(result)
             }
         })
@@ -113,7 +111,7 @@ function editMentorDetail(data) {
         confirmButtonText: "Add",
         showLoaderOnConfirm: true,
         preConfirm: () => {
-            fetchingData('/mentor/mentor/editMentor/0', {
+            fetchingData('/api/v1/mentor/edit/0', {
                 id: data.id,
                 name: Swal.getPopup().querySelector("#name").value,
                 position: Swal.getPopup().querySelector("#position").value,

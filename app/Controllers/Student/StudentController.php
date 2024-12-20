@@ -233,4 +233,71 @@ class StudentController extends BaseController
             $data
         );
     }
+
+    function addDetail(): RedirectResponse
+    {
+        if (!$this->validate([
+            'nis' => [
+                'rules' => 'required|is_unique[user_details.user_id]',
+                'errors' => [
+                    'required' => '{field} harus diisi!!!',
+                    'is_unique' => '{field} sudah ada! Silahkan gunakan NIS lainnya'
+                ]
+            ],
+            'user_public_id' => [
+                'rules' => 'required|is_unique[user_details.user_public_id]',
+                'errors' => [
+                    'required' => '{field} harus diisi!!!',
+                    'is_unique' => 'user sudah ada! Silahkan hubungi admin anda!!!'
+                ]
+            ]
+        ])) {
+            return redirect()->to('/student')->withInput();
+        }
+        $data = [
+            'user_id' => $this->request->getVar('nis'),
+            'user_public_id' => $this->request->getVar('user_public_id'),
+            'nisn' => $this->request->getVar('nisn'),
+            'name' => $this->request->getVar('name'),
+            'jk' => $this->request->getVar('jk'),
+            'tp_id' => $this->request->getVar('tp'),
+            'major_id' => $this->request->getVar('major_id'),
+            'class_id' => $this->request->getVar('class_id')
+        ];
+        try {
+            $this->userDetail->insert($data);
+        } catch (\ReflectionException $e) {
+            $this->session->setFlashdata('eror', $e);
+        }
+        $this->session->setFlashdata('success', 'Data is updated!!!');
+        return redirect()->to('/student');
+    }
+
+    function addMasterData(): RedirectResponse
+    {
+        if (!$this->validate([
+            'nis' => [
+                'rules' => 'required|is_unique[master_data.nis]',
+                'errors' => [
+                    'required' => '{field} harus diisi!!!',
+                    'is_unique' => '{field} sudah memilih lokasi PKL!!!'
+                ]
+            ]
+        ])) {
+            return redirect()->to('/student')->withInput();
+        }
+        $data = [
+            'user_public_id' => $this->request->getVar('user_public_id'),
+            'nis' => $this->request->getVar('nis'),
+            'tp_id' => $this->request->getVar('tp_id'),
+            'iduka_id' => $this->request->getVar('iduka_id'),
+        ];
+        try {
+            $this->masterData->insert($data);
+        } catch (\ReflectionException $e) {
+            $this->session->setFlashdata('error', $e);
+        }
+        $this->session->setFlashdata('success', 'Data is updated!!!');
+        return redirect()->to('/student');
+    }
 }

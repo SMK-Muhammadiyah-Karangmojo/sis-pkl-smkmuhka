@@ -53,4 +53,22 @@ class FormValidation
             ]
         ];
     }
+
+    public function formValidationAddMentor(): array
+    {
+        return [
+            'name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi!!!',
+                ]
+            ],
+            'email' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi!!!',
+                ]
+            ]
+        ];
+    }
 }
