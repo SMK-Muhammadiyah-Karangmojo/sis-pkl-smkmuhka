@@ -83,7 +83,9 @@ class UsersModel extends Model
         $builder->join('iduka i', 'i.id = md.iduka_id', 'LEFT');
         $builder->join('tp t', 't.id = ud.tp_id');
         $builder->where('u.role_pkl', 3);
-        $builder->where('ud.major_id', $major);
+        if ($major) {
+            $builder->where('ud.major_id', $major);
+        }
         if ($tpId) {
             $builder->where('ud.tp_id', $tpId);
         }

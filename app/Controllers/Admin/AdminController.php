@@ -42,7 +42,7 @@ class AdminController extends BaseController
             'subtitle' => "Data Siswa",
             'users' => $this->session->get('email'),
             'role' => $this->session->get('role'),
-            'siswa' => $major != null ? $this->users->findAllSiswaByMajor($major, $tpId) : $this->users->findAllSiswa(),
+            'siswa' => $this->users->findAllSiswaByMajor($major, $tpId),
             'major' => $this->major->findAll(),
             'tp' => $this->tp->findAll()
         ];
