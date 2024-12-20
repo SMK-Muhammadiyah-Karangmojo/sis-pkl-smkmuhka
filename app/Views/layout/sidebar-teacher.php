@@ -41,7 +41,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('teacher/laporan'); ?>" class="nav-link">
+                                <a href="<?= base_url('teacher/report'); ?>" class="nav-link">
                                     <em class="far fa-circle nav-icon"></em>
                                     <p>Laporan Siswa</p>
                                 </a>
@@ -64,7 +64,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('teacher/monitoring/' . $data->id); ?>" class="nav-link">
+                                <a href="<?= base_url('teacher/monitoring/' . $data->id); ?>" class="nav-link" target="_blank">
                                     <em class="far fa-circle nav-icon"></em>
                                     <p>Lembar Monitoring</p>
                                 </a>

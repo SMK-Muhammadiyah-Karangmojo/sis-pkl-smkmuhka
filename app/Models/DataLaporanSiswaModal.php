@@ -79,13 +79,13 @@ class DataLaporanSiswaModal extends Model
             ->getResult();
     }
 
-    public function findStudentReport($id, $tpId): array
+    public function findStudentReport($teacherId, $tpId): array
     {
         $tp = $this->db->table("tp")->get()->getLastRow();
 
         $builder = $this->db->table("tutor");
         $builder->select("
-        ud.user_public_id as id,
+               ud.user_public_id as id,
                ud.user_id        as nis,
                ud.name,
                i.name            as iduka,
@@ -95,12 +95,14 @@ class DataLaporanSiswaModal extends Model
         $builder->join("master_data md", "i.id = md.iduka_id");
         $builder->join("tp", "md.tp_id = tp.id");
         $builder->join("user_details ud", "md.user_public_id = ud.user_public_id");
-        $builder->where("tutor.teacher_id", $id);
+        $builder->where("tutor.teacher_id", $teacherId);
+
         if ($tpId) {
             $builder->where("md.tp_id", $tpId);
         } else {
             $builder->where("md.tp_id", $tp->id);
         }
+
         $builder->orderBy("i.id", "ASC");
 
         $sql = $builder->get();

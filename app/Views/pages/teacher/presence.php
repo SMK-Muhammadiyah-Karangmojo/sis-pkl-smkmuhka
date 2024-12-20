@@ -47,7 +47,7 @@ echo $this->extend('layout/template'); ?>
                         <td><?= $lp->nis; ?></td>
                         <td><?= $lp->name; ?></td>
                         <td>
-                            <a href="<?= base_url('presence/siswa/' . $lp->id); ?>">
+                            <a href="<?= base_url('presence/detail-siswa/' . $lp->id); ?>">
                                 <button class="badge bg-primary"><i class="fas fa-eye"> Detail</i></button>
                             </a>
                         </td>

@@ -9,7 +9,7 @@ class TutorModel extends Model
     protected $table = 'tutor';
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['tp_id', 'teacher_id', 'iduka_id', 'major_id'];
+    protected $allowedFields = ['tp_id', 'teacher_id', 'iduka_id', 'major_id', 'user_public_id'];
 
     public function findByTpAndMajor($tp, $major): array
     {

@@ -172,7 +172,7 @@ class UsersModel extends Model
             ->get()->getResult();
     }
 
-    public function findTeacherDetailByEmail($email)
+    public function findTeacherDetailByEmail($email): bool|string|ResultInterface
     {
         return $this->db->table('users as u')
             ->select('u.id as id, u.email, u.password, u.role_pkl, u.is_active, u.image,

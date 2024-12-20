@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-<img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
+<img src="<?= showImage($kop_surat->content); ?>" alt="kop-surat" width="100%">
 <div>
     <h3 class="text-center">Daftar Hadir Siswa</h3>
     <table style="margin-bottom: 5px">
@@ -90,16 +90,18 @@
     <tbody>
     <?php
     $number = 1;
-    foreach ($data_presence as $item) {
-        ?>
-        <tr>
-            <td class="text-center"><?= $number++; ?></td>
-            <td><?= tanggal($item->date); ?></td>
-            <td class="text-center"><?= $item->time_in; ?></td>
-            <td class="text-center"><?= $item->time_out; ?></td>
-            <td></td>
-        </tr>
-        <?php
+    if (isset($data_presence)) {
+        foreach ($data_presence as $item) {
+            ?>
+            <tr>
+                <td class="text-center"><?= $number++; ?></td>
+                <td><?= tanggal($item->date); ?></td>
+                <td class="text-center"><?= $item->time_in; ?></td>
+                <td class="text-center"><?= $item->time_out; ?></td>
+                <td></td>
+            </tr>
+            <?php
+        }
     }
     ?>
 

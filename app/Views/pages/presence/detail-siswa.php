@@ -11,7 +11,7 @@ echo $this->extend('layout/template'); ?>
     <div class="card card-outline-tabs card-info">
         <div class="card-header">Informasi Semua Presensi</div>
         <div class="card-body">
-            <a href="<?= base_url('presence/cetak/' . $user_id); ?>">
+            <a href="<?= base_url('presence/print/' . $user_id); ?>" target="_blank">
                 <button class="btn btn-sm btn-danger"><i class="fa fa-file-pdf-o"> Cetak</i></button>
             </a>
             <table id="dataTable" class="table table-bordered table-striped">
@@ -32,22 +32,24 @@ echo $this->extend('layout/template'); ?>
                 <tbody>
                 <?php
                 $number = 1;
-                foreach ($data_presence as $item) {
-                    ?>
-                    <tr>
-                        <td><?= $number++; ?></td>
-                        <td><?= $item->name; ?></td>
-                        <td><?= $item->class; ?></td>
-                        <td><?= tanggal($item->date); ?></td>
-                        <td class="text-center"><?= $item->time_in; ?></td>
-                        <td class="text-center"><?= $item->time_out; ?></td>
-                        <td class="text-center">
-                            <a href="<?= base_url() . '/presence/detail/' . $item->id; ?>">
-                                <button class="btn btn-sm btn-primary">Detail</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php
+                if (isset($data_presence)) {
+                    foreach ($data_presence as $item) {
+                        ?>
+                        <tr>
+                            <td><?= $number++; ?></td>
+                            <td><?= $item->name; ?></td>
+                            <td><?= $item->class; ?></td>
+                            <td><?= tanggal($item->date); ?></td>
+                            <td class="text-center"><?= $item->time_in; ?></td>
+                            <td class="text-center"><?= $item->time_out; ?></td>
+                            <td class="text-center">
+                                <a href="<?= base_url() . '/presence/detail/' . $item->id; ?>">
+                                    <button class="btn btn-sm btn-primary">Detail</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
                 }
                 ?>
 

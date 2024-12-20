@@ -2,13 +2,13 @@
 
 use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
-use App\Controllers\Api\TeacherEndpoint;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Home;
 use App\Controllers\Mentor\MentorController;
 use App\Controllers\Nilai\NilaiController;
 use App\Controllers\Presence\PresenceController;
 use App\Controllers\Student\StudentController;
+use App\Controllers\TeacherController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -172,6 +172,8 @@ $routes->group('student', function ($student) {
 $routes->group('presence', function ($presence) {
     $presence->get('', [PresenceController::class, 'index']);
     $presence->get('detail/(:num)', [PresenceController::class, 'detail']);
+    $presence->get('detail-siswa/(:num)', [PresenceController::class, 'presenceDetailSiswa']);
+    $presence->get('print/(:num)', [PresenceController::class, 'printPresenceStudent']);
 });
 
 /**
@@ -179,4 +181,12 @@ $routes->group('presence', function ($presence) {
  */
 $routes->group('mentor', function ($mentor) {
     $mentor->get('', [MentorController::class, 'index']);
+});
+
+$routes->group('teacher', function ($teacher) {
+    $teacher->get('', [TeacherController::class, 'index']);
+    $teacher->get('report', [TeacherController::class, 'report']);
+    $teacher->get('print-report/(:num)', [TeacherController::class, 'printReport']);
+    $teacher->get('presence', [TeacherController::class, 'presence']);
+    $teacher->get('monitoring/(:num)', [TeacherController::class, 'monitoring']);
 });
