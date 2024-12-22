@@ -76,7 +76,8 @@
     }
 
     .konten-right .link {
-        border-top: 5px;
+        margin: 5px;
+        border-top: 10px;
         text-align: center;
         font-size: 12px;
     }
@@ -111,65 +112,68 @@
     }
 </style>
 
-<?php foreach ($data as $siswa) : ?>
-    <div class="container">
-        <div class="id-card">
-            <div class="konten">
-                <div class="konten-left">
-                    <div class="header">
-                        PRAKTEK KERJA LAPANGAN<br/>
-                        <?= $siswa->tpName; ?><br/>
-                        SMK MUH KARANGMOJO
-                    </div>
-                    <div class="foto">
-                        <img src="<?= base_url('assets/img/logo/logo-login.png'); ?>" width="90px" height="100px"
-                             alt="image profile">
-                    </div>
-                    <div class="jurusan">
-                        <?= $siswa->majorName; ?>
-                    </div>
-                    <div class="name">
-                        <?= ucwords(strtolower($siswa->name)); ?>
-                    </div>
-                    <div class="kelas">
-                        <?= $siswa->kelas; ?>
-                    </div>
-                    <div class="tanggal">
-                        <?= $siswa->detail_tgl; ?>
+<?php if (isset($data)) {
+    foreach ($data as $siswa) : ?>
+        <div class="container">
+            <div class="id-card">
+                <div class="konten">
+                    <div class="konten-left">
+                        <div class="header">
+                            PRAKTEK KERJA LAPANGAN<br/>
+                            <?= $siswa->tpName; ?><br/>
+                            SMK MUH KARANGMOJO
+                        </div>
+                        <div class="foto">
+                            <img src="https://api-minio.yantodev.my.id/smk-muh-karangmojo/logo-smk.png" width="90px" height="100px"
+                                 alt="image profile">
+                        </div>
+                        <div class="jurusan">
+                            <?= $siswa->majorName; ?>
+                        </div>
+                        <div class="name">
+                            <?= ucwords(strtolower($siswa->name)); ?>
+                        </div>
+                        <div class="kelas">
+                            <?= $siswa->kelas; ?>
+                        </div>
+                        <div class="tanggal">
+                            <?= $siswa->detail_tgl; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="konten">
-                <div class="konten-right">
-                    <div class="header">
-                        <u>INFORMASI</u>
-                    </div>
-                    <div class="lokasi">
-                        Lokasi PKL<br/>
-                        <?= $siswa->idukaName; ?>
-                    </div>
-                    <div class="alamat">
-                        <?= $siswa->address; ?>
-                    </div>
-                    <div class="guru">
-                        <u>
-                            GURU PEMBIMBING<br>
-                            <?= $siswa->teacherName; ?>
-                        </u> <br>
-                        Telp/Hp. <?= $siswa->hp; ?>
-                    </div>
-                    <div class="scan">
-                        <strong>SCAN ME</strong><br/>
-                        <barcode code="<?= base_url('detail-siswa/' . $siswa->nis); ?>" size="1.2" type="QR"
-                                 error="M" class="barcode"></barcode>
-                    </div>
-                    <div class="link">
-                        <a href="https://pkl.smkmuhkarangmojo.my.id" target="_blank">https://pkl.smkmuhkarangmojo.my.id</a>
+                <div class="konten">
+                    <div class="konten-right">
+                        <div class="header">
+                            <u>INFORMASI</u>
+                        </div>
+                        <div class="lokasi">
+                            Lokasi PKL<br/>
+                            <?= $siswa->idukaName; ?>
+                        </div>
+                        <div class="alamat">
+                            <?= $siswa->address; ?>
+                        </div>
+                        <br>
+                        <div class="guru">
+                            <u>
+                                GURU PEMBIMBING<br>
+                                <?= $siswa->teacherName; ?>
+                            </u> <br>
+                            Telp/Hp. <?= $siswa->hp; ?>
+                        </div>
+    <!--                    <div class="scan">-->
+    <!--                        <strong>SCAN ME</strong><br/>-->
+    <!--                        <barcode code="--><?php //= base_url('detail-siswa/' . $siswa->nis); ?><!--" size="1.2" type="QR"-->
+    <!--                                 error="M" class="barcode"></barcode>-->
+    <!--                    </div>-->
+                        <div class="link">
+                            <p>https://pkl.smkmuhkarangmojo.my.id <br><?= '/detail-siswa/' . $siswa->nis; ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php endforeach; ?>
+    <?php endforeach;
+} ?>
 </body>
 </html>
