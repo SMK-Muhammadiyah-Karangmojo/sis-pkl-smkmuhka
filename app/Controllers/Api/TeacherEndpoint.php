@@ -45,6 +45,11 @@ class TeacherEndpoint extends ResourceController
 
         if ($user) {
             $userId = $this->usersModel->findUserByEmail($email);
+            $this->userDetail->insert([
+                'user_public_id' => $userId->id,
+                'user_id' => $this->request->getVar('nbm'),
+                'name' => $this->request->getVar('name'),
+            ]);
             $data = [
                 "user_public_id" => $userId->id,
                 'name' => $this->request->getVar('name'),
