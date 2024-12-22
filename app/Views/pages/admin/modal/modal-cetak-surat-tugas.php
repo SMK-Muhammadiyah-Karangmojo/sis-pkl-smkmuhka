@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('/admin/printAssignmentLetter'); ?>" method="post">
+                <form action="<?= base_url('/admin/print-assigment-letter'); ?>" method="post">
                     <div class="form-group">
                         <label for="tp-tugas">Tahun Pelajaran</label>
                         <select class="form-control" type="text" id="tp_tugas" name="tp_tugas" required

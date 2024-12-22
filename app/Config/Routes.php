@@ -2,6 +2,7 @@
 
 use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
+use App\Controllers\Api\TeacherEndpoint;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Home;
 use App\Controllers\Mentor\MentorController;
@@ -118,10 +119,11 @@ $routes->group('api/v1/', function ($v1) {
      * Teacher controller
      */
     $v1->resource('teacher', ['controller' => 'Api\TeacherEndpoint']);
-//    $v1->group('teacher', function ($teacher) {
+    $v1->group('teacher', function ($teacher) {
+        $teacher->post('find-by-tp', [TeacherEndpoint::class, 'findTeacherByTp']);
 //        $teacher->post('find-by-id', [RestApiController::class, 'findTeacherById']);
 //        $teacher->post('update', [RestApiController::class, 'updateTeacher']);
-//    });
+    });
 });
 
 /**
@@ -140,6 +142,7 @@ $routes->group('admin', function ($admin) {
     $admin->get('teacher', [AdminController::class, 'teacher']);
     $admin->get('print', [AdminController::class, 'print']);
     $admin->post('print-id-card', [AdminController::class, 'printIdCard']);
+    $admin->post('print-assigment-letter', [AdminController::class, 'printAssignmentLetter']);
 });
 
 /**
@@ -183,10 +186,15 @@ $routes->group('mentor', function ($mentor) {
     $mentor->get('', [MentorController::class, 'index']);
 });
 
+/**
+ * Teacher controller
+ */
 $routes->group('teacher', function ($teacher) {
+    $teacher->get('print', [TeacherController::class, 'print']);
     $teacher->get('', [TeacherController::class, 'index']);
     $teacher->get('report', [TeacherController::class, 'report']);
     $teacher->get('print-report/(:num)', [TeacherController::class, 'printReport']);
     $teacher->get('presence', [TeacherController::class, 'presence']);
     $teacher->get('monitoring/(:num)', [TeacherController::class, 'monitoring']);
+    $teacher->get('surat-tugas/(:num)', [TeacherController::class, 'suratTugas']);
 });

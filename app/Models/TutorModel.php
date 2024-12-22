@@ -98,6 +98,7 @@ class TutorModel extends Model
             ->join('teacher', 'teacher.user_public_id = tutor.teacher_id')
             ->where('tutor.tp_id', $tp)
             ->where('tutor.deleted_at', null)
+            ->orderBy('teacher.name', 'ASC')
             ->get()->getResult();
     }
 

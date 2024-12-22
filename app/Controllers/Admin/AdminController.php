@@ -298,4 +298,24 @@ class AdminController extends BaseController
         $this->response->setHeader('Content-Type', $this->applicationConstant->contentType('pdf'));
         $mpdf->Output('ID Card.pdf', 'I');
     }
+    public function printAssignmentLetter(): void
+    {
+        $tp = $this->request->getVar('tp_tugas');
+        $teacherId = $this->request->getVar('teacher');
+        $result = $this->teacherModel->findAllByUserPublicId($teacherId, $tp);
+        $data = [
+            'results' => $result,
+            'surat' => $this->nomorSuratModel->findByTpAndCategory($tp, 2),
+            'tp' => $tp,
+            'school' => $this->schoolModel->find(1),
+            'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
+        ];
+        view('pages/general/cetak-surat-tugas', $data);
+        $mpdf = new Mpdf();
+        $mpdf->showImageErrors = true;
+        $html = view('pages/general/cetak-surat-tugas', []);
+        $mpdf->WriteHTML($html);
+        $this->response->setHeader('Content-Type', $this->applicationConstant->contentType('pdf'));
+        $mpdf->Output('Surat Tugas ' . $result[0]->name . '. pdf', 'I');
+    }
 }

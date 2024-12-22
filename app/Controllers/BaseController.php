@@ -22,6 +22,7 @@ use App\Models\MentorDetailModel;
 use App\Models\NomorSuratModel;
 use App\Models\SchoolModel;
 use App\Models\student\PresenceModel;
+use App\Models\TeacherModel;
 use App\Models\Template\MasterTemplateModel;
 use App\Models\TpModel;
 use App\Models\TutorModel;
@@ -88,6 +89,7 @@ abstract class BaseController extends Controller
     public IApplicationConstant $applicationConstant;
     public MinioService $minioService;
     public DetailIdukaModel $detailIdukaModel;
+    public TeacherModel $teacherModel;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -137,6 +139,7 @@ abstract class BaseController extends Controller
         $this->laporanSiswa = new DataLaporanSiswaModal();
         $this->formValidation = new FormValidation();
         $this->tutorModel = new TutorModel();
+        $this->teacherModel = new TeacherModel();
 //        $this->IApplicationConstant = new IApplicationConstantConfig();
     }
 }

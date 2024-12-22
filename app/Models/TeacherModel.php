@@ -19,14 +19,14 @@ class TeacherModel extends Model
             ->get()->getRow();
     }
 
-    public function findAllByUserPublicId($teacherId): array
+    public function findAllByUserPublicId($teacherId, $tp): array
     {
-        return $this->db->query('
-                select t.name, t.position, t.nbm, i.name as idukaName, i.id as idukaId
+        return $this->db->query("
+                select t.name, t.position, t.nbm, i.name as iduka_name, i.id as iduka_id
                 from tutor
                          inner join teacher t on tutor.teacher_id = t.user_public_id
                          inner join iduka i on tutor.iduka_id = i.id
-                where tutor.teacher_id =' . $teacherId
+                where tutor.tp_id = $tp and tutor.teacher_id = $teacherId "
         )->getResult();
     }
 }

@@ -5,9 +5,11 @@ namespace App\Controllers\Api;
 use App\Libraries\ResponseBuilder;
 use App\Models\MentorDetailModel;
 use App\Models\TeacherModel;
+use App\Models\TutorModel;
 use App\Models\UserDetailModel;
 use App\Models\UsersModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use Exception;
 
@@ -20,6 +22,7 @@ class TeacherEndpoint extends ResourceController
     protected MentorDetailModel $mentorDetailModel;
     protected UserDetailModel $userDetail;
     protected TeacherModel $teacherModel;
+    protected TutorModel $tutorModel;
 
     public function __construct()
     {
@@ -28,6 +31,7 @@ class TeacherEndpoint extends ResourceController
         $this->userDetail = new UserDetailModel();
         $this->teacherModel = new TeacherModel();
         $this->mentorDetailModel = new MentorDetailModel();
+        $this->tutorModel = new TutorModel();
     }
 
     public function create()
@@ -94,6 +98,18 @@ class TeacherEndpoint extends ResourceController
             $response = $this->responseBuilder->ok($result);
         } catch (Exception $e) {
             $response = $this->responseBuilder->internalServerError("update teacher with id " . $id . " failed");
+        }
+        return $this->respond($response);
+    }
+
+    public function findTeacherByTp(): ResponseInterface
+    {
+        $tp = $this->request->getVar('tp');
+        try {
+            $result = $this->tutorModel->findByTp($tp);
+            $response = $this->responseBuilder->ok($result);
+        } catch (\Exception $e) {
+            $response = $this->responseBuilder->internalServerError($e->getMessage());
         }
         return $this->respond($response);
     }

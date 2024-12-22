@@ -44,7 +44,7 @@ async function getAllIdukaByTp() {
 }
 
 function findTeacherByTp() {
-    fetchingData("/Teacher/findTeacherByTp", {
+    fetchingData("/api/v1/teacher/find-by-tp", {
         tp: document.getElementById("tp_tugas").value
     }).then(response => {
         if (response.responseData.responseCode === 200) {

@@ -101,6 +101,26 @@ class TeacherController extends BaseController
         );
     }
 
+    public function print(): string|RedirectResponse
+    {
+        $response = $this->users->findTeacherDetailByEmail(
+            $this->session->get('email'))->getRow();
+        $data = [
+            'title' => "Menu Cetak",
+            'users' => $this->session->get('email'),
+            'users_id' => $this->session->get('id'),
+            'role' => $this->session->get('role'),
+            'data' => $response,
+            'tp' => $this->tp->findAll(),
+        ];
+
+        return $this->responseBuilder->ReturnViewValidationTeacher(
+            $this->session,
+            'pages/teacher/menu-print',
+            $data
+        );
+    }
+
     public function monitoring($id): void
     {
         $tp = $this->tp->get()->getLastRow();
@@ -119,5 +139,26 @@ class TeacherController extends BaseController
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', $this->applicationConstant->contentType('pdf'));
         $mpdf->Output('ID Card.pdf', 'I');
+    }
+
+    public function suratTugas($teacherId){
+        {
+            $tp = 7;
+            $result = $this->teacherModel->findAllByUserPublicId($teacherId, $tp);
+            $data = [
+                'results' => $result,
+                'surat' => $this->nomorSuratModel->findByTpAndCategory($tp, 2),
+                'tp' => $tp,
+                'school' => $this->schoolModel->find(1),
+                'kop_surat' => $this->masterTemplateModel->findByCode("KOP_SURAT"),
+            ];
+            view('pages/general/cetak-surat-tugas', $data);
+            $mpdf = new Mpdf();
+            $mpdf->showImageErrors = true;
+            $html = view('pages/general/cetak-surat-tugas', []);
+            $mpdf->WriteHTML($html);
+            $this->response->setHeader('Content-Type', $this->applicationConstant->contentType('pdf'));
+            $mpdf->Output('Surat Tugas ' . $result[0]->name . '. pdf', 'I');
+        }
     }
 }

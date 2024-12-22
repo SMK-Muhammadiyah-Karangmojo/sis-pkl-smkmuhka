@@ -64,12 +64,26 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="<?= base_url('teacher/surat-tugas'); ?>" class="nav-link" target="_blank">
+                                    <em class="far fa-circle nav-icon"></em>
+                                    <p>Surat Tugas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?= base_url('teacher/monitoring/' . $data->id); ?>" class="nav-link" target="_blank">
                                     <em class="far fa-circle nav-icon"></em>
                                     <p>Lembar Monitoring</p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('teacher/print'); ?>" class="nav-link">
+                            <em class="nav-icon fas fa-print"></em>
+                            <p>
+                                Cetak
+                            </p>
+                        </a>
                     </li>
                 </ul>
             </nav>

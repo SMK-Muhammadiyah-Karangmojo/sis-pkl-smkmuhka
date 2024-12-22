@@ -22,7 +22,7 @@
 <?php
 foreach ($results as $result): ?>
     <div id="body">
-        <img src="<?= $kop_surat->content; ?>" alt="kop-surat" width="100%">
+        <img src="<?= showImage($kop_surat->content); ?>" alt="kop-surat" width="100%">
         <h3 class="center">
             <u>SURAT TUGAS</u>
             <br/>Nomor : <?= $surat->nomor; ?></h3>
@@ -78,7 +78,7 @@ foreach ($results as $result): ?>
                         left join detail_iduka di on di.id_iduka = i.id
                 where md.deleted_at is null 
                     and md.user_public_id is not null
-                    and md.iduka_id = ' . $result->idukaid . ' 
+                    and md.iduka_id = ' . $result->iduka_id . ' 
                     and md.tp_id = ' . $tp
             )->getResult();
             ?>
@@ -110,7 +110,7 @@ foreach ($results as $result): ?>
             </tr>
             <tr>
                 <td>
-                    <img src="<?= $school['ttd']; ?>" alt="ttd-ks" width="250px">
+                    <img src="<?= showImage($school['ttd']); ?>" alt="ttd-ks" width="250px">
                 </td>
             </tr>
             <tr>
