@@ -136,9 +136,9 @@ class MasterDataModel extends Model
                             di.address,
                             teacher.name as teacher, teacher.hp')
             ->join('user_details ud', 'ud.user_public_id = md.user_public_id')
+            ->join('tutor', 'tutor.iduka_id = md.iduka_id', 'left')
             ->join('iduka i', 'i.id = md.iduka_id')
             ->join('detail_iduka di', 'di.id_iduka = md.iduka_id')
-            ->join('tutor', 'tutor.iduka_id = i.id', 'left')
             ->join('teacher', 'teacher.user_public_id = tutor.teacher_id', 'left')
             ->where('md.user_public_id', $id)
             ->get()->getRow();
