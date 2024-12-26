@@ -48,10 +48,14 @@ class PresenceModel extends Model
 
     public function findAllByDeletedAtNull(): array
     {
+        $tp = $this->db->table("tp")
+            ->where("deleted_at", null)
+            ->get()->getLastRow();
         $builder = $this->db->table("presence p");
         $builder->select("p.id, p.date, p.time_in, p.time_out, ud.name, c.name as class");
         $builder->join("user_details ud", "ud.user_public_id = p.users_id");
         $builder->join("class c", "c.id = ud.class_id");
+        $builder->where("p.tp_id", $tp->id);
         $builder->where("p.deleted_at", null);
         $builder->orderBy("p.date", "DESC");
         $builder->orderBy("p.time_in", "DESC");
@@ -59,6 +63,7 @@ class PresenceModel extends Model
         $sql = $builder->get();
         return $sql->getResult();
     }
+
     public function findAllByDeletedAtNullWithPagination($limit, $offset, $search): BaseBuilder
     {
         $builder = $this->db->table("presence p");

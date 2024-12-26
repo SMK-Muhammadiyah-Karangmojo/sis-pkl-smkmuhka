@@ -59,10 +59,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="<?= base_url("front-certificate?id=") . $d->id . "&majorId=" . $d->majorId; ?>">
+                                    <a href="<?= base_url("certificate/front-certificate?id=") . $d->id . "&majorId=" . $d->majorId; ?>">
                                         <button class="btn-sm btn-primary col-sm-12 mb-2">Depan</button>
                                     </a>
-                                    <a href="<?= base_url("back-certificate?id=") . $d->id . "&majorId=" . $d->majorId; ?>">
+                                    <a href="<?= base_url("certificate/back-certificate?id=") . $d->id . "&majorId=" . $d->majorId; ?>">
                                         <button class="btn-sm btn-secondary col-sm-12">Belakang</button>
                                     </a>
                                 </td>

@@ -7,6 +7,7 @@ use App\Libraries\IApplicationConstant;
 use App\Libraries\MinioService;
 use App\Libraries\ResponseBuilder;
 use App\Libraries\Validation\FormValidation;
+use App\Models\CertificateModel;
 use App\Models\ClassModel;
 use App\Models\DataLaporanSiswaModal;
 use App\Models\DetailIdukaModel;
@@ -90,6 +91,7 @@ abstract class BaseController extends Controller
     public MinioService $minioService;
     public DetailIdukaModel $detailIdukaModel;
     public TeacherModel $teacherModel;
+    public CertificateModel $certificateModel;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -140,6 +142,7 @@ abstract class BaseController extends Controller
         $this->formValidation = new FormValidation();
         $this->tutorModel = new TutorModel();
         $this->teacherModel = new TeacherModel();
+        $this->certificateModel = new CertificateModel();
 //        $this->IApplicationConstant = new IApplicationConstantConfig();
     }
 }

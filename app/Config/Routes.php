@@ -4,6 +4,7 @@ use App\Controllers\Admin\AdminController;
 use App\Controllers\Api\RestApiController;
 use App\Controllers\Api\TeacherEndpoint;
 use App\Controllers\Auth\AuthController;
+use App\Controllers\Certificate\CertificateController;
 use App\Controllers\Home;
 use App\Controllers\Mentor\MentorController;
 use App\Controllers\Nilai\NilaiController;
@@ -184,6 +185,8 @@ $routes->group('presence', function ($presence) {
  */
 $routes->group('mentor', function ($mentor) {
     $mentor->get('', [MentorController::class, 'index']);
+    $mentor->get('add', [MentorController::class, 'addMentor']);
+    $mentor->get('edit/(:num)', [MentorController::class, 'editMentor']);
 });
 
 /**
@@ -197,4 +200,14 @@ $routes->group('teacher', function ($teacher) {
     $teacher->get('presence', [TeacherController::class, 'presence']);
     $teacher->get('monitoring/(:num)', [TeacherController::class, 'monitoring']);
     $teacher->get('surat-tugas/(:num)', [TeacherController::class, 'suratTugas']);
+});
+
+/**
+ * Certificate Controller
+ */
+
+$routes->group('certificate', function ($certificate) {
+    $certificate->get('', [CertificateController::class, 'index']);
+    $certificate->get('front-certificate', [CertificateController::class, 'frontCertificate']);
+    $certificate->get('back-certificate', [CertificateController::class, 'backCertificate']);
 });
