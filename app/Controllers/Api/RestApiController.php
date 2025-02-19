@@ -72,105 +72,120 @@ class RestApiController extends BaseController
      */
     public function addPresence(): ResponseInterface
     {
-        $id = $this->request->getVar("id");
-        $note = $this->request->getVar("note");
-        $userId = $this->request->getVar("user_id");
-        $latitude = $this->request->getVar("latitude");
-        $longitude = $this->request->getVar("longitude");
-        $fileImage = $this->request->getFile('image');
-        $image = null;
-        $user = $this->userDetail->findByUserPublicId($userId);
+        $requestData = $this->getRequestData();
+        $user = $this->userDetail->findByUserPublicId($requestData['userId']);
 
-        if ($id && $note) {
-            $message = "$user->name baru saja membuat laporan presensi";
-        } else if ($id) {
-            $message = "$user->name baru saja melakukan presensi pulang";
-        } else {
-            $message = "$user->name baru saja melakukan presensi masuk";
+        if (!$user) {
+            return $this->respond($this->responseBuilder->badRequest("User not found"));
         }
-        if (!$fileImage->getError() == 4) {
+
+        $message = $this->generatePresenceMessage($user, $requestData['id'], $requestData['note']);
+        $image = null;
+        if (!$requestData['note']) {
+            $image = $this->handleImageUpload($requestData['fileImage'], $user);
+        }
+
+        $response = $this->savePresenceData($user, $requestData, $image);
+
+        if ($response) {
+            $this->sendNotification($user, $requestData, $image);
+            return $this->respond($this->responseBuilder->ok($response));
+        }
+
+        return $this->respond($this->responseBuilder->internalServerError("Failed to save data"));
+    }
+
+    private function getRequestData(): array
+    {
+        return [
+            'id' => $this->request->getVar("id"),
+            'note' => $this->request->getVar("note"),
+            'userId' => $this->request->getVar("user_id"),
+            'latitude' => $this->request->getVar("latitude"),
+            'longitude' => $this->request->getVar("longitude"),
+            'fileImage' => $this->request->getFile('image')
+        ];
+    }
+
+    private function generatePresenceMessage($user, $id, $note): string
+    {
+        if ($id && $note) {
+            return "$user->name baru saja membuat laporan presensi";
+        }
+        return $id ? "$user->name baru saja melakukan presensi pulang" : "$user->name baru saja melakukan presensi masuk";
+    }
+
+    private function handleImageUpload($fileImage, $user): ?string
+    {
+        if ($fileImage->getError() !== 4) {
             $fileName = $fileImage->getRandomName();
             $folderName = "/presence-image/$user->major/$user->name";
 
-            $responseMinIo = $this->minioService->uploadFile($fileImage->getTempName(), $fileName, $folderName);
-
-            if ($responseMinIo) {
-                $image = $folderName . "/" . $fileName;
-                $this->botDiscord->sendPresence($_ENV['BASE_URL_PRESENCE'], $message);
+            if ($this->minioService->uploadFile($fileImage->getTempName(), $fileName, $folderName)) {
+                return "$folderName/$fileName";
             }
         }
+        return null;
+    }
+
+    private function savePresenceData($user, $requestData, $image)
+    {
+        if ($requestData['id'] && $requestData['note']) {
+            return $this->presenceModel->update($requestData['id'], ["note" => $requestData['note']]);
+        }
+
+        $presenceData = [
+            "users_id" => $requestData['userId'],
+            "location_in" => "$requestData[latitude],$requestData[longitude]",
+            "date" => today(),
+            "time_in" => today(),
+            "image_in" => $image,
+            "tp_id" => $user->tpId,
+        ];
+
+        return $requestData['id']
+            ? $this->presenceModel->update($requestData['id'], [
+                "time_out" => today(),
+                "location_out" => "$requestData[latitude],$requestData[longitude]",
+                "image_out" => $image,
+            ])
+            : $this->presenceModel->insert($presenceData);
+    }
+
+    private function sendNotification($user, $requestData, $image): void
+    {
         $today = date("Y-m-d");
         $time = date("H:i:s");
-        if ($id && $note) {
-            $message = <<<EOD
-📢 *Notifikasi Absensi PKL* 📢
 
-Halo *Edi Prabowo* 👋,  
-*$user->name* baru saya membuat laporan presensi pada tanggal $today*:  
-📋 $note
-
-EOD;
-
+        if ($requestData['id'] && $requestData['note']) {
+            $message = $this->buildPresenceMessage($user, $today, "membuat laporan presensi", $requestData['note']);
+            $this->whatsappGateway->sendText('083840398931', $message);
+        } elseif ($requestData['id']) {
+            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi pulang", null, $requestData);
             $this->whatsappGateway->sendText('087839839710', $message);
-
-            $response = $this->presenceModel->update($id, [
-                "note" => $note,
-            ]);
-        } elseif ($id) {
-            $message = <<<EOD
-📢 *Notifikasi Absensi PKL* 📢
-
-Halo *Edi Prabowo* 👋,  
-*$user->name* telah berhasil melakukan absensi pulang pada:  
-📅 $today  
-⏰ $time  
-
-📍 Lokasi:  
-🌎 [Lihat di Google Maps](https://www.google.com/maps?q=$latitude,$longitude)
-EOD;
-
-            $this->whatsappGateway->sendText('087839839710', $message);
-
-            $response = $this->presenceModel->update($id, [
-                "time_out" => today(),
-                "location_out" => "$latitude,$longitude",
-                "image_out" => $image ?? null,
-            ]);
         } else {
-            $message = <<<EOD
-📢 *Notifikasi Absensi PKL* 📢
-
-Halo *Edi Prabowo* 👋,  
-*$user->name* telah berhasil melakukan absensi masuk pada:  
-📅 $today  
-⏰ $time  
-
-📍 Lokasi:  
-🌎 [Lihat di Google Maps](https://www.google.com/maps?q=$latitude,$longitude)
-EOD;
-
+            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi masuk", null, $requestData);
             try {
                 $this->whatsappGateway->sendText('087839839710', $message);
             } catch (Exception $e) {
                 $this->logger->error($e->getMessage());
             }
-
-            $response = $this->presenceModel->insert([
-                "users_id" => $userId,
-                "location_in" => "$latitude,$longitude",
-                "date" => today(),
-                "time_in" => today(),
-                "image_in" => $image ?? null,
-                "tp_id" => $user->tpId,
-            ]);
         }
-
-
-        if ($response) {
-            return $this->respond($this->responseBuilder->ok($response));
-        }
-        return $this->respond($this->responseBuilder->internalServerError("failed to save data"));
     }
+
+    private function buildPresenceMessage($user, $date, $action, $note = null, $requestData = null): string
+    {
+        $message = "📢 *Notifikasi Absensi PKL* 📢\n\nHalo *Edi Prabowo* 👋,\n*$user->name* telah berhasil $action pada:\n📅 $date";
+
+        if ($note) {
+            $message .= "\n📋 $note";
+        } elseif ($requestData) {
+            $message .= "\n⏰ " . date("H:i:s") . "\n\n📍 Lokasi:\n🌎 [Lihat di Google Maps](https://www.google.com/maps?q={$requestData['latitude']},{$requestData['longitude']})";
+        }
+
+        return $message;
+    }
+
 
     /**
      * @return ResponseInterface
