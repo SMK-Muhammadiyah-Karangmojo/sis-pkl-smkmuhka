@@ -159,7 +159,7 @@ class RestApiController extends BaseController
 
         if ($requestData['id'] && $requestData['note']) {
             $message = $this->buildPresenceMessage($user, $today, "membuat laporan presensi", $requestData['note']);
-            $this->whatsappGateway->sendText('083840398931', $message);
+            $this->whatsappGateway->sendText('087839839710', $message);
         } elseif ($requestData['id']) {
             $message = $this->buildPresenceMessage($user, $today, "melakukan absensi pulang", null, $requestData);
             $this->whatsappGateway->sendText('087839839710', $message);
