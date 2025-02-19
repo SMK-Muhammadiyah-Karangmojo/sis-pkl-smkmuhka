@@ -10,20 +10,21 @@
     "slack": "https://codeigniterchat.slack.com"
   },
   "require": {
-    "aws/aws-sdk-php": "^3.322",
     "php": "^8.1 || ^8.2.4",
-    "codeigniter4/framework": "^4.0",
     "ext-curl": "*",
+    "ext-fileinfo": "*",
+    "ext-gd": "*",
     "ext-intl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "mpdf/mpdf": "^8.2",
-    "phpoffice/phpspreadsheet": "^1.25",
-    "mpdf/qrcode": "^1.2",
-    "ext-gd": "*",
+    "aws/aws-sdk-php": "^3.322",
+    "codeigniter4/framework": "^4.0",
     "dompdf/dompdf": "^2.0",
-    "psr/log": "^3.0.2",
-    "ext-fileinfo": "*"
+    "kint-php/kint": "^6.0",
+    "mpdf/mpdf": "^8.2",
+    "mpdf/qrcode": "^1.2",
+    "phpoffice/phpspreadsheet": "^1.25",
+    "psr/log": "^3.0.2"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9",

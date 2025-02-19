@@ -165,7 +165,7 @@ $routes->group('student', function ($student) {
     $student->get('iduka', [StudentController::class, 'iduka']);
     $student->get('report', [StudentController::class, 'report']);
     $student->post('report', [StudentController::class, 'report']);
-    $student->post('report', [StudentController::class, 'report']);
+//    $student->post('report', [StudentController::class, 'report']);
     $student->post('add-detail', [StudentController::class, 'addDetail']);
     $student->post('add-master-data', [StudentController::class, 'addMasterData']);
 });

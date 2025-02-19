@@ -7,6 +7,7 @@ use App\Libraries\IApplicationConstant;
 use App\Libraries\MinioService;
 use App\Libraries\ResponseBuilder;
 use App\Libraries\Validation\FormValidation;
+use App\Libraries\WhatsappGatewayService;
 use App\Models\CertificateModel;
 use App\Models\ClassModel;
 use App\Models\DataLaporanSiswaModal;
@@ -92,6 +93,7 @@ abstract class BaseController extends Controller
     public DetailIdukaModel $detailIdukaModel;
     public TeacherModel $teacherModel;
     public CertificateModel $certificateModel;
+    public WhatsappGatewayService $whatsappGateway;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -143,6 +145,7 @@ abstract class BaseController extends Controller
         $this->tutorModel = new TutorModel();
         $this->teacherModel = new TeacherModel();
         $this->certificateModel = new CertificateModel();
+        $this->whatsappGateway = new WhatsappGatewayService();
 //        $this->IApplicationConstant = new IApplicationConstantConfig();
     }
 }

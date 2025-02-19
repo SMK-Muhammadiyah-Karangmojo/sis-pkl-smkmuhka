@@ -99,27 +99,61 @@ class RestApiController extends BaseController
                 $this->botDiscord->sendPresence($_ENV['BASE_URL_PRESENCE'], $message);
             }
         }
-
+        $today = date("Y-m-d");
+        $time = date("H:i:s");
         if ($id && $note) {
             $response = $this->presenceModel->update($id, [
                 "note" => $note,
             ]);
-        } else if ($id) {
+        } elseif ($id) {
+            $message = <<<EOD
+📢 *Notifikasi Absensi PKL* 📢
+
+Halo Edi Prabowo 👋,  
+*$user->name* telah berhasil melakukan absensi pulang pada:  
+📅 $today  
+⏰ $time  
+
+📍 Lokasi:  
+🌎 [Lihat di Google Maps](https://www.google.com/maps?q=$latitude,$longitude)
+EOD;
+
+            $this->whatsappGateway->sendText('083840398931', $message);
+
             $response = $this->presenceModel->update($id, [
                 "time_out" => today(),
                 "location_out" => "$latitude,$longitude",
-                "image_out" => $image ?? null
+                "image_out" => $image ?? null,
             ]);
         } else {
+            $message = <<<EOD
+📢 *Notifikasi Absensi PKL* 📢
+
+Halo Edi Prabowo 👋,  
+*$user->name* telah berhasil melakukan absensi masuk pada:  
+📅 $today  
+⏰ $time  
+
+📍 Lokasi:  
+🌎 [Lihat di Google Maps](https://www.google.com/maps?q=$latitude,$longitude)
+EOD;
+
+            try {
+                $this->whatsappGateway->sendText('083840398931', $message);
+            } catch (Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+
             $response = $this->presenceModel->insert([
                 "users_id" => $userId,
                 "location_in" => "$latitude,$longitude",
                 "date" => today(),
                 "time_in" => today(),
                 "image_in" => $image ?? null,
-                "tp_id" => $user->tpId
+                "tp_id" => $user->tpId,
             ]);
         }
+
 
         if ($response) {
             return $this->respond($this->responseBuilder->ok($response));
@@ -460,6 +494,7 @@ class RestApiController extends BaseController
         }
         return $this->respond($response);
     }
+
     public function findTeacherById(): ResponseInterface
     {
         $id = $this->request->getVar('id');
