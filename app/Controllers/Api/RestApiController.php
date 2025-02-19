@@ -109,7 +109,7 @@ class RestApiController extends BaseController
             $message = <<<EOD
 📢 *Notifikasi Absensi PKL* 📢
 
-Halo Edi Prabowo 👋,  
+Halo *Edi Prabowo* 👋,  
 *$user->name* telah berhasil melakukan absensi pulang pada:  
 📅 $today  
 ⏰ $time  
@@ -118,7 +118,7 @@ Halo Edi Prabowo 👋,
 🌎 [Lihat di Google Maps](https://www.google.com/maps?q=$latitude,$longitude)
 EOD;
 
-            $this->whatsappGateway->sendText('083840398931', $message);
+            $this->whatsappGateway->sendText('087839839710', $message);
 
             $response = $this->presenceModel->update($id, [
                 "time_out" => today(),
@@ -129,7 +129,7 @@ EOD;
             $message = <<<EOD
 📢 *Notifikasi Absensi PKL* 📢
 
-Halo Edi Prabowo 👋,  
+Halo *Edi Prabowo* 👋,  
 *$user->name* telah berhasil melakukan absensi masuk pada:  
 📅 $today  
 ⏰ $time  
@@ -139,7 +139,7 @@ Halo Edi Prabowo 👋,
 EOD;
 
             try {
-                $this->whatsappGateway->sendText('083840398931', $message);
+                $this->whatsappGateway->sendText('087839839710', $message);
             } catch (Exception $e) {
                 $this->logger->error($e->getMessage());
             }
