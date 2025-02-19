@@ -102,6 +102,17 @@ class RestApiController extends BaseController
         $today = date("Y-m-d");
         $time = date("H:i:s");
         if ($id && $note) {
+            $message = <<<EOD
+📢 *Notifikasi Absensi PKL* 📢
+
+Halo *Edi Prabowo* 👋,  
+*$user->name* baru saya membuat laporan presensi pada tanggal $today*:  
+📋 $note
+
+EOD;
+
+            $this->whatsappGateway->sendText('087839839710', $message);
+
             $response = $this->presenceModel->update($id, [
                 "note" => $note,
             ]);
