@@ -155,32 +155,59 @@ class RestApiController extends BaseController
     private function sendNotification($user, $requestData, $image): void
     {
         $today = date("Y-m-d");
-        $time = date("H:i:s");
+        $masterData = $this->masterData->findDataTeacher($user->nis);
+        $target = $this->numberWA($masterData->hp);
 
         if ($requestData['id'] && $requestData['note']) {
-            $message = $this->buildPresenceMessage($user, $today, "membuat laporan presensi", $requestData['note']);
-            $this->whatsappGateway->sendText('087839839710', $message);
+            $message = $this->buildPresenceMessage($user, $today, "membuat laporan presensi", $requestData['note'], null, $masterData);
         } elseif ($requestData['id']) {
-            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi pulang", null, $requestData);
-            $this->whatsappGateway->sendText('087839839710', $message);
+            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi pulang", null, $requestData, $masterData);
         } else {
-            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi masuk", null, $requestData);
-            try {
-                $this->whatsappGateway->sendText('087839839710', $message);
-            } catch (Exception $e) {
-                $this->logger->error($e->getMessage());
-            }
+            $message = $this->buildPresenceMessage($user, $today, "melakukan absensi masuk", null, $requestData, $masterData);
+        }
+        try {
+            $this->whatsappGateway->sendText($target, $message);
+        } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 
-    private function buildPresenceMessage($user, $date, $action, $note = null, $requestData = null): string
+   private function numberWA($data): string
     {
-        $message = "📢 *Notifikasi Absensi PKL* 📢\n\nHalo *Edi Prabowo* 👋,\n*$user->name* telah berhasil $action pada:\n📅 $date";
+        if (!$data) {
+            return "";
+        }
+        // kadang ada penulisan no hp 0811 239 345
+        $data = str_replace(" ", "", $data);
+        // kadang ada penulisan no hp (0274) 778787
+        $data = str_replace("(", "", $data);
+        // kadang ada penulisan no hp (0274) 778787
+        $data = str_replace(")", "", $data);
+        // kadang ada penulisan no hp 0811.239.345
+        $data = str_replace(".", "", $data);
+        // cek apakah no hp mengandung karakter + dan 0-9
+        if (!preg_match('/[^+0-9]/', trim($data))) {
+            // cek apakah no hp karakter 1-3 adalah +62
+            if (substr(trim($data), 0, 3) == '+62') {
+                $result = trim($data);
+                // cek apakah no hp karakter 1 adalah 0
+            } elseif (substr(trim($data), 0, 1) == '0') {
+                $result = '62' . substr(trim($data), 1);
+            } elseif (substr(trim($data), 0, 1) == '8') {
+                $result = '628' . substr(trim($data), 1);
+            }
+        }
+        return $result;
+    }
+
+    private function buildPresenceMessage($user, $date, $action, $note = null, $requestData = null, $masterData): string
+    {
+        $message = "📢 *Notifikasi Absensi PKL* 📢\n\nHalo *$masterData->teacher_name* 👋,\n*$user->name* telah berhasil $action pada:\n📅 $date";
 
         if ($note) {
             $message .= "\n📋 $note";
         } elseif ($requestData) {
-            $message .= "\n⏰ " . date("H:i:s") . "\n\n📍 Lokasi:\n🌎 [Lihat di Google Maps](https://www.google.com/maps?q={$requestData['latitude']},{$requestData['longitude']})";
+            $message .= "\n⏰ " . date("H:i:s") . "\n\n📍 Lokasi:\n 🏢Nama Iduka: $masterData->iduka_name\n🌎 Lihat di Google Maps:\n https://www.google.com/maps?q={$requestData['latitude']},{$requestData['longitude']}";
         }
 
         return $message;

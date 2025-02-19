@@ -272,4 +272,16 @@ class MasterDataModel extends Model
             ->where('md.nis', $id)
             ->get()->getRow();
     }
+
+    public function findDataTeacher($nis)
+    {
+        return $this->db->query("SELECT md.nis, md.iduka_id, i.name AS iduka_name, tutor.teacher_id, t.name AS teacher_name, t.hp
+                FROM master_data md
+                         JOIN public.iduka i ON md.iduka_id = i.id
+                         JOIN tutor ON i.id = tutor.iduka_id
+                         JOIN teacher t ON tutor.teacher_id = t.user_public_id
+                WHERE md.nis = ? LIMIT 10;
+        ", [$nis])
+            ->getRow();
+    }
 }

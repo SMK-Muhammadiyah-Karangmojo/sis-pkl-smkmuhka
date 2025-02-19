@@ -41,7 +41,7 @@ echo $this->extend('layout/template'); ?>
                                                         left join detail_iduka di on di.id_iduka = i.id
                                                 where md.deleted_at is null
                                                     and ud.user_public_id is not null
-                                                    and md.iduka_id =  $t->id_iduka 
+                                                    and md.iduka_id =  $t->id_iduka
                                                     and md.tp_id = $t->tp_id
                                                 ")->getResult(); ?>
                                                 <ul>
